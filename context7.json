@@ -2,13 +2,20 @@
   "name": "databricks",
   "description": "Databricks documentation for Context7",
   "version": "1.0.0",
-  "include": ["docs/**/*", "README.md", "CONTRIBUTING.md", "LICENSE"],
+  "include": [
+    "docs/**/*",
+    "README.md",
+    "CONTRIBUTING.md",
+    "PROJECT-STATUS.md",
+    "LICENSE"
+  ],
   "exclude": [
     "node_modules/**/*",
     ".git/**/*",
     "*.log",
     "dist/**/*",
     "build/**/*",
+    "tests/**/*",
     "*.tmp",
     "*.bak",
     "coverage/**/*",
@@ -16,7 +23,8 @@
     ".vscode/**/*",
     ".cursor/**/*",
     "docs/plan.md",
-    "docs/progress.md"
+    "docs/progress.md",
+    "VALIDATION-SYSTEM-DELIVERY.md"
   ],
   "bestPractices": [
     "Use clear, concise documentation",
