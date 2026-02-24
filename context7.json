@@ -2,13 +2,7 @@
   "name": "databricks",
   "description": "Databricks documentation for Context7",
   "version": "1.0.0",
-  "include": [
-    "docs/**/*",
-    "README.md",
-    "CONTRIBUTING.md",
-    "PROJECT-STATUS.md",
-    "LICENSE"
-  ],
+  "include": ["docs/**/*", "README.md", "CONTRIBUTING.md", "PROJECT-STATUS.md", "LICENSE"],
   "exclude": [
     "node_modules/**/*",
     ".git/**/*",
@@ -22,6 +16,7 @@
     ".github/**/*",
     ".vscode/**/*",
     ".cursor/**/*",
+    ".zed/**/*",
     "docs/plan.md",
     "docs/progress.md",
     "VALIDATION-SYSTEM-DELIVERY.md"
