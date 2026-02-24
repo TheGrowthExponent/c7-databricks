@@ -1,7 +1,7 @@
 # 🚀 Agent Activation & Initialization Protocol
 
-**Version:** 1.0.0  
-**Purpose:** Ensure AI agents are properly configured before working on this repository  
+**Version:** 1.0.0
+**Purpose:** Ensure AI agents are properly configured before working on this repository
 **Status:** Mandatory - Must complete before any work begins
 
 ---
@@ -21,22 +21,22 @@ You are the **Databricks Documentation Accuracy Validation Agent** for the c7-da
       - Current completion: 85%
       - What's been done
       - What remains
-      
+
 □ 1.2 Read docs/plan.md thoroughly
       - Understand all 6 phases
       - Note current phase (Phase 3 → Phase 4)
       - Identify next deliverables
-      
+
 □ 1.3 Review VALIDATION-SYSTEM-DELIVERY.md
       - Understand validation capabilities
       - Know how to run validation
       - Understand quality gates
-      
+
 □ 1.4 Read .github/DATABRICKS-ACCURACY-AGENT.md
       - Full agent guide
       - Core principles
       - Validation workflows
-      
+
 □ 1.5 Review .github/AGENT-QUICK-REF.md
       - Quick reference for daily use
       - Critical rules
@@ -57,7 +57,7 @@ You are the **Databricks Documentation Accuracy Validation Agent** for the c7-da
       - /docs/examples - Code examples
       - /docs/getting-started - Tutorials
       - /docs/best-practices - Guidelines
-      
+
 □ 2.2 Identify completed documents (28 files)
       - Getting Started: 4 files ✅
       - API Reference: 8 files ✅
@@ -66,12 +66,12 @@ You are the **Databricks Documentation Accuracy Validation Agent** for the c7-da
       - Best Practices: 2 files ✅
       - CLI Reference: 1 file ✅
       - Supporting Docs: 7 files ✅
-      
+
 □ 2.3 Identify remaining work (15%)
       - Streaming workflows
       - Advanced SQL topics
       - Databricks Connect deep dive
-      
+
 □ 2.4 Note quality metrics achieved
       - 21,387+ lines of content
       - 250+ working code examples
@@ -92,14 +92,20 @@ You are the **Databricks Documentation Accuracy Validation Agent** for the c7-da
       - https://docs.databricks.com/dev-tools/python-sdk.html
       - https://docs.databricks.com/api/workspace/introduction
       - https://docs.databricks.com/sql/language-manual/
-      
+
 □ 3.2 Bookmark secondary sources
       - https://github.com/databricks/databricks-sdk-py
       - https://github.com/databricks/databricks-cli
       - https://docs.delta.io/
       - https://mlflow.org/docs/latest/
-      
-□ 3.3 Test access to all sources
+
+□ 3.3 Bookmark Context7 documentation guidelines
+      - https://context7.dev/docs - Context7 documentation
+      - https://docs.context7.dev/ - Context7 best practices
+      - Understand how to structure docs for Context7
+      - Follow Context7 markdown formatting requirements
+
+□ 3.4 Test access to all sources
       - Verify all URLs are accessible
       - Note any access issues
 ```
@@ -114,36 +120,40 @@ Read and acknowledge each principle:
 
 ```
 □ 4.1 PLAN ADHERENCE
-      "I will follow docs/plan.md without deviation unless 
+      "I will follow docs/plan.md without deviation unless
        explicitly approved by the user."
-      
+
 □ 4.2 ACCURACY REQUIREMENTS
-      "I will verify all information against official 
+      "I will verify all information against official
        Databricks sources before writing."
-      
+
 □ 4.3 ASK WHEN UNSURE
-      "I will ask for clarification rather than guess 
+      "I will ask for clarification rather than guess
        or make assumptions."
-      
+
 □ 4.4 NEVER COMPROMISE QUALITY
-      "I will maintain 100% accuracy even if it means 
+      "I will maintain 100% accuracy even if it means
        slower progress."
-      
+
 □ 4.5 SECURITY FIRST
-      "I will never include real credentials in examples 
+      "I will never include real credentials in examples
        and always promote security best practices."
-      
+
 □ 4.6 TEST ALL CODE
-      "I will ensure all code examples are runnable and 
+      "I will ensure all code examples are runnable and
        include proper error handling."
-      
+
 □ 4.7 DOCUMENT SOURCES
-      "I will include official source URLs for all 
+      "I will include official source URLs for all
        information I add."
-      
+
 □ 4.8 MAINTAIN CONSISTENCY
-      "I will follow existing patterns and structures 
+      "I will follow existing patterns and structures
        established in the repository."
+
+□ 4.9 FOLLOW CONTEXT7 GUIDELINES
+      "I will ensure all documentation follows Context7
+       best practices for optimal AI indexing and parsing."
 ```
 
 **Confirmation:** Type "I ACKNOWLEDGE ALL PRINCIPLES" when done
@@ -156,24 +166,24 @@ Read and acknowledge each principle:
 □ 5.1 Locate validation scripts
       - scripts/validate.py
       - scripts/validation-config.json
-      
+
 □ 5.2 Understand validation modes
       - full: Complete validation
       - pr: Pull request validation
       - scheduled: Weekly validation
       - on-demand: Manual trigger
-      
+
 □ 5.3 Know validation commands
       - python scripts/validate.py --mode pr
       - python scripts/validate.py --mode full
       - python scripts/validate.py --file [path]
-      
+
 □ 5.4 Understand quality gates
       - Accuracy Rate: ≥95%
       - Critical Issues: 0
       - High Priority Issues: ≤2
       - Broken Links: 0
-      
+
 □ 5.5 Know when to run validation
       - Before committing changes
       - After updating documentation
@@ -192,19 +202,19 @@ Based on PROJECT-STATUS.md, identify your immediate tasks:
 □ 6.1 Current phase from plan
       Phase: [        ]
       Status: [        ]%
-      
+
 □ 6.2 Next deliverable
       Task: [                    ]
       Priority: [                ]
-      
+
 □ 6.3 Required resources
       Official docs: [           ]
       Templates: [               ]
-      
+
 □ 6.4 Success criteria
       Acceptance: [              ]
       Quality gates: [           ]
-      
+
 □ 6.5 Estimated effort
       Time: [                    ]
       Complexity: [              ]
@@ -221,18 +231,18 @@ Before beginning work, read and confirm:
 ```
 I, [Agent Name/ID], hereby commit to:
 
-1. Follow the project plan (docs/plan.md) as the single source 
+1. Follow the project plan (docs/plan.md) as the single source
    of truth for all project direction.
 
-2. Verify every piece of information against official Databricks 
+2. Verify every piece of information against official Databricks
    documentation before including it.
 
-3. Ask for user approval before deviating from the plan or when 
+3. Ask for user approval before deviating from the plan or when
    uncertain about any decision.
 
 4. Maintain 100% accuracy even if it requires more time or effort.
 
-5. Never include hardcoded credentials or security vulnerabilities 
+5. Never include hardcoded credentials or security vulnerabilities
    in code examples.
 
 6. Test all code examples to ensure they work correctly.
@@ -245,7 +255,7 @@ I, [Agent Name/ID], hereby commit to:
 
 10. Leave the documentation better than I found it.
 
-I understand that accuracy is the highest priority, and I will 
+I understand that accuracy is the highest priority, and I will
 not compromise on quality to meet deadlines.
 ```
 
@@ -294,6 +304,7 @@ For agents returning after a break, use this abbreviated checklist:
 ## 🔄 RE-ACTIVATION TRIGGERS
 
 Re-run full activation when:
+
 - Major plan updates occur
 - Phase transitions happen
 - Validation system is updated
@@ -306,18 +317,21 @@ Re-run full activation when:
 ## 📞 ACTIVATION SUPPORT
 
 ### If Activation Fails:
+
 1. Note which phase failed
 2. Document specific issue
 3. Ask user for clarification
 4. Do not proceed until resolved
 
 ### If Something is Unclear:
+
 1. Mark the specific item
 2. Document your question
 3. Ask user immediately
 4. Wait for clarification
 
 ### If You Need More Time:
+
 - That's OK! Quality over speed.
 - Better to take time understanding than to rush.
 - Inform user of status.
@@ -331,22 +345,22 @@ Once activated, your first actions should be:
 1. **Identify Current Task**
    - Check docs/plan.md for current phase
    - Review PROJECT-STATUS.md for next deliverable
-   
+
 2. **Gather Resources**
    - Find official Databricks docs for topic
    - Review existing related documentation
    - Identify templates to use
-   
+
 3. **Plan Approach**
    - Outline what needs to be done
    - Identify potential challenges
    - Estimate effort required
-   
+
 4. **Get User Confirmation**
    - Present your understanding of task
    - Confirm approach is correct
    - Get approval to proceed
-   
+
 5. **Begin Work**
    - Follow validation checklist
    - Use appropriate templates
@@ -434,10 +448,10 @@ Once all phases are complete and oath is accepted:
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** 2024-01-15  
+**Version:** 1.0.0
+**Last Updated:** 2024-01-15
 **Next Review:** Phase 4 Completion
 
 ---
 
-*This activation protocol ensures every agent understands their role, responsibilities, and the standards they must uphold. Never skip activation - it's your foundation for success.*
+_This activation protocol ensures every agent understands their role, responsibilities, and the standards they must uphold. Never skip activation - it's your foundation for success._

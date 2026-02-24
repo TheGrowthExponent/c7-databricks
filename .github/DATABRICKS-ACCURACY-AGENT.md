@@ -1,8 +1,8 @@
 # 🤖 Databricks Documentation Accuracy Validation Agent
 
-**Version:** 1.0.0  
-**Last Updated:** 2024-01-15  
-**Purpose:** Ensure 100% accuracy of Databricks documentation in this repository  
+**Version:** 1.0.0
+**Last Updated:** 2024-01-15
+**Purpose:** Ensure 100% accuracy of Databricks documentation in this repository
 **Scope:** All documentation files, code examples, API references, and configurations
 
 ---
@@ -22,12 +22,14 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 ## 📋 CORE PRINCIPLES
 
 ### 1. Plan Adherence
+
 - **MUST** follow `docs/plan.md` as the single source of truth for project direction
 - **MUST NOT** deviate from the plan without explicit user confirmation
 - **MUST** ask for approval before implementing alternative approaches
 - **SHOULD** suggest improvements but wait for user approval before proceeding
 
 ### 2. Accuracy Requirements
+
 - **MUST** verify all information against official Databricks sources
 - **MUST** include source URLs in documentation for verification
 - **MUST** flag any content that cannot be verified
@@ -35,13 +37,16 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 - **MUST** check API endpoints exist and parameters are current
 
 ### 3. Quality Standards
+
 - **MUST** maintain consistent formatting across all files
 - **MUST** follow markdown best practices for Context7 compatibility
+- **MUST** follow Context7 documentation guidelines (https://context7.dev/docs)
 - **MUST** include practical, working code examples
 - **MUST** provide clear explanations suitable for all skill levels
 - **MUST** include error handling in all code examples
 
 ### 4. Documentation Structure
+
 - **MUST** follow the established directory structure
 - **MUST** maintain consistent file naming conventions
 - **MUST** ensure proper cross-referencing between documents
@@ -55,13 +60,16 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 ### Before Creating/Updating Any Documentation
 
 #### Step 1: Source Verification
+
 - [ ] Identify official Databricks documentation URL
 - [ ] Verify content is current (check Databricks version compatibility)
 - [ ] Cross-reference with multiple official sources if available
 - [ ] Check for deprecation notices
 - [ ] Verify API endpoints are current
+- [ ] Confirm documentation structure follows Context7 guidelines
 
 #### Step 2: Content Accuracy
+
 - [ ] All API endpoints match official documentation
 - [ ] All parameters and their types are correct
 - [ ] All response formats are accurate
@@ -69,6 +77,7 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 - [ ] All configuration options are valid
 
 #### Step 3: Code Examples
+
 - [ ] Code examples follow current Databricks SDK patterns
 - [ ] All imports are correct and necessary
 - [ ] Error handling is included
@@ -77,7 +86,9 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 - [ ] Examples are practical and commonly needed
 
 #### Step 4: Formatting & Structure
+
 - [ ] Markdown syntax is correct for Context7
+- [ ] Documentation follows Context7 best practices (https://docs.context7.dev/)
 - [ ] Code blocks include proper file path annotations
 - [ ] Headings follow proper hierarchy
 - [ ] Links are valid and working
@@ -85,6 +96,7 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 - [ ] Lists use consistent formatting
 
 #### Step 5: Cross-References
+
 - [ ] Related documents are linked
 - [ ] Prerequisites are clearly stated
 - [ ] Follow-up topics are referenced
@@ -92,6 +104,7 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 - [ ] External resources are cited
 
 #### Step 6: Completeness
+
 - [ ] All major use cases are covered
 - [ ] Common pitfalls are documented
 - [ ] Troubleshooting guidance is provided
@@ -103,6 +116,7 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 ## 📚 OFFICIAL DATABRICKS SOURCES
 
 ### Primary Sources (Always Use These)
+
 1. **Main Documentation:** https://docs.databricks.com/
 2. **API Reference:** https://docs.databricks.com/api/
 3. **Python SDK:** https://docs.databricks.com/dev-tools/python-sdk.html
@@ -110,12 +124,25 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 5. **SQL Reference:** https://docs.databricks.com/sql/language-manual/
 
 ### Secondary Sources (For Additional Context)
+
 1. **GitHub - Databricks SDK:** https://github.com/databricks/databricks-sdk-py
 2. **GitHub - Databricks CLI:** https://github.com/databricks/databricks-cli
 3. **Delta Lake Docs:** https://docs.delta.io/
 4. **MLflow Docs:** https://mlflow.org/docs/latest/
 
+### Context7 Documentation Guidelines (MUST Follow)
+
+1. **Context7 Docs:** https://context7.dev/docs
+2. **Context7 Best Practices:** https://docs.context7.dev/
+3. **Purpose:** Ensure this repository follows Context7's documentation structure guidelines
+4. **Key Requirements:**
+   - Proper markdown formatting for AI parsing
+   - Clear section hierarchy
+   - Code blocks with file path syntax
+   - Optimal structure for Context7 indexing
+
 ### Version-Specific Sources
+
 - Always check the Databricks Runtime version compatibility
 - Note when features are preview/GA/deprecated
 - Include version requirements in documentation
@@ -125,18 +152,21 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 ## 🚨 CRITICAL RULES
 
 ### ALWAYS Do:
+
 1. ✅ **Verify before writing** - Check official docs first
 2. ✅ **Test code examples** - Ensure they work
 3. ✅ **Include sources** - Add reference URLs
 4. ✅ **Follow the plan** - Stick to `docs/plan.md`
-5. ✅ **Ask before deviating** - Get user approval for changes
-6. ✅ **Maintain consistency** - Follow existing patterns
-7. ✅ **Document versions** - Note when features were added
-8. ✅ **Include error handling** - All examples should handle errors
-9. ✅ **Update cross-references** - Keep links current
-10. ✅ **Mark uncertainties** - Flag anything requiring verification
+5. ✅ **Follow Context7 guidelines** - Check https://context7.dev/docs
+6. ✅ **Ask before deviating** - Get user approval for changes
+7. ✅ **Maintain consistency** - Follow existing patterns
+8. ✅ **Document versions** - Note when features were added
+9. ✅ **Include error handling** - All examples should handle errors
+10. ✅ **Update cross-references** - Keep links current
+11. ✅ **Mark uncertainties** - Flag anything requiring verification
 
 ### NEVER Do:
+
 1. ❌ **Make up information** - Only use verified facts
 2. ❌ **Copy outdated content** - Always check currency
 3. ❌ **Skip verification** - Every detail must be checked
@@ -206,25 +236,28 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 
 ### API Endpoint Documentation Template
 
-```markdown
+````markdown
 ## [Endpoint Name]
 
-**Purpose:** [Brief description]  
-**API Version:** [Version]  
-**Availability:** [GA/Preview/Deprecated]  
+**Purpose:** [Brief description]
+**API Version:** [Version]
+**Availability:** [GA/Preview/Deprecated]
 **Official Docs:** [URL]
 
 ### Endpoint Details
+
 - **Method:** [GET/POST/PUT/DELETE/PATCH]
 - **Path:** `/api/2.0/[resource]`
 - **Authentication:** [Required type]
 
 ### Request Parameters
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| param1 | string | Yes | Description |
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| param1    | string | Yes      | Description |
 
 ### Request Example
+
 ```/dev/null/example.py#L1-10
 import requests
 
@@ -239,8 +272,10 @@ response = requests.post(
     json={"param1": "value"}
 )
 ```
+````
 
 ### Response Format
+
 ```/dev/null/response.json#L1-5
 {
   "field1": "value",
@@ -249,20 +284,23 @@ response = requests.post(
 ```
 
 ### Error Handling
+
 [Common errors and how to handle them]
 
 ### Related Endpoints
+
 - [Link to related endpoint]
-```
+
+````
 
 ### Code Example Template
 
 ```markdown
 ## [Example Title]
 
-**Use Case:** [When to use this]  
-**Complexity:** [Beginner/Intermediate/Advanced]  
-**Prerequisites:** [What's needed]  
+**Use Case:** [When to use this]
+**Complexity:** [Beginner/Intermediate/Advanced]
+**Prerequisites:** [What's needed]
 **Official Reference:** [URL]
 
 ### Overview
@@ -280,27 +318,31 @@ w = WorkspaceClient()
 try:
     # Main logic
     result = w.jobs.list()
-    
+
     # Process results
     for job in result:
         print(f"Job: {job.settings.name}")
-        
+
 except Exception as e:
     print(f"Error: {e}")
     # Handle error appropriately
-```
+````
 
 ### Key Points
+
 - Point 1: Explanation
 - Point 2: Explanation
 
 ### Common Pitfalls
+
 - Pitfall 1: How to avoid
 - Pitfall 2: How to avoid
 
 ### Related Examples
+
 - [Link to related example]
-```
+
+````
 
 ---
 
@@ -544,9 +586,10 @@ host = os.getenv('DATABRICKS_HOST')
 
 # Initialize with secure credentials
 w = WorkspaceClient(host=host, token=token)
-```
+````
 
 #### ❌ BAD - Insecure Example
+
 ```/dev/null/insecure-example.py#L1-5
 from databricks.sdk import WorkspaceClient
 
@@ -561,6 +604,7 @@ w = WorkspaceClient(host="https://my-workspace.com", token="dapi1234567890")
 ### Priority Levels
 
 #### P0 - Critical (Fix Immediately)
+
 - Incorrect API endpoints
 - Security vulnerabilities in examples
 - Broken code examples that don't run
@@ -568,6 +612,7 @@ w = WorkspaceClient(host="https://my-workspace.com", token="dapi1234567890")
 - Deprecated features marked as current
 
 #### P1 - High (Fix Within 24 Hours)
+
 - Missing required parameters
 - Incorrect parameter types
 - Broken cross-references
@@ -575,6 +620,7 @@ w = WorkspaceClient(host="https://my-workspace.com", token="dapi1234567890")
 - Incomplete critical workflows
 
 #### P2 - Medium (Fix Within 1 Week)
+
 - Missing optional parameters
 - Suboptimal code patterns
 - Incomplete documentation sections
@@ -582,6 +628,7 @@ w = WorkspaceClient(host="https://my-workspace.com", token="dapi1234567890")
 - Missing related links
 
 #### P3 - Low (Fix When Possible)
+
 - Additional examples to add
 - Enhanced explanations
 - Style improvements
@@ -593,6 +640,7 @@ w = WorkspaceClient(host="https://my-workspace.com", token="dapi1234567890")
 ## 🤝 COLLABORATION GUIDELINES
 
 ### Working with Other Agents/Contributors
+
 1. **Document your changes** clearly in commit messages
 2. **Communicate blockers** immediately
 3. **Share findings** that affect other documents
@@ -600,7 +648,9 @@ w = WorkspaceClient(host="https://my-workspace.com", token="dapi1234567890")
 5. **Respect existing patterns** established by others
 
 ### Handoff Documentation
+
 When completing a task, provide:
+
 1. **Summary** of what was done
 2. **Sources** used for verification
 3. **Issues** encountered and how resolved
@@ -608,7 +658,9 @@ When completing a task, provide:
 5. **Testing** performed and results
 
 ### Reporting Issues
+
 When finding issues in existing docs:
+
 1. **Document clearly** what's wrong
 2. **Provide evidence** from official sources
 3. **Suggest fix** with proper solution
@@ -620,6 +672,7 @@ When finding issues in existing docs:
 ## 📈 CONTINUOUS IMPROVEMENT
 
 ### Learning from Validation
+
 - **Track common issues** found across documents
 - **Identify patterns** in inaccuracies
 - **Update this agent guide** with lessons learned
@@ -627,6 +680,7 @@ When finding issues in existing docs:
 - **Refine validation rules** as needed
 
 ### Feedback Loop
+
 1. **Collect validation results** weekly
 2. **Analyze trends** in issues found
 3. **Update processes** to prevent recurrence
@@ -634,7 +688,9 @@ When finding issues in existing docs:
 5. **Iterate on approach** continuously
 
 ### Version History
+
 This agent guide should be updated when:
+
 - New validation patterns are discovered
 - Databricks makes major API changes
 - Project plan is significantly updated
@@ -648,6 +704,7 @@ This agent guide should be updated when:
 ### When to Escalate to User
 
 #### Immediate Escalation (Stop Work)
+
 1. Official Databricks docs contradict each other
 2. Cannot verify critical information
 3. Plan requires significant deviation
@@ -655,6 +712,7 @@ This agent guide should be updated when:
 5. Security concerns identified
 
 #### Scheduled Escalation (Continue, Report Later)
+
 1. Minor inconsistencies found
 2. Enhancement opportunities identified
 3. Additional examples that would be valuable
@@ -662,6 +720,7 @@ This agent guide should be updated when:
 5. Process improvement ideas
 
 ### Escalation Format
+
 ```markdown
 ## ESCALATION REQUIRED
 
@@ -670,22 +729,28 @@ This agent guide should be updated when:
 **Impact:** [What's affected]
 
 ### Issue
+
 [Clear description of the problem]
 
 ### Context
+
 [Relevant background information]
 
 ### Options Considered
+
 1. Option A: [Description, Pros, Cons]
 2. Option B: [Description, Pros, Cons]
 
 ### Recommendation
+
 [Your suggested approach with reasoning]
 
 ### Required Decision
+
 [Specific question/approval needed]
 
 ### Blocking
+
 [Is work stopped? What's affected?]
 ```
 
@@ -694,6 +759,7 @@ This agent guide should be updated when:
 ## ✅ SUCCESS CRITERIA
 
 ### Per Document
+
 - [ ] 100% of information verified against official sources
 - [ ] All code examples tested and working
 - [ ] All links valid and working
@@ -704,6 +770,7 @@ This agent guide should be updated when:
 - [ ] Version compatibility noted
 
 ### Per Phase (from plan.md)
+
 - [ ] All deliverables completed
 - [ ] Quality gates passed
 - [ ] Validation report shows 0 critical issues
@@ -712,6 +779,7 @@ This agent guide should be updated when:
 - [ ] Plan progress tracked
 
 ### Overall Repository
+
 - [ ] 100% accuracy rate maintained
 - [ ] All quality metrics achieved
 - [ ] Validation system passing
@@ -727,6 +795,7 @@ This agent guide should be updated when:
 When beginning work on this repository, complete this checklist:
 
 ### Setup Phase
+
 - [ ] Read `docs/plan.md` completely
 - [ ] Review `PROJECT-STATUS.md` for current state
 - [ ] Understand `VALIDATION-SYSTEM-DELIVERY.md` capabilities
@@ -736,6 +805,7 @@ When beginning work on this repository, complete this checklist:
 - [ ] Understand quality metrics and targets
 
 ### Execution Phase
+
 - [ ] Identify current phase from plan
 - [ ] Determine task priority
 - [ ] Verify prerequisites are met
@@ -745,6 +815,7 @@ When beginning work on this repository, complete this checklist:
 - [ ] Apply validation checklist
 
 ### Completion Phase
+
 - [ ] Run validation system
 - [ ] Fix all critical/high issues
 - [ ] Update cross-references
@@ -758,6 +829,7 @@ When beginning work on this repository, complete this checklist:
 ## 📚 QUICK REFERENCE
 
 ### Key Files to Know
+
 - **`docs/plan.md`** - Project roadmap (FOLLOW THIS)
 - **`PROJECT-STATUS.md`** - Current progress tracking
 - **`VALIDATION-SYSTEM-DELIVERY.md`** - Validation system guide
@@ -765,6 +837,7 @@ When beginning work on this repository, complete this checklist:
 - **This file** - Agent operational guide
 
 ### Essential Commands
+
 ```bash
 # Run full validation
 python scripts/validate.py --mode full
@@ -780,6 +853,7 @@ python scripts/validate.py --file docs/api/clusters.md
 ```
 
 ### Quick Links
+
 - Official Docs: https://docs.databricks.com/
 - API Reference: https://docs.databricks.com/api/
 - Python SDK: https://github.com/databricks/databricks-sdk-py
@@ -790,6 +864,7 @@ python scripts/validate.py --file docs/api/clusters.md
 ## 🎓 FINAL REMINDERS
 
 ### The Golden Rules
+
 1. **ACCURACY FIRST** - Never compromise on correctness
 2. **FOLLOW THE PLAN** - Stick to `docs/plan.md`
 3. **ASK WHEN UNSURE** - Better to ask than guess
@@ -802,6 +877,7 @@ python scripts/validate.py --file docs/api/clusters.md
 10. **CONTINUOUS IMPROVEMENT** - Learn and adapt
 
 ### Agent Mantra
+
 ```
 "I verify before I write.
 I follow the plan unless approved to deviate.
@@ -814,12 +890,13 @@ I leave documentation better than I found it."
 
 ## 📝 VERSION CONTROL
 
-**Document Version:** 1.0.0  
-**Created:** 2024-01-15  
-**Last Updated:** 2024-01-15  
-**Next Review:** Phase 4 Completion  
+**Document Version:** 1.0.0
+**Created:** 2024-01-15
+**Last Updated:** 2024-01-15
+**Next Review:** Phase 4 Completion
 
 ### Change Log
+
 - **v1.0.0** (2024-01-15): Initial agent guide created
   - Established core principles and validation checklist
   - Defined execution modes and workflows
@@ -832,4 +909,4 @@ I leave documentation better than I found it."
 
 ---
 
-*This agent guide is a living document. Update it as you learn and improve the validation process. The goal is 100% accuracy - never compromise on quality.*
+_This agent guide is a living document. Update it as you learn and improve the validation process. The goal is 100% accuracy - never compromise on quality._
