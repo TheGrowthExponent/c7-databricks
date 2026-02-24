@@ -2,12 +2,7 @@
   "name": "databricks",
   "description": "Databricks documentation for Context7",
   "version": "1.0.0",
-  "include": [
-    "docs/**/*",
-    "README.md",
-    "CONTRIBUTING.md",
-    "LICENSE"
-  ],
+  "include": ["docs/**/*", "README.md", "CONTRIBUTING.md", "LICENSE"],
   "exclude": [
     "node_modules/**/*",
     ".git/**/*",
@@ -20,7 +15,8 @@
     ".github/**/*",
     ".vscode/**/*",
     ".cursor/**/*",
-    "docs/plan.md"
+    "docs/plan.md",
+    "docs/progress.md"
   ],
   "bestPractices": [
     "Use clear, concise documentation",
@@ -35,9 +31,7 @@
     "owner": "databricks",
     "type": "platform",
     "description": "Unified analytics platform for data analysts, data engineers, and data scientists",
-    "versions": [
-      "latest"
-    ]
+    "versions": ["latest"]
   },
   "patterns": {
     "api": "**/api/**/*",
