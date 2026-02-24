@@ -1,0 +1,15 @@
+# Databricks Documentation Validation System - Dependencies
+# Install with: pip install -r requirements.txt
+
+# AI Provider SDKs
+anthropic>=0.18.0         # Claude API for validation
+openai>=1.0.0             # OpenAI GPT-4 API (alternative provider)
+
+# Core dependencies (typically already installed)
+requests>=2.31.0          # HTTP requests for API calls
+python-dotenv>=1.0.0      # Environment variable management
+
+# Optional: Advanced features
+# schedule>=1.2.0         # For automated scheduling
+# slack-sdk>=3.23.0       # Slack notifications
+# jira>=3.5.0             # Jira integration

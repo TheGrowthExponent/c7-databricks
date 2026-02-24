@@ -1,0 +1,225 @@
+name: Documentation Validation
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'Validation scope'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - api
+          - sdk
+          - sql
+          - examples
+      provider:
+        description: 'AI provider'
+        required: true
+        default: 'anthropic'
+        type: choice
+        options:
+          - anthropic
+          - openai
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'tests/validation/**'
+  pull_request:
+    paths:
+      - 'docs/**'
+
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install anthropic openai
+
+      - name: Run validation
+        id: validation
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          cd tests/validation
+          SCOPE="${{ github.event.inputs.scope || 'full' }}"
+          PROVIDER="${{ github.event.inputs.provider || 'anthropic' }}"
+
+          echo "Running validation with scope: $SCOPE and provider: $PROVIDER"
+
+          python agent_validator.py \
+            --provider "$PROVIDER" \
+            --scope "$SCOPE" \
+            --batch-size 3 || echo "VALIDATION_FAILED=true" >> $GITHUB_OUTPUT
+
+          # Extract results
+          LATEST_REPORT=$(ls -t results/validation-report-*.json | head -1)
+          if [ -f "$LATEST_REPORT" ]; then
+            ACCURACY=$(python -c "import json; print(json.load(open('$LATEST_REPORT'))['total_accuracy'])")
+            CRITICAL=$(python -c "import json; print(json.load(open('$LATEST_REPORT'))['total_critical'])")
+            HIGH=$(python -c "import json; print(json.load(open('$LATEST_REPORT'))['total_high'])")
+
+            echo "ACCURACY=$ACCURACY" >> $GITHUB_OUTPUT
+            echo "CRITICAL=$CRITICAL" >> $GITHUB_OUTPUT
+            echo "HIGH=$HIGH" >> $GITHUB_OUTPUT
+            echo "REPORT_FILE=$LATEST_REPORT" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload validation results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-results-${{ github.run_number }}
+          path: |
+            tests/validation/results/validation-report-*.md
+            tests/validation/results/validation-report-*.json
+            tests/validation/results/validation-raw-*.md
+          retention-days: 90
+
+      - name: Create issue for critical findings
+        if: steps.validation.outputs.CRITICAL > 0
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const accuracy = '${{ steps.validation.outputs.ACCURACY }}';
+            const critical = '${{ steps.validation.outputs.CRITICAL }}';
+            const high = '${{ steps.validation.outputs.HIGH }}';
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 CRITICAL: Documentation Validation Issues Found`,
+              body: `## Documentation Validation Alert
+
+              **Date**: ${new Date().toISOString()}
+              **Accuracy Score**: ${accuracy}%
+              **Critical Issues**: 🔴 ${critical}
+              **High Priority Issues**: 🟠 ${high}
+
+              Critical issues were found during automated documentation validation.
+
+              ### Action Required
+              - Review the validation report in the workflow artifacts
+              - Address all critical issues immediately
+              - Update documentation to match official Databricks sources
+
+              ### Workflow
+              - Run: ${{ github.run_number }}
+              - Triggered by: ${{ github.event_name }}
+
+              See workflow artifacts for detailed findings.`,
+              labels: ['documentation', 'critical', 'validation']
+            });
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const accuracy = '${{ steps.validation.outputs.ACCURACY || 'N/A' }}';
+            const critical = '${{ steps.validation.outputs.CRITICAL || '0' }}';
+            const high = '${{ steps.validation.outputs.HIGH || '0' }}';
+            const failed = '${{ steps.validation.outputs.VALIDATION_FAILED }}' === 'true';
+
+            let status = '✅ PASSED';
+            let emoji = '🟢';
+
+            if (failed || critical > 0) {
+              status = '❌ FAILED';
+              emoji = '🔴';
+            } else if (high > 5) {
+              status = '⚠️ WARNING';
+              emoji = '🟡';
+            }
+
+            const body = `## ${emoji} Documentation Validation Results
+
+            **Status**: ${status}
+            **Accuracy**: ${accuracy}%
+
+            ### Issues Found
+            - 🔴 Critical: ${critical}
+            - 🟠 High: ${high}
+
+            ${critical > 0 ? '⚠️ **Critical issues must be resolved before merge**' : ''}
+            ${high > 5 ? '⚠️ **Consider addressing high priority issues**' : ''}
+
+            📊 Full validation report available in workflow artifacts.
+
+            ---
+            <sub>Automated validation powered by AI agent</sub>`;
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
+
+      - name: Check quality gates
+        if: github.event_name == 'pull_request'
+        run: |
+          CRITICAL=${{ steps.validation.outputs.CRITICAL || 0 }}
+          ACCURACY=${{ steps.validation.outputs.ACCURACY || 0 }}
+
+          if [ "$CRITICAL" -gt 0 ]; then
+            echo "❌ Quality gate failed: Critical issues found"
+            exit 1
+          fi
+
+          if (( $(echo "$ACCURACY < 85" | bc -l) )); then
+            echo "❌ Quality gate failed: Accuracy below 85%"
+            exit 1
+          fi
+
+          echo "✅ All quality gates passed"
+
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "## Documentation Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Scope**: ${{ github.event.inputs.scope || 'full' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Provider**: ${{ github.event.inputs.provider || 'anthropic' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Accuracy**: ${{ steps.validation.outputs.ACCURACY || 'N/A' }}%" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Issues" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔴 Critical: ${{ steps.validation.outputs.CRITICAL || '0' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- 🟠 High: ${{ steps.validation.outputs.HIGH || '0' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 Download artifacts for detailed reports" >> $GITHUB_STEP_SUMMARY
+
+  notify:
+    needs: validate-docs
+    runs-on: ubuntu-latest
+    if: failure() && github.event_name == 'schedule'
+
+    steps:
+      - name: Send notification
+        run: |
+          echo "Validation failed on scheduled run"
+          echo "Manual review required"
+          # Add Slack/email notification here if needed

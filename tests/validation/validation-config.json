@@ -1,0 +1,301 @@
+{
+  "validation": {
+    "name": "Databricks Documentation Validation",
+    "version": "1.0.0",
+    "description": "Configuration for validating Databricks documentation against official sources"
+  },
+  "schedule": {
+    "frequency": "weekly",
+    "day": "monday",
+    "time": "09:00",
+    "timezone": "UTC"
+  },
+  "scope": {
+    "include_paths": [
+      "docs/**/*.md",
+      "README.md",
+      "examples/**/*.py",
+      "examples/**/*.sql"
+    ],
+    "exclude_paths": [
+      "docs/internal/**",
+      "**/draft-*.md",
+      "**/.backup/**"
+    ],
+    "validation_types": [
+      "api_accuracy",
+      "code_syntax",
+      "configuration_values",
+      "feature_availability",
+      "version_compatibility",
+      "security_best_practices",
+      "deprecated_features"
+    ]
+  },
+  "official_sources": {
+    "base_url": "https://docs.databricks.com",
+    "api_reference": "https://docs.databricks.com/api/workspace/introduction",
+    "python_sdk": "https://databricks-sdk-py.readthedocs.io/en/latest/",
+    "sql_reference": "https://docs.databricks.com/sql/language-manual/",
+    "cli_reference": "https://docs.databricks.com/dev-tools/cli/",
+    "mlflow_docs": "https://docs.databricks.com/mlflow/",
+    "delta_lake_docs": "https://docs.databricks.com/delta/",
+    "unity_catalog_docs": "https://docs.databricks.com/data-governance/unity-catalog/",
+    "release_notes": "https://docs.databricks.com/release-notes/"
+  },
+  "validation_rules": {
+    "api_documentation": {
+      "enabled": true,
+      "checks": [
+        "endpoint_urls",
+        "http_methods",
+        "request_parameters",
+        "request_body_schema",
+        "response_codes",
+        "response_schema",
+        "authentication_requirements",
+        "api_version"
+      ],
+      "severity_mapping": {
+        "endpoint_mismatch": "critical",
+        "required_parameter_missing": "critical",
+        "optional_parameter_mismatch": "medium",
+        "example_formatting": "low"
+      }
+    },
+    "sdk_documentation": {
+      "enabled": true,
+      "checks": [
+        "import_statements",
+        "class_names",
+        "method_signatures",
+        "parameter_types",
+        "return_types",
+        "exception_handling",
+        "sdk_version_requirements"
+      ],
+      "severity_mapping": {
+        "method_signature_mismatch": "critical",
+        "import_error": "high",
+        "deprecated_method": "high",
+        "example_syntax_error": "high",
+        "type_hint_mismatch": "medium"
+      }
+    },
+    "sql_documentation": {
+      "enabled": true,
+      "checks": [
+        "sql_syntax",
+        "function_signatures",
+        "data_types",
+        "delta_lake_syntax",
+        "unity_catalog_references"
+      ],
+      "severity_mapping": {
+        "syntax_error": "critical",
+        "function_signature_mismatch": "high",
+        "deprecated_syntax": "high",
+        "style_issue": "low"
+      }
+    },
+    "configuration_documentation": {
+      "enabled": true,
+      "checks": [
+        "config_key_names",
+        "default_values",
+        "value_types",
+        "required_vs_optional",
+        "environment_variables",
+        "spark_configurations"
+      ],
+      "severity_mapping": {
+        "config_key_mismatch": "critical",
+        "default_value_incorrect": "high",
+        "type_mismatch": "high",
+        "missing_required_flag": "medium"
+      }
+    },
+    "code_examples": {
+      "enabled": true,
+      "checks": [
+        "syntax_validity",
+        "import_correctness",
+        "best_practices",
+        "error_handling",
+        "security_practices",
+        "completeness"
+      ],
+      "severity_mapping": {
+        "syntax_error": "critical",
+        "security_vulnerability": "critical",
+        "import_error": "high",
+        "missing_error_handling": "medium",
+        "style_violation": "low"
+      }
+    },
+    "feature_documentation": {
+      "enabled": true,
+      "checks": [
+        "feature_availability",
+        "capability_accuracy",
+        "limitations",
+        "prerequisites",
+        "version_requirements"
+      ],
+      "severity_mapping": {
+        "feature_not_available": "critical",
+        "incorrect_capability": "high",
+        "missing_limitation": "medium",
+        "version_mismatch": "high"
+      }
+    },
+    "deprecated_features": {
+      "enabled": true,
+      "auto_flag": true,
+      "severity": "high",
+      "require_migration_guide": true
+    }
+  },
+  "severity_levels": {
+    "critical": {
+      "description": "Breaking errors that will cause user failures",
+      "color": "red",
+      "requires_immediate_fix": true,
+      "block_release": true
+    },
+    "high": {
+      "description": "Significant issues that impact usability",
+      "color": "orange",
+      "requires_immediate_fix": false,
+      "block_release": false,
+      "fix_within_days": 7
+    },
+    "medium": {
+      "description": "Minor issues or inconsistencies",
+      "color": "yellow",
+      "requires_immediate_fix": false,
+      "block_release": false,
+      "fix_within_days": 30
+    },
+    "low": {
+      "description": "Cosmetic or style issues",
+      "color": "blue",
+      "requires_immediate_fix": false,
+      "block_release": false,
+      "fix_within_days": 90
+    }
+  },
+  "accuracy_thresholds": {
+    "excellent": 95,
+    "good": 90,
+    "needs_improvement": 85,
+    "requires_attention": 0
+  },
+  "reporting": {
+    "output_directory": "tests/validation/results",
+    "report_format": "markdown",
+    "include_timestamps": true,
+    "generate_summary": true,
+    "generate_detailed_report": true,
+    "generate_json_export": true,
+    "notification": {
+      "enabled": true,
+      "on_completion": true,
+      "on_critical_issues": true,
+      "on_accuracy_below": 90,
+      "channels": [
+        "email",
+        "slack"
+      ]
+    }
+  },
+  "execution": {
+    "parallel_validation": true,
+    "max_concurrent_files": 5,
+    "timeout_per_file_seconds": 300,
+    "retry_on_failure": true,
+    "max_retries": 2,
+    "cache_official_docs": true,
+    "cache_duration_hours": 24
+  },
+  "agent_configuration": {
+    "model": "claude-sonnet-4.5",
+    "temperature": 0.1,
+    "max_tokens": 4000,
+    "system_prompt_file": "tests/validation/VALIDATION_AGENT_PROMPT.md",
+    "context_window": "full_file",
+    "comparison_mode": "detailed",
+    "require_source_citations": true,
+    "generate_fix_suggestions": true
+  },
+  "quality_gates": {
+    "minimum_accuracy_score": 85,
+    "maximum_critical_issues": 0,
+    "maximum_high_issues": 5,
+    "fail_on_security_issues": true,
+    "fail_on_breaking_changes": true
+  },
+  "tracking": {
+    "store_validation_history": true,
+    "history_retention_days": 90,
+    "track_trends": true,
+    "compare_with_previous": true,
+    "generate_progress_report": true
+  },
+  "integrations": {
+    "github": {
+      "enabled": false,
+      "create_issues_for_critical": true,
+      "create_issues_for_high": false,
+      "label": "documentation-validation"
+    },
+    "jira": {
+      "enabled": false,
+      "project_key": "DOCS",
+      "issue_type": "Bug"
+    },
+    "ci_cd": {
+      "enabled": false,
+      "run_on_pr": true,
+      "run_on_merge": true,
+      "block_merge_on_failure": false
+    }
+  },
+  "custom_validations": [
+    {
+      "name": "Check Databricks Runtime Versions",
+      "enabled": true,
+      "pattern": "DBR \\d+\\.\\d+",
+      "verify_against": "https://docs.databricks.com/release-notes/runtime/",
+      "severity": "medium"
+    },
+    {
+      "name": "Check Python Version Requirements",
+      "enabled": true,
+      "pattern": "Python \\d+\\.\\d+",
+      "minimum_supported": "3.8",
+      "severity": "high"
+    },
+    {
+      "name": "Verify Workspace URLs",
+      "enabled": true,
+      "pattern": "https://.*\\.cloud\\.databricks\\.com",
+      "check_format": true,
+      "severity": "low"
+    },
+    {
+      "name": "Check API Version References",
+      "enabled": true,
+      "pattern": "/api/(2\\.0|2\\.1)/",
+      "verify_current": true,
+      "severity": "medium"
+    }
+  ],
+  "metadata": {
+    "created_date": "2024-01-01",
+    "last_updated": "2024-01-01",
+    "owner": "Documentation Team",
+    "contact": "docs@example.com",
+    "repository": "c7-databricks"
+  }
+}
