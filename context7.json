@@ -1,0 +1,67 @@
+{
+  "name": "databricks",
+  "description": "Databricks documentation for Context7",
+  "version": "1.0.0",
+  "include": [
+    "docs/**/*",
+    "README.md",
+    "CONTRIBUTING.md",
+    "LICENSE"
+  ],
+  "exclude": [
+    "node_modules/**/*",
+    ".git/**/*",
+    "*.log",
+    "dist/**/*",
+    "build/**/*",
+    "*.tmp",
+    "*.bak",
+    "coverage/**/*",
+    ".github/**/*",
+    ".vscode/**/*",
+    ".cursor/**/*",
+    "docs/plan.md"
+  ],
+  "bestPractices": [
+    "Use clear, concise documentation",
+    "Include practical code examples",
+    "Follow Databricks API conventions",
+    "Document common use cases",
+    "Include error handling information",
+    "Provide version-specific guidance"
+  ],
+  "library": {
+    "name": "Databricks",
+    "owner": "databricks",
+    "type": "platform",
+    "description": "Unified analytics platform for data analysts, data engineers, and data scientists",
+    "versions": [
+      "latest"
+    ]
+  },
+  "patterns": {
+    "api": "**/api/**/*",
+    "sdk": "**/sdk/**/*",
+    "sql": "**/sql/**/*",
+    "cli": "**/cli/**/*",
+    "ml": "**/ml/**/*",
+    "examples": "**/examples/**/*"
+  },
+  "examples": [
+    {
+      "name": "Get Started with Databricks",
+      "description": "Basic setup and configuration guide",
+      "category": "getting-started"
+    },
+    {
+      "name": "Using Databricks REST API",
+      "description": "How to make API calls to Databricks",
+      "category": "api"
+    },
+    {
+      "name": "Databricks SQL Query Examples",
+      "description": "Practical SQL examples for Databricks",
+      "category": "sql"
+    }
+  ]
+}
