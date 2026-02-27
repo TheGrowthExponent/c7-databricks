@@ -105,7 +105,7 @@ TBLPROPERTIES (
 CREATE TABLE customer_summary
 USING DELTA
 AS
-SELECT 
+SELECT
     customer_id,
     COUNT(*) as order_count,
     SUM(amount) as total_spent,
@@ -119,23 +119,23 @@ GROUP BY customer_id;
 
 ```sql
 -- Add column
-ALTER TABLE customers 
+ALTER TABLE customers
 ADD COLUMN loyalty_points INT;
 
 -- Rename column
-ALTER TABLE customers 
+ALTER TABLE customers
 RENAME COLUMN phone TO phone_number;
 
 -- Change column type
-ALTER TABLE customers 
+ALTER TABLE customers
 ALTER COLUMN loyalty_points TYPE BIGINT;
 
 -- Add comment to column
-ALTER TABLE customers 
+ALTER TABLE customers
 ALTER COLUMN email COMMENT 'Customer email address';
 
 -- Set table properties
-ALTER TABLE customers 
+ALTER TABLE customers
 SET TBLPROPERTIES (
     'delta.enableChangeDataFeed' = 'true'
 );
@@ -181,7 +181,7 @@ INSERT INTO customers VALUES (
     'Doe',
     'john.doe@example.com',
     '555-0100',
-    '2024-01-15',
+    '2026-02-27',
     'USA',
     true
 );
@@ -193,7 +193,7 @@ INSERT INTO customers VALUES
 
 -- Insert from select
 INSERT INTO customer_summary
-SELECT 
+SELECT
     customer_id,
     COUNT(*) as order_count,
     SUM(amount) as total_spent,
@@ -204,7 +204,7 @@ GROUP BY customer_id;
 
 -- Insert overwrite
 INSERT OVERWRITE TABLE customer_summary
-SELECT 
+SELECT
     customer_id,
     COUNT(*) as order_count,
     SUM(amount) as total_spent
@@ -225,8 +225,8 @@ WHERE registration_date < '2020-01-01';
 UPDATE customers
 SET loyalty_points = loyalty_points + 100
 WHERE customer_id IN (
-    SELECT customer_id 
-    FROM sales 
+    SELECT customer_id
+    FROM sales
     WHERE transaction_date >= CURRENT_DATE - INTERVAL 30 DAYS
 );
 
@@ -246,14 +246,14 @@ WHERE c.customer_id = s.customer_id;
 ```sql
 -- Delete with condition
 DELETE FROM customers
-WHERE is_active = false 
+WHERE is_active = false
   AND registration_date < '2020-01-01';
 
 -- Delete with subquery
 DELETE FROM sales
 WHERE customer_id IN (
-    SELECT customer_id 
-    FROM customers 
+    SELECT customer_id
+    FROM customers
     WHERE is_active = false
 );
 ```
@@ -346,7 +346,7 @@ VACUUM customers DRY RUN;
 ```sql
 -- Query table as of specific timestamp
 SELECT * FROM customers
-TIMESTAMP AS OF '2024-01-15 10:00:00';
+TIMESTAMP AS OF '2026-02-27 10:00:00';
 
 -- Query table as of specific version
 SELECT * FROM customers
@@ -359,7 +359,7 @@ DESCRIBE HISTORY customers;
 RESTORE TABLE customers TO VERSION AS OF 42;
 
 -- Restore table to timestamp
-RESTORE TABLE customers TO TIMESTAMP AS OF '2024-01-15';
+RESTORE TABLE customers TO TIMESTAMP AS OF '2026-02-27';
 ```
 
 ### Clone Tables
@@ -437,7 +437,7 @@ WHERE transaction_date = CURRENT_DATE;
 
 -- Create table in specific catalog/schema
 CREATE TABLE production.sales.daily_summary
-AS SELECT 
+AS SELECT
     transaction_date,
     COUNT(*) as transaction_count,
     SUM(amount) as total_amount
@@ -461,7 +461,7 @@ RETURN CONCAT(SUBSTRING(email, 1, 3), '***@', SPLIT(email, '@')[1]);
 
 -- Use in view
 CREATE VIEW customers_masked AS
-SELECT 
+SELECT
     customer_id,
     first_name,
     last_name,
@@ -477,13 +477,13 @@ FROM customers;
 
 ```sql
 -- Select with filtering
-SELECT 
+SELECT
     customer_id,
     first_name,
     last_name,
     email
 FROM customers
-WHERE country = 'USA' 
+WHERE country = 'USA'
   AND is_active = true
   AND registration_date >= '2023-01-01';
 
@@ -516,8 +516,8 @@ WHERE customer_id IN (1, 2, 3, 4, 5);
 SELECT *
 FROM sales
 WHERE customer_id IN (
-    SELECT customer_id 
-    FROM customers 
+    SELECT customer_id
+    FROM customers
     WHERE country = 'USA'
 );
 
@@ -525,7 +525,7 @@ WHERE customer_id IN (
 SELECT *
 FROM customers
 WHERE customer_id NOT IN (
-    SELECT DISTINCT customer_id 
+    SELECT DISTINCT customer_id
     FROM sales
 );
 ```
@@ -534,11 +534,11 @@ WHERE customer_id NOT IN (
 
 ```sql
 -- Simple CASE
-SELECT 
+SELECT
     customer_id,
     first_name,
     last_name,
-    CASE 
+    CASE
         WHEN loyalty_points >= 1000 THEN 'Gold'
         WHEN loyalty_points >= 500 THEN 'Silver'
         WHEN loyalty_points >= 100 THEN 'Bronze'
@@ -547,7 +547,7 @@ SELECT
 FROM customers;
 
 -- CASE in aggregation
-SELECT 
+SELECT
     country,
     COUNT(*) as total_customers,
     COUNT(CASE WHEN is_active = true THEN 1 END) as active_customers,
@@ -570,7 +570,7 @@ WHERE customer_id IN (
 );
 
 -- Correlated subquery
-SELECT 
+SELECT
     c.customer_id,
     c.first_name,
     c.last_name,
@@ -582,11 +582,11 @@ SELECT
 FROM customers c;
 
 -- Subquery in FROM
-SELECT 
+SELECT
     country,
     AVG(order_count) as avg_orders_per_customer
 FROM (
-    SELECT 
+    SELECT
         c.country,
         c.customer_id,
         COUNT(s.transaction_id) as order_count
@@ -606,16 +606,16 @@ WITH active_customers AS (
     FROM customers
     WHERE is_active = true
 )
-SELECT 
+SELECT
     country,
     COUNT(*) as customer_count
 FROM active_customers
 GROUP BY country;
 
 -- Multiple CTEs
-WITH 
+WITH
 customer_orders AS (
-    SELECT 
+    SELECT
         customer_id,
         COUNT(*) as order_count,
         SUM(amount) as total_spent
@@ -623,16 +623,16 @@ customer_orders AS (
     GROUP BY customer_id
 ),
 customer_segments AS (
-    SELECT 
+    SELECT
         customer_id,
-        CASE 
+        CASE
             WHEN total_spent >= 10000 THEN 'High Value'
             WHEN total_spent >= 5000 THEN 'Medium Value'
             ELSE 'Low Value'
         END as segment
     FROM customer_orders
 )
-SELECT 
+SELECT
     c.first_name,
     c.last_name,
     co.order_count,
@@ -652,22 +652,22 @@ ORDER BY co.total_spent DESC;
 
 ```sql
 -- Assign row numbers within partition
-SELECT 
+SELECT
     customer_id,
     transaction_date,
     amount,
     ROW_NUMBER() OVER (
-        PARTITION BY customer_id 
+        PARTITION BY customer_id
         ORDER BY transaction_date DESC
     ) as transaction_rank
 FROM sales;
 
 -- Get most recent transaction per customer
 WITH ranked_transactions AS (
-    SELECT 
+    SELECT
         *,
         ROW_NUMBER() OVER (
-            PARTITION BY customer_id 
+            PARTITION BY customer_id
             ORDER BY transaction_date DESC
         ) as rn
     FROM sales
@@ -681,7 +681,7 @@ WHERE rn = 1;
 
 ```sql
 -- Rank customers by total spending
-SELECT 
+SELECT
     customer_id,
     SUM(amount) as total_spent,
     RANK() OVER (ORDER BY SUM(amount) DESC) as rank,
@@ -694,7 +694,7 @@ GROUP BY customer_id;
 
 ```sql
 -- Calculate running total
-SELECT 
+SELECT
     transaction_date,
     amount,
     SUM(amount) OVER (
@@ -705,7 +705,7 @@ FROM sales
 ORDER BY transaction_date;
 
 -- Running total by customer
-SELECT 
+SELECT
     customer_id,
     transaction_date,
     amount,
@@ -720,7 +720,7 @@ FROM sales;
 
 ```sql
 -- 7-day moving average
-SELECT 
+SELECT
     transaction_date,
     SUM(amount) as daily_total,
     AVG(SUM(amount)) OVER (
@@ -736,7 +736,7 @@ ORDER BY transaction_date;
 
 ```sql
 -- Compare with previous period
-SELECT 
+SELECT
     transaction_date,
     SUM(amount) as daily_total,
     LAG(SUM(amount), 1) OVER (ORDER BY transaction_date) as previous_day,
@@ -746,12 +746,12 @@ GROUP BY transaction_date
 ORDER BY transaction_date;
 
 -- Look ahead to next value
-SELECT 
+SELECT
     customer_id,
     transaction_date,
     amount,
     LEAD(transaction_date, 1) OVER (
-        PARTITION BY customer_id 
+        PARTITION BY customer_id
         ORDER BY transaction_date
     ) as next_transaction_date
 FROM sales;
@@ -765,7 +765,7 @@ FROM sales;
 
 ```sql
 -- Multiple aggregations
-SELECT 
+SELECT
     COUNT(*) as total_transactions,
     COUNT(DISTINCT customer_id) as unique_customers,
     SUM(amount) as total_revenue,
@@ -780,7 +780,7 @@ FROM sales;
 
 ```sql
 -- Group by multiple columns
-SELECT 
+SELECT
     country,
     year,
     month,
@@ -797,7 +797,7 @@ ORDER BY country, year, month;
 
 ```sql
 -- Filter aggregated results
-SELECT 
+SELECT
     customer_id,
     COUNT(*) as order_count,
     SUM(amount) as total_spent
@@ -811,7 +811,7 @@ ORDER BY total_spent DESC;
 
 ```sql
 -- ROLLUP for hierarchical totals
-SELECT 
+SELECT
     country,
     year,
     month,
@@ -822,7 +822,7 @@ GROUP BY ROLLUP (country, year, month)
 ORDER BY country, year, month;
 
 -- CUBE for all combinations
-SELECT 
+SELECT
     country,
     year,
     SUM(amount) as total_revenue
@@ -836,7 +836,7 @@ ORDER BY country, year;
 
 ```sql
 -- Specific grouping combinations
-SELECT 
+SELECT
     country,
     year,
     month,
@@ -860,7 +860,7 @@ ORDER BY country, year, month;
 
 ```sql
 -- Basic inner join
-SELECT 
+SELECT
     c.customer_id,
     c.first_name,
     c.last_name,
@@ -875,7 +875,7 @@ INNER JOIN sales s ON c.customer_id = s.customer_id;
 
 ```sql
 -- Left join to include all customers
-SELECT 
+SELECT
     c.customer_id,
     c.first_name,
     c.last_name,
@@ -890,7 +890,7 @@ GROUP BY c.customer_id, c.first_name, c.last_name;
 
 ```sql
 -- Join multiple tables
-SELECT 
+SELECT
     c.customer_id,
     c.first_name,
     c.last_name,
@@ -908,15 +908,15 @@ WHERE s.transaction_date >= '2024-01-01';
 
 ```sql
 -- Find customers from same country
-SELECT 
+SELECT
     c1.customer_id as customer1_id,
     c1.first_name as customer1_name,
     c2.customer_id as customer2_id,
     c2.first_name as customer2_name,
     c1.country
 FROM customers c1
-INNER JOIN customers c2 
-    ON c1.country = c2.country 
+INNER JOIN customers c2
+    ON c1.country = c2.country
     AND c1.customer_id < c2.customer_id;
 ```
 
@@ -924,7 +924,7 @@ INNER JOIN customers c2
 
 ```sql
 -- Generate all combinations
-SELECT 
+SELECT
     d.date,
     p.product_id,
     p.product_name
@@ -943,7 +943,7 @@ WHERE d.date BETWEEN '2024-01-01' AND '2024-12-31';
 -- Query with partition filters (fast)
 SELECT *
 FROM sales
-WHERE year = 2024 
+WHERE year = 2024
   AND month = 1
   AND amount > 100;
 
@@ -956,14 +956,14 @@ WHERE year = 2024
 
 ```sql
 -- Filter early for better performance
-SELECT 
+SELECT
     c.customer_id,
     c.first_name,
     c.last_name,
     s.total_spent
 FROM customers c
 INNER JOIN (
-    SELECT 
+    SELECT
         customer_id,
         SUM(amount) as total_spent
     FROM sales

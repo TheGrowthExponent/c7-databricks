@@ -34,34 +34,34 @@ with mlflow.start_run(run_name="random-forest-v1"):
     # Log parameters
     n_estimators = 100
     max_depth = 10
-    
+
     mlflow.log_param("n_estimators", n_estimators)
     mlflow.log_param("max_depth", max_depth)
     mlflow.log_param("model_type", "RandomForest")
-    
+
     # Train model
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-    
+
     model = RandomForestClassifier(
         n_estimators=n_estimators,
         max_depth=max_depth,
         random_state=42
     )
     model.fit(X_train, y_train)
-    
+
     # Make predictions
     y_pred = model.predict(X_test)
-    
+
     # Log metrics
     accuracy = accuracy_score(y_test, y_pred)
     f1 = f1_score(y_test, y_pred, average='weighted')
-    
+
     mlflow.log_metric("accuracy", accuracy)
     mlflow.log_metric("f1_score", f1)
-    
+
     # Log model
     mlflow.sklearn.log_model(model, "model")
-    
+
     print(f"Accuracy: {accuracy:.4f}")
     print(f"F1 Score: {f1:.4f}")
 ```
@@ -74,24 +74,24 @@ import mlflow
 # Parent run for hyperparameter tuning
 with mlflow.start_run(run_name="hyperparameter-tuning") as parent_run:
     mlflow.log_param("tuning_strategy", "grid_search")
-    
+
     # Child runs for each configuration
     for n_estimators in [50, 100, 200]:
         for max_depth in [5, 10, 15]:
             with mlflow.start_run(nested=True, run_name=f"n{n_estimators}_d{max_depth}"):
                 mlflow.log_param("n_estimators", n_estimators)
                 mlflow.log_param("max_depth", max_depth)
-                
+
                 # Train and evaluate
                 model = RandomForestClassifier(
                     n_estimators=n_estimators,
                     max_depth=max_depth
                 )
                 model.fit(X_train, y_train)
-                
+
                 accuracy = accuracy_score(y_test, model.predict(X_test))
                 mlflow.log_metric("accuracy", accuracy)
-                
+
                 print(f"Config: n={n_estimators}, d={max_depth}, acc={accuracy:.4f}")
 ```
 
@@ -106,22 +106,22 @@ with mlflow.start_run():
     # Log parameters and metrics
     mlflow.log_param("algorithm", "xgboost")
     mlflow.log_metric("rmse", 0.85)
-    
+
     # Save and log confusion matrix
     plt.figure(figsize=(8, 6))
     # ... create confusion matrix plot ...
     plt.savefig("confusion_matrix.png")
     mlflow.log_artifact("confusion_matrix.png")
-    
+
     # Log feature importance
     feature_importance = pd.DataFrame({
         'feature': feature_names,
         'importance': model.feature_importances_
     }).sort_values('importance', ascending=False)
-    
+
     feature_importance.to_csv("feature_importance.csv", index=False)
     mlflow.log_artifact("feature_importance.csv")
-    
+
     # Log entire directory
     mlflow.log_artifacts("output_data/", artifact_path="data")
 ```
@@ -170,16 +170,16 @@ with mlflow.start_run():
         ('scaler', StandardScaler()),
         ('classifier', LogisticRegression())
     ])
-    
+
     pipeline.fit(X_train, y_train)
-    
+
     # Log the entire pipeline
     mlflow.sklearn.log_model(
         pipeline,
         "model",
         signature=mlflow.models.infer_signature(X_train, y_train)
     )
-    
+
     # Log with input example
     mlflow.sklearn.log_model(
         pipeline,
@@ -202,13 +202,13 @@ with mlflow.start_run():
         tf.keras.layers.Dense(64, activation='relu'),
         tf.keras.layers.Dense(n_classes, activation='softmax')
     ])
-    
+
     model.compile(
         optimizer='adam',
         loss='sparse_categorical_crossentropy',
         metrics=['accuracy']
     )
-    
+
     # Train
     history = model.fit(
         X_train, y_train,
@@ -216,16 +216,16 @@ with mlflow.start_run():
         epochs=10,
         batch_size=32
     )
-    
+
     # Log model
     mlflow.tensorflow.log_model(
         model,
         "model",
         signature=mlflow.models.infer_signature(X_train, model.predict(X_train))
     )
-    
+
     # Log training history
-    for epoch, (loss, val_loss) in enumerate(zip(history.history['loss'], 
+    for epoch, (loss, val_loss) in enumerate(zip(history.history['loss'],
                                                    history.history['val_loss'])):
         mlflow.log_metric("train_loss", loss, step=epoch)
         mlflow.log_metric("val_loss", val_loss, step=epoch)
@@ -244,7 +244,7 @@ class NeuralNetwork(nn.Module):
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(hidden_size, num_classes)
-    
+
     def forward(self, x):
         out = self.fc1(x)
         out = self.relu(out)
@@ -253,21 +253,21 @@ class NeuralNetwork(nn.Module):
 
 with mlflow.start_run():
     model = NeuralNetwork(input_size=n_features, hidden_size=128, num_classes=10)
-    
+
     # Training loop
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     criterion = nn.CrossEntropyLoss()
-    
+
     for epoch in range(10):
         # Training code...
         loss = train_epoch(model, train_loader, optimizer, criterion)
         mlflow.log_metric("train_loss", loss, step=epoch)
-    
+
     # Log model
     mlflow.pytorch.log_model(
         model,
         "model",
-        signature=mlflow.models.infer_signature(X_train.numpy(), 
+        signature=mlflow.models.infer_signature(X_train.numpy(),
                                                 model(X_train).detach().numpy())
     )
 ```
@@ -280,27 +280,27 @@ import pandas as pd
 
 class CustomPredictor(mlflow.pyfunc.PythonModel):
     """Custom model with preprocessing and postprocessing"""
-    
+
     def load_context(self, context):
         """Load artifacts and setup model"""
         import joblib
         self.model = joblib.load(context.artifacts["model"])
         self.scaler = joblib.load(context.artifacts["scaler"])
-    
+
     def predict(self, context, model_input):
         """Custom prediction logic"""
         # Preprocess
         scaled_input = self.scaler.transform(model_input)
-        
+
         # Predict
         predictions = self.model.predict(scaled_input)
-        
+
         # Postprocess
         result = pd.DataFrame({
             'prediction': predictions,
             'confidence': self.model.predict_proba(scaled_input).max(axis=1)
         })
-        
+
         return result
 
 # Log custom model
@@ -309,7 +309,7 @@ with mlflow.start_run():
         "model": "trained_model.pkl",
         "scaler": "scaler.pkl"
     }
-    
+
     mlflow.pyfunc.log_model(
         artifact_path="custom_model",
         python_model=CustomPredictor(),
@@ -330,7 +330,7 @@ import mlflow
 with mlflow.start_run() as run:
     # Train and log model
     mlflow.sklearn.log_model(model, "model")
-    
+
     # Register to Model Registry
     model_uri = f"runs:/{run.info.run_id}/model"
     mlflow.register_model(model_uri, "production_model")
@@ -538,16 +538,16 @@ import random
 def predict_with_ab_test(features, traffic_split=0.5):
     """
     Route traffic between champion and challenger models
-    
+
     Args:
         features: Input features
         traffic_split: Fraction of traffic to send to challenger (0-1)
     """
-    
+
     # Load both models
     champion = mlflow.pyfunc.load_model("models:/production_model@champion")
     challenger = mlflow.pyfunc.load_model("models:/production_model@challenger")
-    
+
     # Random routing
     if random.random() < traffic_split:
         model_used = "challenger"
@@ -555,12 +555,12 @@ def predict_with_ab_test(features, traffic_split=0.5):
     else:
         model_used = "champion"
         prediction = champion.predict(features)
-    
+
     # Log for analysis
     with mlflow.start_run(nested=True):
         mlflow.log_param("model_used", model_used)
         mlflow.log_metric("prediction", prediction[0])
-    
+
     return prediction, model_used
 
 # Usage
@@ -613,15 +613,15 @@ import pandas as pd
 
 def compare_models(experiment_name, metric_name="accuracy"):
     """Compare all runs in an experiment"""
-    
+
     client = MlflowClient()
     experiment = client.get_experiment_by_name(experiment_name)
-    
+
     runs = client.search_runs(
         experiment_ids=[experiment.experiment_id],
         order_by=[f"metrics.{metric_name} DESC"]
     )
-    
+
     results = []
     for run in runs:
         results.append({
@@ -631,7 +631,7 @@ def compare_models(experiment_name, metric_name="accuracy"):
             'model_type': run.data.params.get('model_type', 'N/A'),
             'start_time': pd.to_datetime(run.info.start_time, unit='ms')
         })
-    
+
     df = pd.DataFrame(results)
     return df
 
@@ -648,25 +648,25 @@ from datetime import datetime, timedelta
 
 def log_production_metrics(model_name, predictions, actuals):
     """Log production model performance"""
-    
+
     from sklearn.metrics import accuracy_score, f1_score
-    
+
     with mlflow.start_run(run_name=f"production_monitoring_{datetime.now().isoformat()}"):
         # Log model info
         mlflow.log_param("model_name", model_name)
         mlflow.log_param("evaluation_date", datetime.now().isoformat())
         mlflow.log_param("sample_size", len(predictions))
-        
+
         # Calculate metrics
         accuracy = accuracy_score(actuals, predictions)
         f1 = f1_score(actuals, predictions, average='weighted')
-        
+
         mlflow.log_metric("production_accuracy", accuracy)
         mlflow.log_metric("production_f1", f1)
-        
+
         # Log drift metrics if available
         # mlflow.log_metric("feature_drift", drift_score)
-        
+
         return accuracy, f1
 
 # Usage - run daily/hourly
@@ -693,34 +693,34 @@ class ExperimentConfig:
 
 def run_experiment(config: ExperimentConfig, X_train, y_train, X_test, y_test):
     """Standardized experiment runner"""
-    
+
     mlflow.set_experiment(config.experiment_name)
-    
+
     with mlflow.start_run():
         # Log configuration
         mlflow.log_param("data_version", config.data_version)
         mlflow.log_param("feature_set", config.feature_set)
-        
+
         for param_name, param_value in config.model_params.items():
             mlflow.log_param(param_name, param_value)
-        
+
         # Train model
         model = train_model(X_train, y_train, **config.model_params)
-        
+
         # Evaluate
         predictions = model.predict(X_test)
         metrics = evaluate_model(y_test, predictions)
-        
+
         for metric_name, metric_value in metrics.items():
             mlflow.log_metric(metric_name, metric_value)
-        
+
         # Log model
         mlflow.sklearn.log_model(
             model,
             "model",
             signature=mlflow.models.infer_signature(X_train, predictions)
         )
-        
+
         return model, metrics
 
 # Usage
@@ -747,48 +747,48 @@ def automated_retraining(
     performance_threshold: float = 0.85
 ):
     """Automated model retraining and registration"""
-    
+
     client = MlflowClient()
-    
+
     # Get current production model performance
     current_versions = client.search_model_versions(f"name='{model_name}'")
     production_version = [v for v in current_versions if v.current_stage == "Production"][0]
-    
+
     # Load and evaluate current model
     current_model = mlflow.pyfunc.load_model(
         f"models:/{model_name}/Production"
     )
-    
+
     # Load new training data
     train_df = spark.read.format("delta").load(train_data_path)
     X_train, y_train = prepare_data(train_df)
-    
+
     # Train new model
     with mlflow.start_run(run_name=f"retrain_{datetime.now().strftime('%Y%m%d')}"):
         mlflow.log_param("retrain_date", datetime.now().isoformat())
         mlflow.log_param("data_path", train_data_path)
         mlflow.log_param("previous_version", production_version.version)
-        
+
         # Train
         new_model = train_model(X_train, y_train)
-        
+
         # Evaluate
         X_test, y_test = load_test_data()
         new_accuracy = evaluate_model(new_model, X_test, y_test)
-        
+
         mlflow.log_metric("test_accuracy", new_accuracy)
-        
+
         # Log model
         mlflow.sklearn.log_model(new_model, "model")
-        
+
         # Compare with current production
         current_accuracy = float(production_version.tags.get("accuracy", 0))
-        
+
         if new_accuracy > max(current_accuracy, performance_threshold):
             # Register new version
             model_uri = f"runs:/{mlflow.active_run().info.run_id}/model"
             new_version = mlflow.register_model(model_uri, model_name)
-            
+
             # Tag with performance
             client.set_model_version_tag(
                 model_name,
@@ -796,7 +796,7 @@ def automated_retraining(
                 "accuracy",
                 str(new_accuracy)
             )
-            
+
             # Transition to Production
             client.transition_model_version_stage(
                 model_name,
@@ -804,7 +804,7 @@ def automated_retraining(
                 stage="Production",
                 archive_existing_versions=True
             )
-            
+
             print(f"New model v{new_version.version} promoted to Production")
             print(f"Accuracy: {new_accuracy:.4f} (previous: {current_accuracy:.4f})")
         else:
@@ -849,17 +849,17 @@ with mlflow.start_run():
     # Log random seeds
     seed = 42
     mlflow.log_param("random_seed", seed)
-    
+
     random.seed(seed)
     np.random.seed(seed)
-    
+
     # Log data version
-    mlflow.log_param("data_version", "2024-01-15")
+    mlflow.log_param("data_version", "2026-02-27")
     mlflow.log_param("data_hash", compute_data_hash(train_data))
-    
+
     # Log code version
     mlflow.log_param("git_commit", get_git_commit())
-    
+
     # Log dependencies
     mlflow.log_artifact("requirements.txt")
 ```
@@ -872,10 +872,10 @@ from mlflow.models.signature import infer_signature
 with mlflow.start_run():
     model.fit(X_train, y_train)
     predictions = model.predict(X_train)
-    
+
     # Infer signature
     signature = infer_signature(X_train, predictions)
-    
+
     mlflow.sklearn.log_model(
         model,
         "model",

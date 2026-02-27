@@ -318,7 +318,7 @@ COMMENT 'Partitioned transaction table for performance';
 
 -- Insert sample data
 INSERT INTO my_catalog.sales.transactions VALUES
-    (1001, 1, 'PROD-001', 2, 100.00, '2024-01-15', 2024, 1),
+    (1001, 1, 'PROD-001', 2, 100.00, '2026-02-27', 2024, 1),
     (1002, 2, 'PROD-002', 1, 250.50, '2024-01-20', 2024, 1),
     (1003, 3, 'PROD-001', 3, 150.00, '2024-02-10', 2024, 2),
     (1004, 1, 'PROD-003', 1, 500.00, '2024-02-15', 2024, 2),
@@ -649,7 +649,7 @@ DESCRIBE HISTORY my_catalog.sales.customers LIMIT 5;
 SELECT * FROM my_catalog.sales.customers VERSION AS OF 1;
 
 -- Query table at specific timestamp
-SELECT * FROM my_catalog.sales.customers TIMESTAMP AS OF '2024-01-15T10:00:00';
+SELECT * FROM my_catalog.sales.customers TIMESTAMP AS OF '2026-02-27T10:00:00';
 
 -- Compare versions
 SELECT
@@ -763,6 +763,7 @@ FROM table_changes('my_catalog.sales.customers', 0, 5);
 **Error:** `Permission denied: User does not have CREATE TABLE on Schema`
 
 **Solutions:**
+
 ```sql
 -- Request permissions from schema owner
 -- GRANT CREATE TABLE ON SCHEMA my_catalog.sales TO `user@company.com`;
@@ -776,6 +777,7 @@ SHOW SCHEMAS IN my_catalog;
 **Error:** `Table my_catalog.sales.customers already exists`
 
 **Solutions:**
+
 ```sql
 -- Use CREATE OR REPLACE
 CREATE OR REPLACE TABLE my_catalog.sales.customers (...);
@@ -793,6 +795,7 @@ CREATE TABLE my_catalog.sales.customers (...);
 **Error:** Schema mismatch when writing data
 
 **Solutions:**
+
 ```python
 # Enable schema evolution
 df.write.format("delta") \

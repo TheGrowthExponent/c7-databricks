@@ -17,12 +17,14 @@ export ANTHROPIC_API_KEY="your-key-here"
 ### Run Validation Now
 
 **Easiest Method:**
+
 ```bash
 bash validate-now.sh      # Linux/Mac
 validate-now.bat          # Windows
 ```
 
 **Direct Command:**
+
 ```bash
 python agent_validator.py --provider anthropic --scope full --interactive
 ```
@@ -79,13 +81,13 @@ cat results/validation-report-*.json | python -m json.tool
 
 ## 🎯 Validation Scopes
 
-| Scope | Command | Files Validated |
-|-------|---------|-----------------|
-| **Full** | `--scope full` | All documentation |
-| **API** | `--scope api` | `docs/api/*.md` |
-| **SDK** | `--scope sdk` | `docs/sdk/*.md` |
-| **SQL** | `--scope sql` | `docs/sql/*.md` |
-| **Examples** | `--scope examples` | `examples/**/*` |
+| Scope        | Command            | Files Validated   |
+| ------------ | ------------------ | ----------------- |
+| **Full**     | `--scope full`     | All documentation |
+| **API**      | `--scope api`      | `docs/api/*.md`   |
+| **SDK**      | `--scope sdk`      | `docs/sdk/*.md`   |
+| **SQL**      | `--scope sql`      | `docs/sql/*.md`   |
+| **Examples** | `--scope examples` | `examples/**/*`   |
 
 ---
 
@@ -112,12 +114,12 @@ setx ANTHROPIC_API_KEY "your-key"
 
 ### Accuracy Scores
 
-| Score | Status | Action |
-|-------|--------|--------|
-| 95-100% | 🟢 EXCELLENT | Maintain quality |
-| 90-95% | 🟡 GOOD | Minor fixes |
-| 85-90% | 🟠 NEEDS WORK | Address issues |
-| <85% | 🔴 CRITICAL | Immediate action |
+| Score   | Status        | Action           |
+| ------- | ------------- | ---------------- |
+| 95-100% | 🟢 EXCELLENT  | Maintain quality |
+| 90-95%  | 🟡 GOOD       | Minor fixes      |
+| 85-90%  | 🟠 NEEDS WORK | Address issues   |
+| <85%    | 🔴 CRITICAL   | Immediate action |
 
 ### Issue Severity
 
@@ -178,6 +180,7 @@ chmod +x validate-now.sh
 ### GitHub Actions (Automatic)
 
 Already configured! Runs:
+
 - Every Monday at 9 AM UTC
 - On push to main branch (docs changes)
 - On pull requests (docs changes)
@@ -248,10 +251,12 @@ bash validate-now.sh
 ## 💰 Cost Estimates
 
 **Anthropic Claude:**
+
 - Per validation: $0.15 - $0.30
 - Weekly (4x/month): ~$1.20/month
 
 **OpenAI GPT-4:**
+
 - Per validation: $0.50 - $0.75
 - Weekly (4x/month): ~$3.00/month
 
@@ -398,4 +403,4 @@ pip install anthropic && python tests/validation/agent_validator.py --provider a
 **Remember**: The goal is 100% accuracy against official Databricks documentation!
 
 **Version**: 1.0.0
-**Updated**: 2024-01-15
+**Updated**: 2026-02-27

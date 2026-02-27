@@ -342,7 +342,7 @@ databricks jobs run-now --job-id 123
 
 # Run with parameters
 databricks jobs run-now --job-id 123 \
-  --notebook-params '{"date": "2024-01-15", "env": "prod"}'
+  --notebook-params '{"date": "2026-02-27", "env": "prod"}'
 
 # Run and wait for completion
 databricks jobs run-now --job-id 123 --wait
@@ -715,13 +715,13 @@ databricks workspace ls /Users -r --output JSON | \
 # Function with error handling
 run_job_safely() {
   local job_id=$1
-  
+
   if ! databricks jobs run-now --job-id "$job_id" 2>/tmp/error.log; then
     echo "Error running job $job_id:"
     cat /tmp/error.log
     return 1
   fi
-  
+
   echo "Job $job_id started successfully"
   return 0
 }
@@ -734,7 +734,7 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
   if run_job_safely 123; then
     break
   fi
-  
+
   RETRY_COUNT=$((RETRY_COUNT + 1))
   echo "Retry $RETRY_COUNT of $MAX_RETRIES..."
   sleep 5
@@ -756,11 +756,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Setup Databricks CLI
         run: |
           pip install databricks-cli
-          
+
       - name: Configure Databricks
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
@@ -770,11 +770,11 @@ jobs:
           $DATABRICKS_HOST
           $DATABRICKS_TOKEN
           EOF
-          
+
       - name: Deploy Notebooks
         run: |
           databricks workspace import_dir ./notebooks /Production/notebooks --overwrite
-          
+
       - name: Run Tests
         run: |
           databricks jobs run-now --job-id 123 --wait

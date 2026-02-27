@@ -11,17 +11,8 @@
     "timezone": "UTC"
   },
   "scope": {
-    "include_paths": [
-      "docs/**/*.md",
-      "README.md",
-      "examples/**/*.py",
-      "examples/**/*.sql"
-    ],
-    "exclude_paths": [
-      "docs/internal/**",
-      "**/draft-*.md",
-      "**/.backup/**"
-    ],
+    "include_paths": ["docs/**/*.md", "README.md", "examples/**/*.py", "examples/**/*.sql"],
+    "exclude_paths": ["docs/internal/**", "**/draft-*.md", "**/.backup/**"],
     "validation_types": [
       "api_accuracy",
       "code_syntax",
@@ -203,10 +194,7 @@
       "on_completion": true,
       "on_critical_issues": true,
       "on_accuracy_below": 90,
-      "channels": [
-        "email",
-        "slack"
-      ]
+      "channels": ["email", "slack"]
     }
   },
   "execution": {
@@ -292,8 +280,8 @@
     }
   ],
   "metadata": {
-    "created_date": "2024-01-01",
-    "last_updated": "2024-01-01",
+    "created_date": "2026-02-27",
+    "last_updated": "2026-02-27",
     "owner": "Documentation Team",
     "contact": "docs@example.com",
     "repository": "c7-databricks"

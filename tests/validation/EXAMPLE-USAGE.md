@@ -43,12 +43,16 @@ Here are the documentation files to validate:
 
 File 1: docs/api/clusters-api.md
 ```
+
 [paste file content]
+
 ```
 
 File 2: docs/api/jobs-api.md
 ```
+
 [paste file content]
+
 ```
 
 [Continue for all files you want to validate]
@@ -61,7 +65,8 @@ Please provide a detailed validation report now.
 ## Example 1: Validate API Documentation
 
 ### Prompt:
-```
+
+````
 I need you to validate this Databricks API documentation against the official Databricks API reference at https://docs.databricks.com/api/workspace/introduction
 
 Please check:
@@ -90,13 +95,16 @@ The Clusters API allows you to create, manage, and delete Databricks clusters.
   "node_type_id": "i3.xlarge",
   "num_workers": 2
 }
-```
+````
 
 **Response**: Returns cluster ID
+
 ```
+
 ```
 
 Rate accuracy 0-100% and list any issues with official documentation URLs.
+
 ```
 
 ---
@@ -105,9 +113,11 @@ Rate accuracy 0-100% and list any issues with official documentation URLs.
 
 ### Prompt:
 ```
+
 Please validate this Python code example for Databricks SDK usage. Check against the official Python SDK documentation at https://databricks-sdk-py.readthedocs.io/
 
 Verify:
+
 - Import statements are correct
 - Class and method names are accurate
 - Parameter types match SDK
@@ -128,6 +138,7 @@ for cluster in clusters:
 ```
 
 Is this code correct? List any issues with severity and corrections.
+
 ```
 
 ---
@@ -136,9 +147,11 @@ Is this code correct? List any issues with severity and corrections.
 
 ### Prompt:
 ```
+
 Validate this Databricks SQL documentation against the official SQL reference at https://docs.databricks.com/sql/language-manual/
 
 Check:
+
 - SQL syntax is valid for Databricks SQL
 - Delta Lake syntax is correct
 - Function signatures are accurate
@@ -156,6 +169,7 @@ WHEN NOT MATCHED THEN INSERT *
 ```
 
 Is this syntax correct and current? Provide accuracy score and any corrections needed.
+
 ```
 
 ---
@@ -164,6 +178,7 @@ Is this syntax correct and current? Provide accuracy score and any corrections n
 
 ### Prompt Template:
 ```
+
 You are a Databricks documentation validation expert. I need a comprehensive validation of multiple documentation files against official Databricks sources.
 
 VALIDATION REQUIREMENTS:
@@ -195,6 +210,7 @@ OUTPUT FORMAT:
 **Accuracy Score**: [0-100]%
 
 ## Executive Summary
+
 - Total Files: [N]
 - Critical Issues: [N]
 - High Priority: [N]
@@ -204,9 +220,11 @@ OUTPUT FORMAT:
 ## Detailed Findings
 
 ### File: [filename]
+
 **Accuracy**: [score]%
 
 #### Issue 1: [Title]
+
 - **Severity**: [Critical/High/Medium/Low]
 - **Location**: Lines [X-Y]
 - **Current**: [What it says now]
@@ -217,25 +235,29 @@ OUTPUT FORMAT:
 [Repeat for each issue]
 
 ## Priority Actions
+
 1. [Critical issue summary] - File:Line
 2. [High issue summary] - File:Line
-[etc.]
+   [etc.]
 
 ---
 
 FILES TO VALIDATE:
 
 ### File 1: docs/api/clusters-api.md
+
 ```
 [PASTE CONTENT]
 ```
 
 ### File 2: docs/sdk/python-sdk.md
+
 ```
 [PASTE CONTENT]
 ```
 
 ### File 3: docs/sql/delta-queries.md
+
 ```
 [PASTE CONTENT]
 ```
@@ -243,6 +265,7 @@ FILES TO VALIDATE:
 [Add more files as needed]
 
 Please generate the validation report now with specific, actionable findings.
+
 ```
 
 ---
@@ -251,6 +274,7 @@ Please generate the validation report now with specific, actionable findings.
 
 ### Prompt:
 ```
+
 Quick validation request:
 
 Compare this documentation against official Databricks docs and rate accuracy 0-100%. List top 3 issues if any.
@@ -268,7 +292,8 @@ Required parameters:
 ```
 
 Accuracy score and issues?
-```
+
+````
 
 ---
 
@@ -280,9 +305,10 @@ Accuracy score and issues?
 ```bash
 cd tests/validation
 python run_validation.py --scope full
-```
+````
 
 **Step 2**: Open the generated request file
+
 ```bash
 cat results/validation-request-20240115-093045.txt
 ```
@@ -294,6 +320,7 @@ cat results/validation-request-20240115-093045.txt
 **Step 5**: Wait for detailed validation report
 
 **Step 6**: Save the AI's response to a file
+
 ```bash
 # Save AI response
 cat > results/validation-response-20240115-093045.md
@@ -315,6 +342,7 @@ When you use these prompts, you'll get responses like:
 **Accuracy Score**: 92.5%
 
 ## Executive Summary
+
 - Total Files: 5
 - Critical Issues: 0
 - High Priority: 3
@@ -324,9 +352,11 @@ When you use these prompts, you'll get responses like:
 ## Detailed Findings
 
 ### File: docs/api/jobs-api.md
+
 **Accuracy**: 88%
 
 #### Issue 1: Deprecated API Version
+
 - **Severity**: High
 - **Location**: Lines 12-15
 - **Current**: References Jobs API 2.0
@@ -335,6 +365,7 @@ When you use these prompts, you'll get responses like:
 - **Action**: Update all references from 2.0 to 2.1, note 2.0 compatibility
 
 #### Issue 2: Missing Required Parameter
+
 - **Severity**: High
 - **Location**: Lines 45-52
 - **Current**: Example missing timeout_seconds
@@ -345,11 +376,13 @@ When you use these prompts, you'll get responses like:
 [... more issues ...]
 
 ## Priority Actions
+
 1. Update Jobs API version references (High) - docs/api/jobs-api.md:12-15
 2. Add missing required parameters (High) - docs/api/jobs-api.md:45-52
 3. Update deprecated SDK patterns (Medium) - docs/examples/etl.py:78-82
 
 ## Recommendations
+
 - Set up automated weekly validation
 - Add version badges to documentation
 - Create API version migration guide
@@ -360,27 +393,32 @@ When you use these prompts, you'll get responses like:
 ## Tips for Best Results
 
 ### 1. Be Specific
+
 ```
 ❌ "Check if this is correct"
 ✅ "Validate this against official Databricks Clusters API docs at https://docs.databricks.com/api/workspace/clusters"
 ```
 
 ### 2. Provide Context
+
 ```
 ✅ "This documentation targets Databricks Runtime 13.x and SDK version 0.18.0"
 ```
 
 ### 3. Request Structured Output
+
 ```
 ✅ "Provide findings in this format: Severity | Location | Issue | Fix | Source URL"
 ```
 
 ### 4. Ask for Sources
+
 ```
 ✅ "Include URLs to official documentation for every finding"
 ```
 
 ### 5. Specify Validation Depth
+
 ```
 ✅ "Deep validation: check every parameter, data type, and example"
 ```
@@ -390,6 +428,7 @@ When you use these prompts, you'll get responses like:
 ## Common Validation Questions
 
 ### Q: "Is this API endpoint correct?"
+
 ```
 Validate this endpoint against https://docs.databricks.com/api/workspace/introduction:
 
@@ -399,25 +438,29 @@ Is the URL, HTTP method, and API version correct?
 ```
 
 ### Q: "Is this code example up to date?"
-```
+
+````
 Check if this Python SDK code follows current best practices per https://databricks-sdk-py.readthedocs.io/:
 
 ```python
 from databricks.sdk import WorkspaceClient
 w = WorkspaceClient()
-```
+````
 
 Is this the recommended pattern?
+
 ```
 
 ### Q: "Are these configuration values correct?"
 ```
+
 Verify these Spark configuration values against official docs:
 
 spark.sql.adaptive.enabled = true
 spark.databricks.delta.optimizeWrite.enabled = true
 
 Are these keys and defaults correct?
+
 ```
 
 ---
@@ -426,28 +469,34 @@ Are these keys and defaults correct?
 
 ### Daily Usage
 ```
+
 Morning: Run validation on new/changed files
 Afternoon: Review findings
 Evening: Create fix tickets
+
 ```
 
 ### Weekly Review
 ```
+
 Monday: Full validation run
 Tuesday: Review critical/high issues
 Wednesday: Implement fixes
 Thursday: Re-validate
 Friday: Update documentation standards
+
 ```
 
 ### Release Process
 ```
+
 Pre-release: Full validation
 Fix critical issues: Must pass
 Fix high issues: Should pass
 Document medium/low: Track in backlog
 Final validation: Confirm >85% accuracy
 Release: Ship with confidence
+
 ```
 
 ---
@@ -505,4 +554,5 @@ Release: Ship with confidence
 **Start validating now!** Your documentation quality depends on it.
 
 **Version**: 1.0.0
-**Updated**: 2024-01-15
+**Updated**: 2026-02-27
+```

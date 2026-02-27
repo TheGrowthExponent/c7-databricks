@@ -46,16 +46,19 @@ All validation is performed against these authoritative sources:
 ### Validation Methods
 
 **1. Automated AI Validation** (Recommended)
+
 - Uses AI agents (Claude, GPT-4) to systematically compare documentation
 - Fully automated with detailed reports
 - Requires API key
 
 **2. Semi-Automated Validation**
+
 - Generates validation requests for manual AI review
 - Copy/paste to your AI assistant
 - No API key required
 
 **3. Manual Validation**
+
 - Use the validation prompt as a checklist
 - Manually verify each item
 - Time-intensive but thorough
@@ -80,11 +83,13 @@ pip install -r requirements.txt
 ### Set Up API Key (for automated validation)
 
 **Option 1: Anthropic Claude** (Recommended)
+
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
 **Option 2: OpenAI GPT-4**
+
 ```bash
 export OPENAI_API_KEY="sk-..."
 ```
@@ -92,16 +97,19 @@ export OPENAI_API_KEY="sk-..."
 ### Run Your First Validation
 
 **On Linux/Mac:**
+
 ```bash
 bash validate-now.sh
 ```
 
 **On Windows:**
+
 ```cmd
 validate-now.bat
 ```
 
 **Or directly with Python:**
+
 ```bash
 # Automated validation
 python agent_validator.py --provider anthropic --scope full --interactive
@@ -156,13 +164,13 @@ Edit `validation-config.json` to customize:
 
 ### Validation Scopes
 
-| Scope | Files Validated | Use Case |
-|-------|-----------------|----------|
-| `full` | All documentation | Weekly comprehensive check |
-| `api` | `docs/api/*.md` | After API updates |
-| `sdk` | `docs/sdk/*.md` | After SDK version changes |
-| `sql` | `docs/sql/*.md` | SQL syntax verification |
-| `examples` | `examples/**/*.py` | Code example validation |
+| Scope      | Files Validated    | Use Case                   |
+| ---------- | ------------------ | -------------------------- |
+| `full`     | All documentation  | Weekly comprehensive check |
+| `api`      | `docs/api/*.md`    | After API updates          |
+| `sdk`      | `docs/sdk/*.md`    | After SDK version changes  |
+| `sql`      | `docs/sql/*.md`    | SQL syntax verification    |
+| `examples` | `examples/**/*.py` | Code example validation    |
 
 ---
 
@@ -171,18 +179,21 @@ Edit `validation-config.json` to customize:
 ### Method 1: Interactive Script (Easiest)
 
 **Linux/Mac:**
+
 ```bash
 cd tests/validation
 bash validate-now.sh
 ```
 
 **Windows:**
+
 ```cmd
 cd tests\validation
 validate-now.bat
 ```
 
 Follow the prompts to select:
+
 1. Validation mode (automated/manual)
 2. AI provider (if automated)
 3. Validation scope
@@ -190,6 +201,7 @@ Follow the prompts to select:
 ### Method 2: Direct Python Commands
 
 **Full Automated Validation:**
+
 ```bash
 python agent_validator.py \
   --provider anthropic \
@@ -199,6 +211,7 @@ python agent_validator.py \
 ```
 
 **Validate Specific Scope:**
+
 ```bash
 # API documentation only
 python agent_validator.py --provider anthropic --scope api
@@ -211,6 +224,7 @@ python agent_validator.py --provider anthropic --scope sql
 ```
 
 **Validate Specific Files:**
+
 ```bash
 python agent_validator.py \
   --provider anthropic \
@@ -218,6 +232,7 @@ python agent_validator.py \
 ```
 
 **Generate Manual Validation Request:**
+
 ```bash
 python run_validation.py --scope full
 # Copy output from results/validation-request-*.txt to your AI assistant
@@ -226,11 +241,13 @@ python run_validation.py --scope full
 ### Method 3: GitHub Actions (CI/CD)
 
 Validation runs automatically on:
+
 - **Schedule**: Every Monday at 9 AM UTC
 - **Push**: When docs are updated on main branch
 - **Pull Request**: When docs are changed in PR
 
 **Manual Trigger:**
+
 1. Go to GitHub Actions tab
 2. Select "Documentation Validation" workflow
 3. Click "Run workflow"
@@ -254,34 +271,38 @@ validation-raw-20240115-093045-batch2.md  # Detailed batch 2
 
 ### Accuracy Scores
 
-| Score | Status | Meaning |
-|-------|--------|---------|
-| 95-100% | 🟢 EXCELLENT | Production ready |
-| 90-95% | 🟡 GOOD | Minor issues only |
-| 85-90% | 🟠 NEEDS IMPROVEMENT | Several issues to fix |
-| <85% | 🔴 REQUIRES ATTENTION | Significant problems |
+| Score   | Status                | Meaning               |
+| ------- | --------------------- | --------------------- |
+| 95-100% | 🟢 EXCELLENT          | Production ready      |
+| 90-95%  | 🟡 GOOD               | Minor issues only     |
+| 85-90%  | 🟠 NEEDS IMPROVEMENT  | Several issues to fix |
+| <85%    | 🔴 REQUIRES ATTENTION | Significant problems  |
 
 ### Issue Severity
 
 **🔴 CRITICAL** - Fix immediately
+
 - API breaking changes
 - Incorrect required parameters
 - Security vulnerabilities
 - Syntax errors in code examples
 
 **🟠 HIGH** - Fix within 7 days
+
 - Deprecated feature usage
 - Missing important information
 - Version compatibility issues
 - Incorrect method signatures
 
 **🟡 MEDIUM** - Fix within 30 days
+
 - Incomplete documentation
 - Minor parameter mismatches
 - Missing optional fields
 - Outdated examples
 
 **🔵 LOW** - Fix as time permits
+
 - Formatting inconsistencies
 - Typos
 - Style improvements
@@ -298,6 +319,7 @@ Example report structure:
 **Accuracy Score**: 92.5%
 
 ## Executive Summary
+
 - Critical Issues: 0
 - High Priority Issues: 4
 - Medium Priority Issues: 9
@@ -306,10 +328,12 @@ Example report structure:
 ## Detailed Findings
 
 ### File: docs/api/jobs-api.md
+
 **Status**: ⚠️ NEEDS UPDATES
 **Accuracy Score**: 88%
 
 #### Issue 1: Deprecated API Version Reference
+
 - **Severity**: 🟠 High
 - **Location**: Lines 23-25
 - **Description**: References Jobs API 2.0, should use 2.1
@@ -321,13 +345,14 @@ Example report structure:
 
 Validation checks these gates:
 
-| Gate | Default | Description |
-|------|---------|-------------|
-| Minimum Accuracy | 85% | Overall accuracy must exceed this |
-| Max Critical | 0 | No critical issues allowed |
-| Max High | 5 | Limited high-priority issues |
+| Gate             | Default | Description                       |
+| ---------------- | ------- | --------------------------------- |
+| Minimum Accuracy | 85%     | Overall accuracy must exceed this |
+| Max Critical     | 0       | No critical issues allowed        |
+| Max High         | 5       | Limited high-priority issues      |
 
 **Status Indicators:**
+
 - ✅ PASS - Meets requirements
 - ❌ FAIL - Does not meet requirements
 
@@ -337,18 +362,19 @@ Validation checks these gates:
 
 ### Recommended Schedule
 
-| Frequency | Use Case |
-|-----------|----------|
-| **Weekly** | Standard maintenance |
-| **Pre-release** | Before documentation releases |
+| Frequency       | Use Case                          |
+| --------------- | --------------------------------- |
+| **Weekly**      | Standard maintenance              |
+| **Pre-release** | Before documentation releases     |
 | **Post-update** | After Databricks platform updates |
-| **On-demand** | When issues are suspected |
+| **On-demand**   | When issues are suspected         |
 
 ### Setup Scheduled Validation
 
 **Option 1: GitHub Actions** (Recommended)
 
 Already configured in `.github/workflows/validate-documentation.yml`:
+
 - Runs every Monday at 9 AM UTC
 - Can be manually triggered
 - Automatic on PR and push to main
@@ -395,6 +421,7 @@ while True:
 ```
 
 Run continuously:
+
 ```bash
 python scheduled_validation.py
 ```
@@ -479,6 +506,7 @@ Error: API key not found. Set ANTHROPIC_API_KEY environment variable.
 ```
 
 **Solution:**
+
 ```bash
 export ANTHROPIC_API_KEY="your-api-key"
 # Or add to ~/.bashrc or ~/.zshrc
@@ -491,6 +519,7 @@ ModuleNotFoundError: No module named 'anthropic'
 ```
 
 **Solution:**
+
 ```bash
 pip install -r requirements.txt
 # Or specifically:
@@ -504,6 +533,7 @@ Error 429: Rate limit exceeded
 ```
 
 **Solution:**
+
 - Reduce batch size: `--batch-size 2`
 - Add delays in `agent_validator.py`
 - Validate smaller scopes separately
@@ -515,6 +545,7 @@ Error: Token limit exceeded
 ```
 
 **Solution:**
+
 - Use smaller batch sizes: `--batch-size 1`
 - Validate specific files instead of full scope
 - Break validation into multiple runs
@@ -526,6 +557,7 @@ Permission denied: ./validate-now.sh
 ```
 
 **Solution:**
+
 ```bash
 chmod +x validate-now.sh
 ```
@@ -558,11 +590,13 @@ python -c "import json; json.load(open('validation-config.json')); print('Valid'
 ### 1. Regular Validation
 
 **Weekly Schedule:**
+
 - Monday: Full validation
 - Track trends over time
 - Address issues incrementally
 
 **Event-Based:**
+
 - Before releases
 - After Databricks updates
 - When official docs change
@@ -570,6 +604,7 @@ python -c "import json; json.load(open('validation-config.json')); print('Valid'
 ### 2. Prioritize Fixes
 
 **Fix Order:**
+
 1. 🔴 Critical - Immediately (user-breaking)
 2. 🟠 High - Within 7 days (usability)
 3. 🟡 Medium - Within 30 days (completeness)
@@ -578,6 +613,7 @@ python -c "import json; json.load(open('validation-config.json')); print('Valid'
 ### 3. Track Metrics
 
 **Monitor Over Time:**
+
 ```bash
 # View accuracy trends
 for file in results/validation-report-*.json; do
@@ -589,6 +625,7 @@ done
 ### 4. Document Changes
 
 When fixing issues:
+
 ```markdown
 Fix: Update Jobs API from 2.0 to 2.1
 
@@ -603,6 +640,7 @@ Source: https://docs.databricks.com/api/workspace/jobs
 ### 5. Incremental Validation
 
 For large repos:
+
 ```bash
 # Day 1: APIs
 python agent_validator.py --provider anthropic --scope api
@@ -617,10 +655,12 @@ python agent_validator.py --provider anthropic --scope examples
 ### 6. Cost Management
 
 **Estimate Costs:**
+
 - Claude: ~$0.15-$0.30 per full validation
 - GPT-4: ~$0.50-$0.75 per full validation
 
 **Optimize:**
+
 - Validate changed files only
 - Use appropriate batch sizes
 - Schedule during off-peak hours
@@ -628,6 +668,7 @@ python agent_validator.py --provider anthropic --scope examples
 ### 7. Integration with Workflow
 
 **Pre-commit Hook:**
+
 ```bash
 #!/bin/bash
 # .git/hooks/pre-commit
@@ -639,6 +680,7 @@ fi
 ```
 
 **Documentation Review Checklist:**
+
 - [ ] Validation report reviewed
 - [ ] Critical issues resolved
 - [ ] High priority issues addressed or documented
@@ -667,6 +709,7 @@ fi
 ### Monthly Budget
 
 Assuming weekly full validations:
+
 - **Claude**: ~$1.20/month
 - **GPT-4**: ~$3.00/month
 
@@ -679,6 +722,7 @@ Assuming weekly full validations:
 **Add Custom Validation Rules:**
 
 Edit `validation-config.json`:
+
 ```json
 {
   "custom_validations": [
@@ -696,6 +740,7 @@ Edit `validation-config.json`:
 **Enhance Agent Prompt:**
 
 Edit `VALIDATION_AGENT_PROMPT.md` to:
+
 - Add new validation criteria
 - Customize output format
 - Add domain-specific checks
@@ -714,16 +759,19 @@ class CustomValidator(AIAgentValidator):
 ## Resources
 
 ### Documentation
+
 - [Validation Agent Prompt](validation/VALIDATION_AGENT_PROMPT.md)
 - [Configuration Reference](validation/validation-config.json)
 - [Sample Report](validation/results/SAMPLE-REPORT.md)
 
 ### Official Sources
+
 - [Databricks Documentation](https://docs.databricks.com)
 - [Python SDK Docs](https://databricks-sdk-py.readthedocs.io/)
 - [Release Notes](https://docs.databricks.com/release-notes/)
 
 ### AI Providers
+
 - [Anthropic Claude](https://www.anthropic.com)
 - [OpenAI GPT-4](https://openai.com)
 
@@ -741,6 +789,7 @@ The Databricks Documentation Validation System ensures your documentation remain
 6. **Cost Effective** - ~$1-3/month for weekly validation
 
 **Get Started:**
+
 ```bash
 cd tests/validation
 bash validate-now.sh
@@ -750,6 +799,6 @@ bash validate-now.sh
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: 2024-01-15  
+**Version**: 1.0.0
+**Last Updated**: 2026-02-27
 **Maintained By**: Documentation Team

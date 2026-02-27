@@ -23,6 +23,7 @@ Authorization: Bearer <token>
 ### Hierarchy
 
 Unity Catalog uses a three-level namespace:
+
 - **Metastore** - Top-level container for metadata
 - **Catalog** - Database namespace containing schemas
 - **Schema** (Database) - Container for tables, views, and functions
@@ -136,6 +137,7 @@ Create a new catalog in the metastore.
 **Endpoint:** `POST /api/2.1/unity-catalog/catalogs`
 
 **Request Body:**
+
 - `name` (required) - Catalog name
 - `comment` (optional) - Description
 - `properties` (optional) - Key-value properties
@@ -240,6 +242,7 @@ Update catalog properties.
 **Endpoint:** `PATCH /api/2.1/unity-catalog/catalogs/{catalog_name}`
 
 **Request Body:**
+
 - `comment` (optional) - Updated description
 - `properties` (optional) - Updated properties
 - `owner` (optional) - New owner
@@ -274,7 +277,7 @@ data = {
     "comment": "Updated production catalog",
     "properties": {
         "department": "data-engineering",
-        "updated": "2024-01-15"
+        "updated": "2026-02-27"
     }
 }
 
@@ -292,6 +295,7 @@ Delete a catalog (must be empty).
 **Endpoint:** `DELETE /api/2.1/unity-catalog/catalogs/{catalog_name}`
 
 **Parameters:**
+
 - `force` (optional) - Set to `true` to force delete non-empty catalog
 
 **Request Example:**
@@ -328,6 +332,7 @@ Create a new schema (database) in a catalog.
 **Endpoint:** `POST /api/2.1/unity-catalog/schemas`
 
 **Request Body:**
+
 - `name` (required) - Schema name
 - `catalog_name` (required) - Parent catalog
 - `comment` (optional) - Description
@@ -402,6 +407,7 @@ List all schemas in a catalog.
 **Endpoint:** `GET /api/2.1/unity-catalog/schemas`
 
 **Parameters:**
+
 - `catalog_name` (required) - Catalog to list schemas from
 
 **Request Example:**
@@ -473,6 +479,7 @@ Delete a schema (must be empty).
 **Endpoint:** `DELETE /api/2.1/unity-catalog/schemas/{full_name}`
 
 **Parameters:**
+
 - `force` (optional) - Set to `true` to force delete non-empty schema
 
 **Request Example:**
@@ -508,6 +515,7 @@ List all tables in a schema.
 **Endpoint:** `GET /api/2.1/unity-catalog/tables`
 
 **Parameters:**
+
 - `catalog_name` (required) - Catalog name
 - `schema_name` (required) - Schema name
 
@@ -619,6 +627,7 @@ Grant permissions on a securable object.
 **Endpoint:** `POST /api/2.1/unity-catalog/permissions/{securable_type}/{full_name}`
 
 **Securable Types:**
+
 - `catalog`
 - `schema`
 - `table`
@@ -626,6 +635,7 @@ Grant permissions on a securable object.
 - `function`
 
 **Privileges:**
+
 - `SELECT` - Read data
 - `MODIFY` - Insert, update, delete
 - `CREATE` - Create child objects
@@ -832,7 +842,7 @@ from typing import List, Dict, Optional
 
 class UnityCatalogManager:
     """Unity Catalog management utility"""
-    
+
     def __init__(self, host: str, token: str):
         self.host = host.rstrip('/')
         self.token = token
@@ -841,7 +851,7 @@ class UnityCatalogManager:
             "Content-Type": "application/json"
         }
         self.base_url = f"{self.host}/api/2.1/unity-catalog"
-    
+
     def create_catalog(self, name: str, comment: str = None, properties: Dict = None) -> Dict:
         """Create a new catalog"""
         url = f"{self.base_url}/catalogs"
@@ -850,11 +860,11 @@ class UnityCatalogManager:
             data["comment"] = comment
         if properties:
             data["properties"] = properties
-        
+
         response = requests.post(url, headers=self.headers, json=data)
         response.raise_for_status()
         return response.json()
-    
+
     def create_schema(self, catalog_name: str, schema_name: str, comment: str = None) -> Dict:
         """Create a new schema"""
         url = f"{self.base_url}/schemas"
@@ -864,11 +874,11 @@ class UnityCatalogManager:
         }
         if comment:
             data["comment"] = comment
-        
+
         response = requests.post(url, headers=self.headers, json=data)
         response.raise_for_status()
         return response.json()
-    
+
     def list_tables(self, catalog_name: str, schema_name: str) -> List[Dict]:
         """List all tables in a schema"""
         url = f"{self.base_url}/tables"
@@ -876,18 +886,18 @@ class UnityCatalogManager:
             "catalog_name": catalog_name,
             "schema_name": schema_name
         }
-        
+
         response = requests.get(url, headers=self.headers, params=params)
         response.raise_for_status()
         return response.json().get("tables", [])
-    
+
     def get_table_details(self, full_name: str) -> Dict:
         """Get detailed table information"""
         url = f"{self.base_url}/tables/{full_name}"
         response = requests.get(url, headers=self.headers)
         response.raise_for_status()
         return response.json()
-    
+
     def grant_permissions(
         self,
         securable_type: str,
@@ -905,17 +915,17 @@ class UnityCatalogManager:
                 }
             ]
         }
-        
+
         response = requests.post(url, headers=self.headers, json=data)
         response.raise_for_status()
-    
+
     def get_permissions(self, securable_type: str, full_name: str) -> Dict:
         """Get current permissions"""
         url = f"{self.base_url}/permissions/{securable_type}/{full_name}"
         response = requests.get(url, headers=self.headers)
         response.raise_for_status()
         return response.json()
-    
+
     def clone_permissions(
         self,
         source_type: str,
@@ -926,19 +936,19 @@ class UnityCatalogManager:
         """Clone permissions from one object to another"""
         # Get source permissions
         source_perms = self.get_permissions(source_type, source_name)
-        
+
         # Apply to target
         for grant in source_perms.get("privilege_assignments", []):
             principal = grant["principal"]
             privileges = grant["privileges"]
-            
+
             self.grant_permissions(
                 target_type,
                 target_name,
                 principal,
                 privileges
             )
-        
+
         print(f"Cloned permissions from {source_name} to {target_name}")
 
 # Usage
@@ -988,11 +998,11 @@ def migrate_catalog_structure(
         "Content-Type": "application/json"
     }
     base_url = f"{host}/api/2.1/unity-catalog"
-    
+
     # Get source catalog info
     source_url = f"{base_url}/catalogs/{source_catalog}"
     source_info = requests.get(source_url, headers=headers).json()
-    
+
     # Create target catalog
     create_catalog_url = f"{base_url}/catalogs"
     catalog_data = {
@@ -1002,13 +1012,13 @@ def migrate_catalog_structure(
     }
     requests.post(create_catalog_url, headers=headers, json=catalog_data)
     print(f"Created catalog: {target_catalog}")
-    
+
     # Get schemas from source
     schemas_url = f"{base_url}/schemas"
     schemas_params = {"catalog_name": source_catalog}
     schemas_response = requests.get(schemas_url, headers=headers, params=schemas_params)
     schemas = schemas_response.json().get("schemas", [])
-    
+
     # Create schemas in target
     for schema in schemas:
         schema_data = {
@@ -1019,14 +1029,14 @@ def migrate_catalog_structure(
         }
         requests.post(schemas_url, headers=headers, json=schema_data)
         print(f"Created schema: {target_catalog}.{schema['name']}")
-        
+
         # Copy schema permissions
         source_schema_name = f"{source_catalog}.{schema['name']}"
         target_schema_name = f"{target_catalog}.{schema['name']}"
-        
+
         perms_url = f"{base_url}/permissions/schema/{source_schema_name}"
         perms = requests.get(perms_url, headers=headers).json()
-        
+
         for grant in perms.get("privilege_assignments", []):
             grant_url = f"{base_url}/permissions/schema/{target_schema_name}"
             grant_data = {
@@ -1036,9 +1046,9 @@ def migrate_catalog_structure(
                 }]
             }
             requests.post(grant_url, headers=headers, json=grant_data)
-        
+
         print(f"Copied permissions for {target_schema_name}")
-    
+
     print(f"Migration complete: {source_catalog} -> {target_catalog}")
 
 # Usage
@@ -1094,27 +1104,27 @@ def audit_permissions(catalog_name: str, token: str, host: str):
     """Generate permissions audit report"""
     headers = {"Authorization": f"Bearer {token}"}
     base_url = f"{host}/api/2.1/unity-catalog"
-    
+
     # Get all schemas
     schemas_url = f"{base_url}/schemas"
     params = {"catalog_name": catalog_name}
     schemas = requests.get(schemas_url, headers=headers, params=params).json()
-    
+
     report = []
     for schema in schemas.get("schemas", []):
         schema_name = schema["full_name"]
-        
+
         # Get permissions
         perms_url = f"{base_url}/permissions/schema/{schema_name}"
         perms = requests.get(perms_url, headers=headers).json()
-        
+
         for grant in perms.get("privilege_assignments", []):
             report.append({
                 "object": schema_name,
                 "principal": grant["principal"],
                 "privileges": grant["privileges"]
             })
-    
+
     return report
 ```
 

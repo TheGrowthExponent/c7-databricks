@@ -327,8 +327,8 @@ spark = DatabricksSession.builder.getOrCreate()
 
 # Create sample data
 data = [
-    (1, "Product A", 100.0, "2024-01-15"),
-    (2, "Product B", 150.0, "2024-01-15"),
+    (1, "Product A", 100.0, "2026-02-27"),
+    (2, "Product B", 150.0, "2026-02-27"),
     (3, "Product C", 200.0, "2024-01-16")
 ]
 
@@ -475,6 +475,7 @@ spark.sql("""
 ### VS Code Setup
 
 **1. Install Python Extension**
+
 ```bash
 # Install VS Code Python extension
 code --install-extension ms-python.python
@@ -486,12 +487,10 @@ Create `.vscode/settings.json`:
 
 ```json
 {
-    "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
-    "python.envFile": "${workspaceFolder}/.env",
-    "python.testing.pytestEnabled": true,
-    "python.testing.pytestArgs": [
-        "tests"
-    ]
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["tests"]
 }
 ```
 
@@ -511,17 +510,17 @@ Create `.vscode/launch.json`:
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "envFile": "${workspaceFolder}/.env"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
 }
 ```
 
@@ -1117,6 +1116,7 @@ df = (spark.table("partitioned_table")
 ---
 
 **Quick Start Checklist:**
+
 - [ ] Install `databricks-connect`
 - [ ] Configure `.databrickscfg` or environment variables
 - [ ] Verify cluster is running

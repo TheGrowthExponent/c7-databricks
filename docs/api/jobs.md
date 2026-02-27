@@ -58,16 +58,16 @@ POST /api/2.1/jobs/create
 
 ### Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name | string | Yes | Job name |
-| tasks | array | Yes | List of tasks to execute |
-| schedule | object | No | Cron schedule for job |
-| email_notifications | object | No | Email notification settings |
-| timeout_seconds | integer | No | Job timeout (default: no timeout) |
-| max_concurrent_runs | integer | No | Max parallel runs (default: 1) |
-| tags | object | No | Custom tags for organization |
-| format | string | No | Job format (MULTI_TASK or SINGLE_TASK) |
+| Parameter           | Type    | Required | Description                            |
+| ------------------- | ------- | -------- | -------------------------------------- |
+| name                | string  | Yes      | Job name                               |
+| tasks               | array   | Yes      | List of tasks to execute               |
+| schedule            | object  | No       | Cron schedule for job                  |
+| email_notifications | object  | No       | Email notification settings            |
+| timeout_seconds     | integer | No       | Job timeout (default: no timeout)      |
+| max_concurrent_runs | integer | No       | Max parallel runs (default: 1)         |
+| tags                | object  | No       | Custom tags for organization           |
+| format              | string  | No       | Job format (MULTI_TASK or SINGLE_TASK) |
 
 ### Simple Notebook Job
 
@@ -131,9 +131,7 @@ POST /api/2.1/jobs/create
     {
       "task_key": "transform",
       "description": "Transform data",
-      "depends_on": [
-        {"task_key": "extract"}
-      ],
+      "depends_on": [{ "task_key": "extract" }],
       "notebook_task": {
         "notebook_path": "/Pipelines/transform",
         "base_parameters": {}
@@ -143,9 +141,7 @@ POST /api/2.1/jobs/create
     {
       "task_key": "load",
       "description": "Load data to warehouse",
-      "depends_on": [
-        {"task_key": "transform"}
-      ],
+      "depends_on": [{ "task_key": "transform" }],
       "notebook_task": {
         "notebook_path": "/Pipelines/load",
         "base_parameters": {}
@@ -289,9 +285,9 @@ GET /api/2.1/jobs/get
 
 ### Query Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| job_id | integer | Yes | The job ID |
+| Parameter | Type    | Required | Description |
+| --------- | ------- | -------- | ----------- |
+| job_id    | integer | Yes      | The job ID  |
 
 ### Example
 
@@ -366,12 +362,12 @@ GET /api/2.1/jobs/list
 
 ### Query Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| limit | integer | No | Max results per page (default: 20) |
-| offset | integer | No | Offset for pagination |
-| expand_tasks | boolean | No | Include task details |
-| name | string | No | Filter by job name |
+| Parameter    | Type    | Required | Description                        |
+| ------------ | ------- | -------- | ---------------------------------- |
+| limit        | integer | No       | Max results per page (default: 20) |
+| offset       | integer | No       | Offset for pagination              |
+| expand_tasks | boolean | No       | Include task details               |
+| name         | string  | No       | Filter by job name                 |
 
 ### Example
 
@@ -408,10 +404,10 @@ for job in client.jobs.list():
     print(f"Job: {job.settings.name}")
     print(f"  ID: {job.job_id}")
     print(f"  Creator: {job.creator_user_name}")
-    
+
     if job.settings.schedule:
         print(f"  Schedule: {job.settings.schedule.quartz_cron_expression}")
-    
+
     print()
 ```
 
@@ -585,7 +581,7 @@ POST /api/2.1/jobs/run-now
   "job_id": 123456,
   "notebook_params": {
     "environment": "production",
-    "date": "2024-01-15"
+    "date": "2026-02-27"
   },
   "python_params": ["--config", "production"],
   "jar_params": ["input.csv", "output.csv"]
@@ -600,7 +596,7 @@ import requests
 run_config = {
     "job_id": 123456,
     "notebook_params": {
-        "date": "2024-01-15",
+        "date": "2026-02-27",
         "environment": "production"
     }
 }
@@ -627,7 +623,7 @@ client = WorkspaceClient()
 run = client.jobs.run_now(
     job_id=123456,
     notebook_params={
-        "date": "2024-01-15",
+        "date": "2026-02-27",
         "environment": "production"
     }
 )
@@ -672,7 +668,7 @@ POST /api/2.1/jobs/runs/submit
       "notebook_task": {
         "notebook_path": "/Users/user@example.com/analysis",
         "base_parameters": {
-          "date": "2024-01-15"
+          "date": "2026-02-27"
         }
       },
       "new_cluster": {
@@ -735,7 +731,7 @@ run = client.jobs.submit(
             task_key="analysis",
             notebook_task=jobs.NotebookTask(
                 notebook_path="/Users/user@example.com/analysis",
-                base_parameters={"date": "2024-01-15"}
+                base_parameters={"date": "2026-02-27"}
             ),
             new_cluster=compute.ClusterSpec(
                 spark_version="13.3.x-scala2.12",
@@ -764,13 +760,13 @@ GET /api/2.1/jobs/runs/list
 
 ### Query Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| job_id | integer | No | Filter by job ID |
-| active_only | boolean | No | Show only active runs |
-| completed_only | boolean | No | Show only completed runs |
-| limit | integer | No | Max results (default: 25) |
-| offset | integer | No | Pagination offset |
+| Parameter      | Type    | Required | Description               |
+| -------------- | ------- | -------- | ------------------------- |
+| job_id         | integer | No       | Filter by job ID          |
+| active_only    | boolean | No       | Show only active runs     |
+| completed_only | boolean | No       | Show only completed runs  |
+| limit          | integer | No       | Max results (default: 25) |
+| offset         | integer | No       | Pagination offset         |
 
 ### Example
 
@@ -825,9 +821,9 @@ GET /api/2.1/jobs/runs/get
 
 ### Query Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| run_id | integer | Yes | The run ID |
+| Parameter | Type    | Required | Description |
+| --------- | ------- | -------- | ----------- |
+| run_id    | integer | Yes      | The run ID  |
 
 ### Example
 
@@ -928,9 +924,9 @@ GET /api/2.1/jobs/runs/get-output
 
 ### Query Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| run_id | integer | Yes | The run ID |
+| Parameter | Type    | Required | Description |
+| --------- | ------- | -------- | ----------- |
+| run_id    | integer | Yes      | The run ID  |
 
 ### Example
 
@@ -968,23 +964,23 @@ if output.notebook_output:
 
 ## Run Lifecycle States
 
-| State | Description |
-|-------|-------------|
-| PENDING | Run is being set up |
-| RUNNING | Run is executing |
-| TERMINATING | Run is being terminated |
-| TERMINATED | Run has completed |
-| SKIPPED | Run was skipped |
-| INTERNAL_ERROR | Internal system error |
+| State          | Description             |
+| -------------- | ----------------------- |
+| PENDING        | Run is being set up     |
+| RUNNING        | Run is executing        |
+| TERMINATING    | Run is being terminated |
+| TERMINATED     | Run has completed       |
+| SKIPPED        | Run was skipped         |
+| INTERNAL_ERROR | Internal system error   |
 
 ## Run Result States
 
-| State | Description |
-|-------|-------------|
-| SUCCESS | Run completed successfully |
-| FAILED | Run failed |
-| TIMEDOUT | Run exceeded timeout |
-| CANCELED | Run was cancelled |
+| State    | Description                |
+| -------- | -------------------------- |
+| SUCCESS  | Run completed successfully |
+| FAILED   | Run failed                 |
+| TIMEDOUT | Run exceeded timeout       |
+| CANCELED | Run was cancelled          |
 
 ---
 
@@ -1000,7 +996,7 @@ import time
 def create_and_monitor_job():
     """Create job, trigger run, and monitor completion"""
     client = WorkspaceClient()
-    
+
     # 1. Create job
     print("Creating job...")
     job = client.jobs.create(
@@ -1031,45 +1027,45 @@ def create_and_monitor_job():
         ),
         tags={"pipeline": "etl", "version": "1.0"}
     )
-    
+
     job_id = job.job_id
     print(f"Job created: {job_id}")
-    
+
     # 2. Trigger run
     print("Triggering run...")
     run = client.jobs.run_now(
         job_id=job_id,
-        notebook_params={"date": "2024-01-15"}
+        notebook_params={"date": "2026-02-27"}
     )
-    
+
     run_id = run.run_id
     print(f"Run started: {run_id}")
-    
+
     # 3. Monitor run
     print("Monitoring run...")
     while True:
         run_info = client.jobs.get_run(run_id=run_id)
         state = run_info.state.life_cycle_state
-        
+
         print(f"Current state: {state}")
-        
+
         if state in ["TERMINATED", "SKIPPED", "INTERNAL_ERROR"]:
             result = run_info.state.result_state
             print(f"Run completed with result: {result}")
-            
+
             if result == "SUCCESS":
                 print("✓ Job completed successfully!")
             else:
                 print(f"✗ Job failed: {run_info.state.state_message}")
-            
+
             break
-        
+
         time.sleep(10)
-    
+
     # 4. Get output
     output = client.jobs.get_run_output(run_id=run_id)
     print(f"Output: {output}")
-    
+
     return job_id, run_id
 
 # Run workflow
@@ -1082,7 +1078,7 @@ job_id, run_id = create_and_monitor_job()
 def create_branching_pipeline():
     """Create job with parallel execution branches"""
     client = WorkspaceClient()
-    
+
     job = client.jobs.create(
         name="Branching Pipeline",
         tasks=[
@@ -1094,7 +1090,7 @@ def create_branching_pipeline():
                 ),
                 existing_cluster_id="1234-567890-abc123"
             ),
-            
+
             # Branch 1: Customer data
             jobs.Task(
                 task_key="process_customers",
@@ -1104,7 +1100,7 @@ def create_branching_pipeline():
                 ),
                 existing_cluster_id="1234-567890-abc123"
             ),
-            
+
             # Branch 2: Order data
             jobs.Task(
                 task_key="process_orders",
@@ -1114,7 +1110,7 @@ def create_branching_pipeline():
                 ),
                 existing_cluster_id="1234-567890-abc123"
             ),
-            
+
             # Merge branches
             jobs.Task(
                 task_key="merge_results",
@@ -1130,7 +1126,7 @@ def create_branching_pipeline():
         ],
         max_concurrent_runs=1
     )
-    
+
     print(f"Branching pipeline created: {job.job_id}")
     return job.job_id
 
@@ -1144,7 +1140,7 @@ job_id = create_branching_pipeline()
 def create_conditional_job():
     """Create job with conditional execution"""
     client = WorkspaceClient()
-    
+
     job = client.jobs.create(
         name="Conditional Pipeline",
         tasks=[
@@ -1156,7 +1152,7 @@ def create_conditional_job():
                 ),
                 existing_cluster_id="1234-567890-abc123"
             ),
-            
+
             # Process only if quality check passes
             jobs.Task(
                 task_key="process_data",
@@ -1171,7 +1167,7 @@ def create_conditional_job():
                 ),
                 existing_cluster_id="1234-567890-abc123"
             ),
-            
+
             # Send alert if quality check fails
             jobs.Task(
                 task_key="alert_failure",
@@ -1188,7 +1184,7 @@ def create_conditional_job():
             )
         ]
     )
-    
+
     print(f"Conditional job created: {job.job_id}")
     return job.job_id
 
@@ -1202,33 +1198,33 @@ job_id = create_conditional_job()
 def manage_multiple_jobs():
     """Manage multiple jobs as a batch"""
     client = WorkspaceClient()
-    
+
     # List all jobs
     all_jobs = list(client.jobs.list())
     print(f"Total jobs: {len(all_jobs)}")
-    
+
     # Find jobs with specific tag
     etl_jobs = [
-        job for job in all_jobs 
+        job for job in all_jobs
         if job.settings.tags and job.settings.tags.get("type") == "etl"
     ]
-    
+
     print(f"ETL jobs: {len(etl_jobs)}")
-    
+
     # Trigger all ETL jobs
     run_ids = []
     for job in etl_jobs:
         print(f"Triggering job: {job.settings.name}")
         run = client.jobs.run_now(job_id=job.job_id)
         run_ids.append(run.run_id)
-    
+
     # Wait for all to complete
     print("Waiting for jobs to complete...")
     for run_id in run_ids:
         client.jobs.wait_get_run_job_terminated_or_skipped(run_id=run_id)
-    
+
     print("All jobs completed!")
-    
+
     # Check results
     for run_id in run_ids:
         run = client.jobs.get_run(run_id=run_id)
@@ -1332,6 +1328,7 @@ except Exception as e:
 **Problem**: Job stuck in PENDING
 
 **Solutions**:
+
 - Check cluster availability
 - Verify cluster configuration
 - Check resource quotas
@@ -1342,6 +1339,7 @@ except Exception as e:
 **Problem**: Tasks failing repeatedly
 
 **Solutions**:
+
 ```python
 # Increase timeout
 timeout_seconds=7200  # 2 hours
@@ -1360,6 +1358,7 @@ print(output.error)
 **Problem**: Jobs running slowly
 
 **Solutions**:
+
 - Right-size cluster
 - Enable autoscaling
 - Optimize notebook code

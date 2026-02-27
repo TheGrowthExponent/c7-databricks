@@ -70,7 +70,7 @@ from datetime import datetime
 
 # Create partitioned data
 data = [
-    (1, "Order A", "2024-01-15", 100.0),
+    (1, "Order A", "2026-02-27", 100.0),
     (2, "Order B", "2024-01-16", 200.0),
     (3, "Order C", "2024-02-01", 150.0),
     (4, "Order D", "2024-02-15", 300.0)
@@ -287,7 +287,7 @@ from delta.exceptions import ConcurrentModificationException
 
 try:
     target_table = DeltaTable.forName(spark, "catalog.schema.customers")
-    
+
     # Perform merge
     target_table.alias("target").merge(
         updates_df.alias("source"),
@@ -295,7 +295,7 @@ try:
     ).whenMatchedUpdateAll() \
      .whenNotMatchedInsertAll() \
      .execute()
-    
+
 except ConcurrentModificationException:
     print("Concurrent modification detected, retrying...")
     # Implement retry logic
@@ -313,7 +313,7 @@ df_v1 = spark.read.format("delta").option("versionAsOf", 1).table("catalog.schem
 
 # Read version by timestamp
 df_historical = spark.read.format("delta") \
-    .option("timestampAsOf", "2024-01-15") \
+    .option("timestampAsOf", "2026-02-27") \
     .table("catalog.schema.customers")
 
 df_historical.show()
@@ -346,7 +346,7 @@ delta_table = DeltaTable.forName(spark, "catalog.schema.customers")
 delta_table.restoreToVersion(5)
 
 # Restore to specific timestamp
-delta_table.restoreToTimestamp("2024-01-15T10:00:00")
+delta_table.restoreToTimestamp("2026-02-27T10:00:00")
 
 print("Table restored")
 ```
@@ -569,7 +569,7 @@ changes_df.show()
 changes_df = spark.read.format("delta") \
     .option("readChangeData", "true") \
     .option("startingTimestamp", "2024-01-01") \
-    .option("endingTimestamp", "2024-01-15") \
+    .option("endingTimestamp", "2026-02-27") \
     .table("catalog.schema.customers")
 
 # Change data columns
@@ -681,31 +681,31 @@ from delta.tables import DeltaTable
 def scd_type2_merge(target_table_name, source_df, key_columns, track_columns):
     """
     Implement SCD Type 2 merge pattern
-    
+
     Args:
         target_table_name: Name of target Delta table
         source_df: Source DataFrame with updates
         key_columns: Business key columns
         track_columns: Columns to track changes
     """
-    
+
     target = DeltaTable.forName(spark, target_table_name)
-    
+
     # Add SCD columns to source
     source_with_scd = source_df \
         .withColumn("effective_date", current_timestamp()) \
         .withColumn("end_date", lit(None).cast("timestamp")) \
         .withColumn("is_current", lit(True))
-    
+
     # Build merge condition
     merge_condition = " AND ".join([f"target.{col} = source.{col}" for col in key_columns])
     merge_condition += " AND target.is_current = true"
-    
+
     # Build update condition (check if tracked columns changed)
     update_condition = " OR ".join([
         f"target.{col} != source.{col}" for col in track_columns
     ])
-    
+
     # Perform SCD Type 2 merge
     target.alias("target").merge(
         source_with_scd.alias("source"),
@@ -717,7 +717,7 @@ def scd_type2_merge(target_table_name, source_df, key_columns, track_columns):
             "is_current": lit(False)
         }
     ).execute()
-    
+
     # Insert new versions of changed records
     changed_records = target.toDF().alias("target").join(
         source_with_scd.alias("source"),
@@ -727,9 +727,9 @@ def scd_type2_merge(target_table_name, source_df, key_columns, track_columns):
         (col("target.is_current") == False) &
         (col("target.end_date") == current_timestamp())
     ).select("source.*")
-    
+
     changed_records.write.format("delta").mode("append").saveAsTable(target_table_name)
-    
+
     # Insert completely new records
     target.alias("target").merge(
         source_with_scd.alias("source"),
@@ -759,17 +759,17 @@ from delta.tables import DeltaTable
 def incremental_load(source_table, target_table, watermark_column):
     """
     Load only new/updated data based on watermark
-    
+
     Args:
         source_table: Source table name
         target_table: Target Delta table name
         watermark_column: Column to track (e.g., updated_at)
     """
-    
+
     # Get last watermark from target
     target_df = spark.read.format("delta").table(target_table)
     last_watermark = target_df.agg(spark_max(watermark_column)).collect()[0][0]
-    
+
     if last_watermark is None:
         # First load
         source_df = spark.read.table(source_table)
@@ -777,18 +777,18 @@ def incremental_load(source_table, target_table, watermark_column):
         # Incremental load
         source_df = spark.read.table(source_table) \
             .filter(col(watermark_column) > last_watermark)
-    
+
     # Merge into target
     if source_df.count() > 0:
         target_delta = DeltaTable.forName(spark, target_table)
-        
+
         target_delta.alias("target").merge(
             source_df.alias("source"),
             "target.id = source.id"
         ).whenMatchedUpdateAll() \
          .whenNotMatchedInsertAll() \
          .execute()
-        
+
         print(f"Loaded {source_df.count()} records")
     else:
         print("No new records to load")
@@ -810,22 +810,22 @@ from delta.tables import DeltaTable
 def validate_delta_table(table_name, rules):
     """
     Validate Delta table against quality rules
-    
+
     Args:
         table_name: Delta table name
         rules: Dict of validation rules
-    
+
     Returns:
         Dict of validation results
     """
-    
+
     df = spark.read.format("delta").table(table_name)
     results = {}
-    
+
     # Check row count
     total_rows = df.count()
     results["total_rows"] = total_rows
-    
+
     # Check for duplicates on key columns
     if "key_columns" in rules:
         duplicate_count = df.groupBy(rules["key_columns"]) \
@@ -833,13 +833,13 @@ def validate_delta_table(table_name, rules):
             .filter(col("count") > 1) \
             .count()
         results["duplicates"] = duplicate_count
-    
+
     # Check for nulls in required columns
     if "required_columns" in rules:
         for col_name in rules["required_columns"]:
             null_count = df.filter(isnull(col(col_name))).count()
             results[f"{col_name}_nulls"] = null_count
-    
+
     # Check value ranges
     if "range_checks" in rules:
         for col_name, (min_val, max_val) in rules["range_checks"].items():
@@ -847,18 +847,18 @@ def validate_delta_table(table_name, rules):
                 (col(col_name) < min_val) | (col(col_name) > max_val)
             ).count()
             results[f"{col_name}_out_of_range"] = out_of_range
-    
+
     # Check data freshness
     if "freshness_column" in rules:
         from pyspark.sql.functions import max as spark_max, datediff, current_date
-        
+
         latest_date = df.agg(spark_max(rules["freshness_column"])).collect()[0][0]
         if latest_date:
             days_old = df.select(
                 datediff(current_date(), col(rules["freshness_column"]))
             ).agg({"datediff(current_date(), updated_at)": "max"}).collect()[0][0]
             results["days_since_update"] = days_old
-    
+
     return results
 
 # Usage

@@ -10,8 +10,8 @@ This directory contains GitHub Actions workflows that automatically validate and
 
 ### Available Workflows
 
-| Workflow | File | Trigger | Purpose |
-|----------|------|---------|---------|
+| Workflow                     | File                         | Trigger                    | Purpose                                            |
+| ---------------------------- | ---------------------------- | -------------------------- | -------------------------------------------------- |
 | **Documentation Validation** | `validate-documentation.yml` | Schedule, Push, PR, Manual | Validates docs against official Databricks sources |
 
 ---
@@ -23,18 +23,22 @@ Automated validation using AI agents to ensure documentation accuracy.
 ### Triggers
 
 **1. Scheduled**
+
 - Runs every Monday at 9:00 AM UTC
 - Full validation of all documentation
 
 **2. Push to Main**
+
 - Triggers when documentation files are modified
 - Validates changed docs only
 
 **3. Pull Request**
+
 - Runs when PR modifies documentation
 - Blocks merge if quality gates fail
 
 **4. Manual Dispatch**
+
 - Can be triggered from GitHub Actions tab
 - Allows custom scope and provider selection
 
@@ -60,29 +64,33 @@ When manually triggering the workflow:
 
 The workflow enforces these quality standards:
 
-| Gate | Threshold | Action on Failure |
-|------|-----------|-------------------|
-| Minimum Accuracy | 85% | Fail PR build |
-| Max Critical Issues | 0 | Create issue, fail PR |
-| Max High Issues | 5 | Warning |
+| Gate                | Threshold | Action on Failure     |
+| ------------------- | --------- | --------------------- |
+| Minimum Accuracy    | 85%       | Fail PR build         |
+| Max Critical Issues | 0         | Create issue, fail PR |
+| Max High Issues     | 5         | Warning               |
 
 ### Outputs
 
 **1. Validation Reports**
+
 - Uploaded as workflow artifacts
 - Available for 90 days
 - Includes markdown and JSON formats
 
 **2. GitHub Issues**
+
 - Automatically created for critical findings
 - Tagged with `documentation`, `critical`, `validation`
 
 **3. PR Comments**
+
 - Validation results posted to PR
 - Shows accuracy score and issue count
 - Indicates pass/fail status
 
 **4. Workflow Summary**
+
 - Quick overview in Actions tab
 - Accuracy score and issue breakdown
 
@@ -104,16 +112,19 @@ The workflow enforces these quality standards:
 ### View Results
 
 **Workflow Run:**
+
 1. Go to Actions tab
 2. Click on workflow run
 3. View summary and logs
 
 **Download Reports:**
+
 1. Scroll to workflow artifacts
 2. Download `validation-results-[run-number]`
 3. Extract and review reports
 
 **Check Issues:**
+
 1. Go to Issues tab
 2. Filter by `validation` label
 3. Review critical findings
@@ -128,6 +139,7 @@ When you create a PR that modifies documentation:
 4. 🚫 Merge blocked if critical issues found
 
 Example PR comment:
+
 ```markdown
 ## 🟢 Documentation Validation Results
 
@@ -135,6 +147,7 @@ Example PR comment:
 **Accuracy**: 94.5%
 
 ### Issues Found
+
 - 🔴 Critical: 0
 - 🟠 High: 2
 
@@ -148,6 +161,7 @@ Example PR comment:
 ### Jobs
 
 **validate-docs**
+
 - Sets up Python 3.10
 - Installs dependencies (`anthropic`, `openai`)
 - Runs validation with specified scope and provider
@@ -157,6 +171,7 @@ Example PR comment:
 - Checks quality gates
 
 **notify** (on failure)
+
 - Runs if scheduled validation fails
 - Can be extended with Slack/email notifications
 
@@ -170,6 +185,7 @@ OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 ### Artifacts
 
 Validation results stored for 90 days:
+
 ```
 validation-results-[run-number]/
 ├── validation-report-[timestamp].md
@@ -188,10 +204,11 @@ Edit `validate-documentation.yml`:
 ```yaml
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Monday 9 AM UTC
+    - cron: "0 9 * * 1" # Monday 9 AM UTC
 ```
 
 Common schedules:
+
 - Daily: `'0 9 * * *'`
 - Weekly: `'0 9 * * 1'` (Monday)
 - Bi-weekly: `'0 9 * * 1/2'`
@@ -251,11 +268,13 @@ Modify to validate only PR changes:
 ### Workflow Fails: API Key Not Found
 
 **Problem:**
+
 ```
 Error: API key not found. Set ANTHROPIC_API_KEY environment variable.
 ```
 
 **Solution:**
+
 1. Go to Settings → Secrets and variables → Actions
 2. Add `ANTHROPIC_API_KEY` secret
 3. Re-run workflow
@@ -263,11 +282,13 @@ Error: API key not found. Set ANTHROPIC_API_KEY environment variable.
 ### Workflow Fails: Rate Limiting
 
 **Problem:**
+
 ```
 Error 429: Rate limit exceeded
 ```
 
 **Solution:**
+
 - Reduce batch size in workflow
 - Add delays between API calls
 - Use different validation schedule
@@ -275,11 +296,13 @@ Error 429: Rate limit exceeded
 ### Workflow Fails: Token Limit
 
 **Problem:**
+
 ```
 Error: Token limit exceeded
 ```
 
 **Solution:**
+
 - Reduce scope (validate in batches)
 - Decrease max_tokens in config
 - Split into multiple workflow runs
@@ -290,6 +313,7 @@ Error: Token limit exceeded
 Can't find validation reports
 
 **Solution:**
+
 - Check workflow completed successfully
 - Look in "Artifacts" section at bottom of workflow run
 - Artifacts expire after 90 days (retention setting)
@@ -308,10 +332,12 @@ Can't find validation reports
 ### AI API Costs
 
 **Anthropic Claude:**
+
 - Per validation: $0.15 - $0.30
 - Weekly (4x/month): ~$1.20/month
 
 **OpenAI GPT-4:**
+
 - Per validation: $0.50 - $0.75
 - Weekly (4x/month): ~$3.00/month
 
@@ -322,6 +348,7 @@ Can't find validation reports
 ## Best Practices
 
 ### 1. Use Secrets for API Keys
+
 ```yaml
 # ✅ Correct
 env:
@@ -333,22 +360,25 @@ env:
 ```
 
 ### 2. Set Appropriate Timeouts
+
 ```yaml
 - name: Run validation
-  timeout-minutes: 30  # Prevent hanging
+  timeout-minutes: 30 # Prevent hanging
   run: python agent_validator.py --provider anthropic --scope full
 ```
 
 ### 3. Cache Dependencies
+
 ```yaml
 - name: Set up Python
   uses: actions/setup-python@v5
   with:
-    python-version: '3.10'
-    cache: 'pip'  # Cache pip dependencies
+    python-version: "3.10"
+    cache: "pip" # Cache pip dependencies
 ```
 
 ### 4. Use Conditional Execution
+
 ```yaml
 # Only run on doc changes
 - name: Run validation
@@ -357,14 +387,15 @@ env:
 ```
 
 ### 5. Handle Failures Gracefully
+
 ```yaml
 - name: Run validation
-  continue-on-error: true  # Don't block other steps
+  continue-on-error: true # Don't block other steps
   id: validation
   run: python agent_validator.py
 
 - name: Post results
-  if: always()  # Run even if validation failed
+  if: always() # Run even if validation failed
   run: echo "Results available"
 ```
 
@@ -373,12 +404,14 @@ env:
 ## Security Considerations
 
 ### API Keys
+
 - ✅ Store in GitHub Secrets
 - ✅ Never commit to repository
 - ✅ Rotate regularly
 - ✅ Use read-only keys when possible
 
 ### Workflow Permissions
+
 ```yaml
 permissions:
   contents: read
@@ -387,6 +420,7 @@ permissions:
 ```
 
 ### Third-Party Actions
+
 - ✅ Pin to specific versions (e.g., `@v4`)
 - ✅ Review action code before use
 - ✅ Use verified creators when possible
@@ -408,6 +442,7 @@ gh run list --workflow="Documentation Validation" --status=failure
 ### Track Metrics
 
 Monitor over time:
+
 - Validation frequency
 - Accuracy trends
 - Issue counts
@@ -417,6 +452,7 @@ Monitor over time:
 ### Set Up Alerts
 
 Configure notifications for:
+
 - Failed scheduled validations
 - Critical issues found
 - Quality gate failures
@@ -451,6 +487,6 @@ Configure notifications for:
 
 ---
 
-**Maintained By**: Documentation Team  
-**Last Updated**: 2024-01-15  
+**Maintained By**: Documentation Team
+**Last Updated**: 2026-02-27
 **Version**: 1.0.0

@@ -1,6 +1,6 @@
 # 🚀 Agent Quick Reference Card
 
-**For:** AI Assistants working on c7-databricks repository  
+**For:** AI Assistants working on c7-databricks repository
 **Purpose:** Quick access to critical guidelines and rules
 
 ---
@@ -8,11 +8,13 @@
 ## ⚡ CRITICAL RULES (NEVER BREAK THESE)
 
 ### 🎯 The Three Commandments
+
 1. **FOLLOW THE PLAN** → `docs/plan.md` is law. Ask before deviating.
 2. **VERIFY EVERYTHING** → Check https://docs.databricks.com before writing.
 3. **ASK WHEN UNSURE** → Better to ask than to guess wrong.
 
 ### ❌ NEVER Do This
+
 - ❌ Make up information or guess
 - ❌ Deviate from `docs/plan.md` without approval
 - ❌ Include real tokens/credentials in examples
@@ -21,6 +23,7 @@
 - ❌ Leave broken links or non-working code
 
 ### ✅ ALWAYS Do This
+
 - ✅ Verify against official Databricks docs
 - ✅ Include source URLs in documentation
 - ✅ Test all code examples
@@ -45,6 +48,7 @@
 ## 🔍 VALIDATION CHECKLIST
 
 ### Required for Every Document
+
 - [ ] Official Databricks source URL included
 - [ ] All API endpoints verified as current
 - [ ] All code examples are runnable
@@ -59,6 +63,7 @@
 ## 📚 ESSENTIAL SOURCES
 
 ### Primary (Always Check First)
+
 - **Main Docs:** https://docs.databricks.com/
 - **API Ref:** https://docs.databricks.com/api/
 - **Python SDK:** https://docs.databricks.com/dev-tools/python-sdk.html
@@ -66,6 +71,7 @@
 - **SQL Ref:** https://docs.databricks.com/sql/language-manual/
 
 ### Repository Files
+
 - **The Plan:** `docs/plan.md` ← Your Bible
 - **Status:** `PROJECT-STATUS.md` ← Current progress
 - **Validation:** `VALIDATION-SYSTEM-DELIVERY.md` ← How to validate
@@ -76,6 +82,7 @@
 ## 🚦 WHEN TO ASK USER
 
 ### 🔴 STOP & ASK (Critical)
+
 - Official docs contradict each other
 - Can't verify critical information
 - Need to deviate from plan
@@ -83,12 +90,14 @@
 - Breaking changes detected
 
 ### 🟡 ASK SOON (Important)
+
 - Found better approach than plan
 - Discovered pattern inconsistency
 - Need clarification on requirements
 - Found gaps in existing docs
 
 ### 🟢 CONTINUE & MENTION (Minor)
+
 - Found typos or minor issues
 - Have optimization suggestions
 - Noticed improvement opportunities
@@ -98,6 +107,7 @@
 ## 💻 CODE EXAMPLE REQUIREMENTS
 
 ### ✅ GOOD Example Template
+
 ```python
 # Import required libraries
 from databricks.sdk import WorkspaceClient
@@ -112,11 +122,11 @@ w = WorkspaceClient(
 try:
     # Main operation with clear comments
     result = w.jobs.list()
-    
+
     # Process results
     for job in result:
         print(f"Job: {job.settings.name}")
-        
+
 except Exception as e:
     # Error handling included
     print(f"Error: {e}")
@@ -124,6 +134,7 @@ except Exception as e:
 ```
 
 ### ❌ BAD Example (Never Do This)
+
 ```python
 # NO imports
 # NO error handling
@@ -137,25 +148,34 @@ jobs = w.jobs.list()  # What if this fails?
 ## 📝 MARKDOWN FORMATTING FOR CONTEXT7
 
 ### Code Blocks (CRITICAL FORMAT)
-```
+
+````
 Always use file path after triple backticks:
 ```/dev/null/example.py#L1-10
 code here
-```
+````
+
 ```
 
 ### Headings (Proper Hierarchy)
 ```
+
 # H1 - Document Title (one per file)
+
 ## H2 - Major Sections
+
 ### H3 - Subsections
+
 #### H4 - Details
+
 ```
 
 ### Links (Always Verify)
 ```
+
 [Link Text](https://docs.databricks.com/path)
-```
+
+````
 
 ---
 
@@ -184,7 +204,7 @@ python scripts/validate.py --file docs/api/clusters.md
 
 # Generate report
 python scripts/validate.py --report
-```
+````
 
 ---
 
@@ -264,6 +284,7 @@ Each Document Must Have:
 ## 🤝 COLLABORATION
 
 ### Commit Message Format
+
 ```
 [Type] Brief description
 
@@ -306,6 +327,7 @@ Types: `feat`, `fix`, `docs`, `validate`, `refactor`
 ## 🚨 EMERGENCY CONTACTS
 
 ### Critical Issues Found?
+
 1. Stop work immediately
 2. Document the issue clearly
 3. Tag issue with priority (P0)
@@ -313,6 +335,7 @@ Types: `feat`, `fix`, `docs`, `validate`, `refactor`
 5. Wait for guidance
 
 ### Escalation Template
+
 ```markdown
 ## ESCALATION: [Brief Issue]
 
@@ -330,6 +353,7 @@ Types: `feat`, `fix`, `docs`, `validate`, `refactor`
 ## 📈 METRICS TO TRACK
 
 Track in `PROJECT-STATUS.md`:
+
 - Files created/updated today
 - Validation results
 - Issues found and fixed
@@ -361,11 +385,11 @@ Track in `PROJECT-STATUS.md`:
 
 ---
 
-**Version:** 1.0.0  
-**Last Updated:** 2024-01-15  
+**Version:** 1.0.0
+**Last Updated:** 2026-02-27
 
 **Remember: Quality > Speed | Accuracy > Completeness | Ask > Guess**
 
 ---
 
-*Print this. Pin it. Refer to it. Your guide to 100% accuracy.*
+_Print this. Pin it. Refer to it. Your guide to 100% accuracy._

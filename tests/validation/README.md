@@ -143,30 +143,30 @@ name: Documentation Validation
 
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Every Monday at 9 AM UTC
-  workflow_dispatch:  # Manual trigger
+    - cron: "0 9 * * 1" # Every Monday at 9 AM UTC
+  workflow_dispatch: # Manual trigger
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
-      
+          python-version: "3.10"
+
       - name: Install dependencies
         run: |
           pip install anthropic
-      
+
       - name: Run validation
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           python tests/validation/agent_validator.py --provider anthropic --scope full
-      
+
       - name: Upload results
         uses: actions/upload-artifact@v3
         with:
@@ -207,11 +207,11 @@ results/
 
 The validation checks against these quality gates:
 
-| Gate | Default Threshold | Description |
-|------|-------------------|-------------|
-| Minimum Accuracy | 85% | Overall accuracy score must meet this |
-| Max Critical Issues | 0 | No critical issues allowed |
-| Max High Issues | 5 | Limited high-priority issues |
+| Gate                | Default Threshold | Description                           |
+| ------------------- | ----------------- | ------------------------------------- |
+| Minimum Accuracy    | 85%               | Overall accuracy score must meet this |
+| Max Critical Issues | 0                 | No critical issues allowed            |
+| Max High Issues     | 5                 | Limited high-priority issues          |
 
 ## Configuration
 
@@ -287,11 +287,7 @@ Edit `validation-config.json` to focus on specific validation types:
 ```json
 {
   "scope": {
-    "validation_types": [
-      "api_accuracy",
-      "code_syntax",
-      "security_best_practices"
-    ]
+    "validation_types": ["api_accuracy", "code_syntax", "security_best_practices"]
   }
 }
 ```
@@ -340,6 +336,7 @@ python -c "import anthropic; print('OK')"
 ### 1. Regular Validation
 
 Run validation:
+
 - **Weekly**: Automated scheduled runs
 - **Pre-release**: Before major documentation updates
 - **Post-update**: After Databricks platform updates
@@ -348,6 +345,7 @@ Run validation:
 ### 2. Incremental Validation
 
 For large repositories:
+
 ```bash
 # Day 1: API docs
 python agent_validator.py --provider anthropic --scope api
@@ -362,6 +360,7 @@ python agent_validator.py --provider anthropic --scope examples
 ### 3. Track Trends
 
 Compare validation results over time:
+
 ```bash
 # Check accuracy trends
 ls -lt tests/validation/results/validation-report-*.json | head -5
@@ -370,6 +369,7 @@ ls -lt tests/validation/results/validation-report-*.json | head -5
 ### 4. Prioritize Fixes
 
 Focus on:
+
 1. Critical issues first (user-breaking)
 2. High priority issues (usability impact)
 3. Security-related issues
@@ -378,6 +378,7 @@ Focus on:
 ### 5. Document Changes
 
 When fixing issues:
+
 - Reference validation report ID
 - Include official documentation URL
 - Note the specific change made
@@ -421,6 +422,7 @@ When validation finds incorrect issues:
 ### Contributing
 
 Improvements welcome:
+
 - Enhanced parsing of agent responses
 - Additional validation rules
 - New AI provider integrations
@@ -467,13 +469,13 @@ cat tests/validation/results/validation-raw-*.md
 
 ## Quick Reference
 
-| Command | Description |
-|---------|-------------|
-| `python agent_validator.py --provider anthropic --scope full` | Full validation |
-| `python agent_validator.py --provider anthropic --scope api` | API docs only |
-| `python agent_validator.py --provider anthropic --files "path/*.md"` | Specific files |
-| `python agent_validator.py --help` | Show all options |
-| `python run_validation.py --scope full` | Generate request (manual mode) |
+| Command                                                              | Description                    |
+| -------------------------------------------------------------------- | ------------------------------ |
+| `python agent_validator.py --provider anthropic --scope full`        | Full validation                |
+| `python agent_validator.py --provider anthropic --scope api`         | API docs only                  |
+| `python agent_validator.py --provider anthropic --files "path/*.md"` | Specific files                 |
+| `python agent_validator.py --help`                                   | Show all options               |
+| `python run_validation.py --scope full`                              | Generate request (manual mode) |
 
 ## References
 
@@ -483,6 +485,6 @@ cat tests/validation/results/validation-raw-*.md
 
 ---
 
-**Version**: 1.0.0  
-**Last Updated**: 2024-01-15  
+**Version**: 1.0.0
+**Last Updated**: 2026-02-27
 **Maintained By**: Documentation Team
