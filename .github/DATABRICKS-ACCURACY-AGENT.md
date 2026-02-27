@@ -41,6 +41,7 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 - **MUST** maintain consistent formatting across all files
 - **MUST** follow markdown best practices for Context7 compatibility
 - **MUST** follow Context7 documentation guidelines (https://context7.dev/docs)
+- **MUST** include proper YAML frontmatter in all SKILL.md files (see docs/skills/SKILL-FORMAT-GUIDE.md)
 - **MUST** include practical, working code examples
 - **MUST** provide clear explanations suitable for all skill levels
 - **MUST** include error handling in all code examples
@@ -67,6 +68,7 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 - [ ] Check for deprecation notices
 - [ ] Verify API endpoints are current
 - [ ] Confirm documentation structure follows Context7 guidelines
+- [ ] For SKILL.md files: Verify YAML frontmatter is present and valid
 
 #### Step 2: Content Accuracy
 
@@ -89,6 +91,9 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 
 - [ ] Markdown syntax is correct for Context7
 - [ ] Documentation follows Context7 best practices (https://docs.context7.dev/)
+- [ ] **For SKILL.md files**: YAML frontmatter includes all required fields (title, description, category, tags, last_updated, version)
+- [ ] **For SKILL.md files**: Date retrieved from CLI using `date +%Y-%m-%d` (never hardcoded)
+- [ ] **For SKILL.md files**: Category matches directory name (lowercase-hyphenated)
 - [ ] Code blocks include proper file path annotations
 - [ ] Headings follow proper hierarchy
 - [ ] Links are valid and working
@@ -158,12 +163,14 @@ This agent is responsible for maintaining **100% accuracy** of all Databricks do
 3. ✅ **Include sources** - Add reference URLs
 4. ✅ **Follow the plan** - Stick to `docs/plan.md`
 5. ✅ **Follow Context7 guidelines** - Check https://context7.dev/docs
-6. ✅ **Ask before deviating** - Get user approval for changes
-7. ✅ **Maintain consistency** - Follow existing patterns
-8. ✅ **Document versions** - Note when features were added
-9. ✅ **Include error handling** - All examples should handle errors
-10. ✅ **Update cross-references** - Keep links current
-11. ✅ **Mark uncertainties** - Flag anything requiring verification
+6. ✅ **For SKILL.md files** - Always include valid YAML frontmatter (see SKILL-FORMAT-GUIDE.md)
+7. ✅ **Get date from CLI** - Use `date +%Y-%m-%d` for last_updated field (Rule DATE-CLI-001)
+8. ✅ **Ask before deviating** - Get user approval for changes
+9. ✅ **Maintain consistency** - Follow existing patterns
+10. ✅ **Document versions** - Note when features were added
+11. ✅ **Include error handling** - All examples should handle errors
+12. ✅ **Update cross-references** - Keep links current
+13. ✅ **Mark uncertainties** - Flag anything requiring verification
 
 ### NEVER Do:
 

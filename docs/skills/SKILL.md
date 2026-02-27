@@ -1,3 +1,31 @@
+---
+title: "Databricks Skills Reference"
+description: "A comprehensive guide to skills and patterns for building on Databricks, organized by functional area and optimized for AI-assisted development with Context7"
+category: "overview"
+tags:
+  [
+    "skills",
+    "patterns",
+    "best-practices",
+    "ai",
+    "ml",
+    "data-engineering",
+    "analytics",
+    "devops",
+    "deployment",
+    "automation",
+    "dashboards",
+    "workflows",
+    "agents",
+    "vector-search",
+    "mlflow",
+  ]
+skills_count: 24
+last_updated: 2026-02-27
+version: "1.0.0"
+status: "active"
+---
+
 # Databricks Skills Reference
 
 A comprehensive guide to skills and patterns for building on Databricks, organized by functional area and optimized for AI-assisted development with Context7.
@@ -217,6 +245,11 @@ Application development, deployment automation, and DevOps practices.
 - [Examples](../examples/) - Working code examples
 - [Best Practices](../best-practices/) - Performance and security
 
+### Skills Documentation Standards
+
+- [SKILL-FORMAT-GUIDE.md](SKILL-FORMAT-GUIDE.md) - Required format for all SKILL.md files
+- [SKILL-TEMPLATE.md](SKILL-TEMPLATE.md) - Template for creating new skills documentation
+
 ### Quick Links
 
 - [30-Minute Quickstart](../getting-started/quickstart.md)
@@ -290,13 +323,21 @@ All skills documentation follows these standards:
 
 To add or enhance skills documentation:
 
-1. Follow the established structure and format
-2. Include complete, working code examples
-3. Add practical use cases and scenarios
-4. Cross-reference related documentation
-5. Update this index file
+1. **Follow the SKILL.md format** - See [SKILL-FORMAT-GUIDE.md](SKILL-FORMAT-GUIDE.md) for required YAML frontmatter
+2. **Use the template** - Start with [SKILL-TEMPLATE.md](SKILL-TEMPLATE.md) for new skills
+3. **Get date from CLI** - Always use `date +%Y-%m-%d` for last_updated field (never hardcode)
+4. Follow the established structure and format
+5. Include complete, working code examples
+6. Add practical use cases and scenarios
+7. Cross-reference related documentation
+8. Update this index file
 
 See [CONTRIBUTING.md](../../CONTRIBUTING.md) for detailed guidelines.
+
+**Required Files:**
+
+- [SKILL-FORMAT-GUIDE.md](SKILL-FORMAT-GUIDE.md) - Complete format requirements and validation
+- [SKILL-TEMPLATE.md](SKILL-TEMPLATE.md) - Starting template for new SKILL.md files
 
 ---
 

@@ -1,3 +1,26 @@
+---
+title: "Analytics & Dashboards Skills"
+description: "Business intelligence, dashboards, and data governance with system tables on Databricks"
+category: "analytics"
+tags:
+  [
+    "analytics",
+    "dashboards",
+    "bi",
+    "genie",
+    "system-tables",
+    "unity-catalog",
+    "governance",
+    "monitoring",
+    "cost-analysis",
+  ]
+priority: "high"
+skills_count: 2
+last_updated: 2026-02-27
+version: "1.0.0"
+status: "partial"
+---
+
 # Analytics & Dashboards Skills
 
 This directory contains skills and patterns for analytics, dashboards, and data governance on Databricks.
@@ -7,11 +30,13 @@ This directory contains skills and patterns for analytics, dashboards, and data 
 ### High Priority Skills
 
 #### 1. Databricks AI/BI Dashboards
+
 **Status**: ❌ Not yet documented
 **Priority**: HIGH
 **Description**: Create intelligent, AI-powered dashboards for business intelligence and analytics
 
 **Key Topics**:
+
 - Dashboard creation and design
 - AI-powered insights generation
 - Natural language queries in dashboards
@@ -22,6 +47,7 @@ This directory contains skills and patterns for analytics, dashboards, and data 
 - Dashboard performance optimization
 
 **Use Cases**:
+
 - Executive dashboards
 - Operational reporting
 - Self-service analytics for business users
@@ -30,12 +56,14 @@ This directory contains skills and patterns for analytics, dashboards, and data 
 - Department-specific analytics
 
 **Prerequisites**:
+
 - SQL Warehouse access
 - Unity Catalog enabled
 - Data tables prepared
 - Basic SQL knowledge
 
 **Related Documentation**:
+
 - [SQL Examples](../../examples/sql.md)
 - [Unity Catalog API](../../api/unity-catalog.md)
 - [Query and Visualize Data](../../getting-started/query-visualize-data.md)
@@ -43,11 +71,13 @@ This directory contains skills and patterns for analytics, dashboards, and data 
 ---
 
 #### 2. Unity Catalog System Tables
+
 **Status**: ⚠️ Partially documented
 **Priority**: MEDIUM
 **Description**: Leverage system tables for usage monitoring, audit, and governance
 
 **Key Topics**:
+
 - System table schema and structure
 - Usage monitoring and analysis
 - Audit log querying
@@ -58,6 +88,7 @@ This directory contains skills and patterns for analytics, dashboards, and data 
 - Compliance reporting
 
 **Use Cases**:
+
 - Cost attribution and chargeback
 - Security audit and compliance
 - Query performance optimization
@@ -66,17 +97,20 @@ This directory contains skills and patterns for analytics, dashboards, and data 
 - Capacity planning
 
 **Prerequisites**:
+
 - Unity Catalog metastore admin access
 - SQL Warehouse configured
 - Understanding of Unity Catalog concepts
 
 **Enhancement Needed**:
+
 - Add dedicated system tables guide
 - Document common analysis queries
 - Include cost monitoring examples
 - Show lineage tracking patterns
 
 **Related Documentation**:
+
 - [Unity Catalog API](../../api/unity-catalog.md) ⚠️ Basic coverage only
 - [SQL Examples](../../examples/sql.md)
 - [Security Best Practices](../../best-practices/security.md)
@@ -569,6 +603,7 @@ print(f"Results: {response.results}")
 ## 📊 Best Practices
 
 ### Dashboard Design
+
 1. **User-Focused Design**
    - Identify your audience (executives, analysts, operations)
    - Prioritize key metrics above the fold
@@ -590,9 +625,10 @@ print(f"Results: {response.results}")
    - Add interactive filters
 
 ### System Tables Usage
+
 1. **Query Optimization**
    - Always filter by date partitions
-   - Use specific columns instead of SELECT *
+   - Use specific columns instead of SELECT \*
    - Leverage predicate pushdown
    - Sample large result sets when exploring
 
@@ -609,6 +645,7 @@ print(f"Results: {response.results}")
    - Schedule regular reports
 
 ### Cost Management
+
 1. **Resource Optimization**
    - Right-size SQL Warehouses
    - Use serverless warehouses for variable workloads
@@ -632,6 +669,7 @@ print(f"Results: {response.results}")
 ## 🚀 Getting Started Checklist
 
 ### For AI/BI Dashboards
+
 - [ ] Enable Databricks SQL in workspace
 - [ ] Create or select SQL Warehouse
 - [ ] Prepare source tables in Unity Catalog
@@ -644,6 +682,7 @@ print(f"Results: {response.results}")
 - [ ] Gather feedback and iterate
 
 ### For System Tables Analysis
+
 - [ ] Verify Unity Catalog metastore access
 - [ ] Locate system catalog in SQL editor
 - [ ] Explore available system schemas (access, billing, query)
@@ -654,6 +693,7 @@ print(f"Results: {response.results}")
 - [ ] Share with stakeholders
 
 ### For Cost Monitoring
+
 - [ ] Access system.billing.usage table
 - [ ] Identify your DBU pricing
 - [ ] Create cost analysis queries
@@ -771,6 +811,7 @@ ORDER BY transformation_count DESC;
 ## 📖 Additional Resources
 
 ### Official Documentation
+
 - [Databricks SQL Dashboards](https://docs.databricks.com/en/dashboards/index.html)
 - [AI/BI Dashboards](https://docs.databricks.com/en/dashboards/ai-bi-dashboards.html)
 - [Genie Spaces](https://docs.databricks.com/en/genie/index.html)
@@ -778,11 +819,13 @@ ORDER BY transformation_count DESC;
 - [Unity Catalog Audit Logs](https://docs.databricks.com/en/admin/system-tables/audit-logs.html)
 
 ### Tutorials
+
 - [Query and Visualize Data](../../getting-started/query-visualize-data.md)
 - [SQL Examples](../../examples/sql.md)
 - [Create Table Tutorial](../../getting-started/create-table-tutorial.md)
 
 ### API References
+
 - [Unity Catalog API](../../api/unity-catalog.md)
 - [SQL Warehouse Management](../../api/overview.md)
 - [Python SDK](../../sdk/python.md)

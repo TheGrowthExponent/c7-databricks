@@ -1,3 +1,27 @@
+---
+title: "Data Engineering Skills"
+description: "ETL pipelines, data processing, and workflow orchestration on Databricks"
+category: "data-engineering"
+tags:
+  [
+    "data-engineering",
+    "etl",
+    "pipelines",
+    "delta-live-tables",
+    "databricks-jobs",
+    "workflows",
+    "medallion-architecture",
+    "data-quality",
+    "streaming",
+    "batch-processing",
+  ]
+priority: "medium"
+skills_count: 3
+last_updated: 2026-02-27
+version: "1.0.0"
+status: "partial"
+---
+
 # Data Engineering Skills
 
 This directory contains skills and patterns for data engineering, ETL pipelines, and data processing on Databricks.
@@ -7,11 +31,13 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 ### Well Covered Skills
 
 #### 1. Databricks Jobs
+
 **Status**: ✅ Covered
 **Priority**: -
 **Description**: Comprehensive guide to creating and managing data pipelines and workflows
 
 **Key Topics**:
+
 - Job creation and configuration
 - Task orchestration and dependencies
 - Multi-task workflows
@@ -22,6 +48,7 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 - Job clusters vs shared clusters
 
 **Use Cases**:
+
 - ETL pipeline orchestration
 - Batch data processing
 - ML model training pipelines
@@ -30,6 +57,7 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 - Multi-stage data transformations
 
 **Related Documentation**:
+
 - [Jobs API](../../api/jobs.md) ✅ (1,382 lines)
 - [ETL Patterns](../../examples/etl-patterns.md) ✅
 - [Python SDK](../../sdk/python.md) ✅
@@ -39,11 +67,13 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 ### Medium Priority Skills
 
 #### 2. Databricks Spark Declarative Pipelines (Delta Live Tables)
+
 **Status**: ⚠️ Partially covered (streaming workflows documented)
 **Priority**: MEDIUM
 **Description**: Build reliable, maintainable data pipelines with declarative syntax
 
 **Key Topics**:
+
 - Delta Live Tables (DLT) basics
 - Pipeline declaration with Python and SQL
 - Data quality expectations
@@ -54,6 +84,7 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 - Cost optimization strategies
 
 **Use Cases**:
+
 - Medallion architecture (Bronze → Silver → Gold)
 - Streaming and batch pipelines
 - Data quality enforcement
@@ -62,17 +93,20 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 - CDC processing
 
 **Prerequisites**:
+
 - Delta Lake knowledge
 - SQL or Python proficiency
 - Understanding of data quality concepts
 
 **Enhancement Needed**:
+
 - Add dedicated DLT guide
 - Document pipeline patterns
 - Include quality expectation examples
 - Show monitoring and troubleshooting
 
 **Related Documentation**:
+
 - [Streaming Workflows](../../examples/streaming-workflows.md) ⚠️ Structured streaming covered
 - [Delta Lake Guide](../../sdk/delta-lake.md) ✅
 - [ETL Patterns](../../examples/etl-patterns.md) ✅
@@ -82,11 +116,13 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 ### Low Priority Skills
 
 #### 3. Databricks Synthetic Data Generation
+
 **Status**: ❌ Not covered
 **Priority**: LOW
 **Description**: Generate synthetic data for testing, development, and demo purposes
 
 **Key Topics**:
+
 - Synthetic data generation libraries
 - Realistic data patterns
 - Data distribution matching
@@ -96,6 +132,7 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 - Data volume scaling
 
 **Use Cases**:
+
 - Development and testing environments
 - Demo and training data
 - Load testing
@@ -104,11 +141,13 @@ This directory contains skills and patterns for data engineering, ETL pipelines,
 - Data science experiments
 
 **Prerequisites**:
+
 - PySpark knowledge
 - Understanding of data types
 - Schema definition skills
 
 **Related Documentation**:
+
 - [ETL Patterns](../../examples/etl-patterns.md)
 - [Delta Lake Guide](../../sdk/delta-lake.md)
 - [Python SDK](../../sdk/python.md)
@@ -805,6 +844,7 @@ print(f"Started run: {run.run_id}")
 ## 📊 Best Practices
 
 ### Job Design
+
 1. **Task Organization**
    - Keep tasks focused and single-purpose
    - Use task dependencies for orchestration
@@ -824,6 +864,7 @@ print(f"Started run: {run.run_id}")
    - Set appropriate instance types per task
 
 ### Delta Live Tables
+
 1. **Pipeline Design**
    - Follow medallion architecture (Bronze/Silver/Gold)
    - Use streaming for continuous processing
@@ -843,6 +884,7 @@ print(f"Started run: {run.run_id}")
    - Monitor pipeline execution metrics
 
 ### Data Engineering
+
 1. **Incremental Processing**
    - Implement watermarking for efficiency
    - Use Delta Lake change data feed
@@ -866,6 +908,7 @@ print(f"Started run: {run.run_id}")
 ## 🚀 Getting Started Checklist
 
 ### For Databricks Jobs
+
 - [ ] Create first notebook or Python script
 - [ ] Define job with single task
 - [ ] Configure cluster (job cluster or existing)
@@ -878,6 +921,7 @@ print(f"Started run: {run.run_id}")
 - [ ] Deploy to production
 
 ### For Delta Live Tables
+
 - [ ] Install DLT library
 - [ ] Create DLT pipeline definition (Python or SQL)
 - [ ] Define bronze layer (raw ingestion)
@@ -890,6 +934,7 @@ print(f"Started run: {run.run_id}")
 - [ ] Review data quality metrics
 
 ### For Production Pipelines
+
 - [ ] Design pipeline architecture
 - [ ] Implement incremental processing
 - [ ] Add comprehensive error handling
@@ -906,12 +951,14 @@ print(f"Started run: {run.run_id}")
 ## 📖 Additional Resources
 
 ### Official Documentation
+
 - [Databricks Jobs](https://docs.databricks.com/en/workflows/jobs/index.html)
 - [Delta Live Tables](https://docs.databricks.com/en/delta-live-tables/index.html)
 - [Workflow Orchestration](https://docs.databricks.com/en/workflows/index.html)
 - [Best Practices](https://docs.databricks.com/en/workflows/jobs/jobs-best-practices.html)
 
 ### Tutorials
+
 - [Jobs API Guide](../../api/jobs.md)
 - [ETL Patterns](../../examples/etl-patterns.md)
 - [Streaming Workflows](../../examples/streaming-workflows.md)
@@ -919,6 +966,7 @@ print(f"Started run: {run.run_id}")
 - [ETL Pipeline Tutorial](../../getting-started/etl-pipeline-tutorial.md)
 
 ### API References
+
 - [Python SDK](../../sdk/python.md)
 - [Clusters API](../../api/clusters.md)
 - [Workspace API](../../api/workspace.md)

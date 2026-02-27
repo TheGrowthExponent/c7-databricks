@@ -1,3 +1,27 @@
+---
+title: "Development & Deployment Skills"
+description: "Application development, deployment automation, and DevOps practices on Databricks"
+category: "development"
+tags:
+  [
+    "development",
+    "deployment",
+    "devops",
+    "cicd",
+    "asset-bundles",
+    "databricks-apps",
+    "python-sdk",
+    "automation",
+    "infrastructure-as-code",
+    "multi-environment",
+  ]
+priority: "high"
+skills_count: 6
+last_updated: 2026-02-27
+version: "1.0.0"
+status: "partial"
+---
+
 # Development & Deployment Skills
 
 This directory contains skills and patterns for application development, deployment, and DevOps on Databricks.
@@ -7,11 +31,13 @@ This directory contains skills and patterns for application development, deploym
 ### Well Covered Skills
 
 #### 1. Databricks Python SDK
+
 **Status**: ✅ Covered
 **Priority**: -
 **Description**: Comprehensive guide to programmatic Databricks interaction
 
 **Key Topics**:
+
 - SDK installation and configuration
 - Authentication methods
 - Service client usage
@@ -21,6 +47,7 @@ This directory contains skills and patterns for application development, deploym
 - Error handling patterns
 
 **Use Cases**:
+
 - Infrastructure automation
 - CI/CD integration
 - Custom tooling development
@@ -29,6 +56,7 @@ This directory contains skills and patterns for application development, deploym
 - Resource provisioning
 
 **Related Documentation**:
+
 - [Python SDK Guide](../../sdk/python.md) ✅ (1,172 lines)
 - [Authentication Guide](../../getting-started/authentication.md) ✅
 - [API Overview](../../api/overview.md) ✅
@@ -36,11 +64,13 @@ This directory contains skills and patterns for application development, deploym
 ---
 
 #### 2. Databricks Configuration
+
 **Status**: ✅ Covered
 **Priority**: -
 **Description**: Configure Databricks CLI and SDK for different environments
 
 **Key Topics**:
+
 - Configuration file setup (.databrickscfg)
 - Environment variables
 - Profile management
@@ -49,6 +79,7 @@ This directory contains skills and patterns for application development, deploym
 - Workspace URL configuration
 
 **Use Cases**:
+
 - Multi-environment setup (dev/staging/prod)
 - CI/CD configuration
 - Team collaboration
@@ -56,6 +87,7 @@ This directory contains skills and patterns for application development, deploym
 - Automated deployments
 
 **Related Documentation**:
+
 - [Setup Guide](../../getting-started/setup.md) ✅
 - [Authentication Guide](../../getting-started/authentication.md) ✅
 - [CLI Reference](../../cli/README.md) ✅
@@ -65,11 +97,13 @@ This directory contains skills and patterns for application development, deploym
 ### High Priority Skills
 
 #### 3. Databricks Asset Bundles (DABs)
+
 **Status**: ❌ Not yet documented
 **Priority**: HIGH
 **Description**: Modern deployment framework for Databricks resources
 
 **Key Topics**:
+
 - Bundle structure and configuration
 - Resource definitions (jobs, pipelines, models)
 - Multi-environment deployments
@@ -80,6 +114,7 @@ This directory contains skills and patterns for application development, deploym
 - Deployment validation
 
 **Use Cases**:
+
 - Production deployments
 - Multi-environment management
 - Infrastructure as Code
@@ -88,12 +123,14 @@ This directory contains skills and patterns for application development, deploym
 - Automated testing and deployment
 
 **Prerequisites**:
+
 - Databricks CLI installed
 - Git repository setup
 - Understanding of YAML configuration
 - Workspace admin permissions
 
 **Related Documentation**:
+
 - [Jobs API](../../api/jobs.md)
 - [Python SDK](../../sdk/python.md)
 - [CLI Reference](../../cli/README.md)
@@ -101,11 +138,13 @@ This directory contains skills and patterns for application development, deploym
 ---
 
 #### 4. Databricks Apps (Python)
+
 **Status**: ❌ Not yet documented
 **Priority**: HIGH
 **Description**: Build and deploy full-stack applications on Databricks
 
 **Key Topics**:
+
 - App framework setup
 - Python backend development
 - Frontend integration (Streamlit, Dash)
@@ -116,6 +155,7 @@ This directory contains skills and patterns for application development, deploym
 - Custom UI components
 
 **Use Cases**:
+
 - Interactive dashboards
 - Data exploration tools
 - ML model interfaces
@@ -124,12 +164,14 @@ This directory contains skills and patterns for application development, deploym
 - Customer-facing applications
 
 **Prerequisites**:
+
 - Python proficiency
 - Web framework knowledge (Streamlit/Dash)
 - Unity Catalog access
 - App hosting permissions
 
 **Related Documentation**:
+
 - [Python SDK](../../sdk/python.md)
 - [Authentication](../../getting-started/authentication.md)
 - [Security Best Practices](../../best-practices/security.md)
@@ -137,11 +179,13 @@ This directory contains skills and patterns for application development, deploym
 ---
 
 #### 5. Databricks Apps (APX Framework)
+
 **Status**: ❌ Not yet documented
 **Priority**: HIGH
 **Description**: Advanced application framework for enterprise applications
 
 **Key Topics**:
+
 - APX framework architecture
 - Application structure
 - API development
@@ -152,6 +196,7 @@ This directory contains skills and patterns for application development, deploym
 - Scalability patterns
 
 **Use Cases**:
+
 - Enterprise applications
 - Complex workflows
 - Multi-user applications
@@ -159,12 +204,14 @@ This directory contains skills and patterns for application development, deploym
 - Production-grade apps
 
 **Prerequisites**:
+
 - Advanced Python knowledge
 - REST API development
 - React/JavaScript for frontend
 - DevOps experience
 
 **Related Documentation**:
+
 - [Python SDK](../../sdk/python.md)
 - [API Overview](../../api/overview.md)
 
@@ -173,11 +220,13 @@ This directory contains skills and patterns for application development, deploym
 ### Low Priority Skills
 
 #### 6. Databricks Lakebase Provisioned
+
 **Status**: ❌ Not covered
 **Priority**: LOW
 **Description**: Provisioned lakehouse infrastructure management
 
 **Key Topics**:
+
 - Provisioned infrastructure setup
 - Capacity planning
 - Resource allocation
@@ -185,12 +234,14 @@ This directory contains skills and patterns for application development, deploym
 - Cost optimization
 
 **Use Cases**:
+
 - Enterprise deployments
 - High-performance requirements
 - Predictable workloads
 - Dedicated resources
 
 **Prerequisites**:
+
 - Enterprise account
 - Infrastructure planning
 - Cost analysis
@@ -513,7 +564,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Databricks CLI
         run: |
@@ -536,7 +587,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Databricks CLI
         run: |
@@ -560,7 +611,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install Databricks CLI
         run: |
@@ -878,6 +929,7 @@ def blue_green_deploy(job_name: str, new_config: dict):
 ## 🚀 Getting Started Checklist
 
 ### For Python SDK
+
 - [ ] Install databricks-sdk: `pip install databricks-sdk`
 - [ ] Configure authentication (.databrickscfg or env vars)
 - [ ] Initialize WorkspaceClient
@@ -887,6 +939,7 @@ def blue_green_deploy(job_name: str, new_config: dict):
 - [ ] Add logging and monitoring
 
 ### For Asset Bundles
+
 - [ ] Install Databricks CLI: `pip install databricks-cli`
 - [ ] Initialize bundle: `databricks bundle init`
 - [ ] Define resources in databricks.yml
@@ -898,6 +951,7 @@ def blue_green_deploy(job_name: str, new_config: dict):
 - [ ] Deploy to production with approval
 
 ### For Databricks Apps
+
 - [ ] Choose framework (Streamlit/Dash)
 - [ ] Create app directory structure
 - [ ] Develop app locally
@@ -1013,18 +1067,21 @@ class MonitoredDeployment:
 ## 📖 Additional Resources
 
 ### Official Documentation
+
 - [Databricks Python SDK](https://docs.databricks.com/en/dev-tools/sdk-python.html)
 - [Asset Bundles](https://docs.databricks.com/en/dev-tools/bundles/index.html)
 - [Databricks Apps](https://docs.databricks.com/en/dev-tools/databricks-apps/index.html)
 - [CLI Reference](https://docs.databricks.com/en/dev-tools/cli/index.html)
 
 ### Tutorials
+
 - [Python SDK Guide](../../sdk/python.md)
 - [Setup Guide](../../getting-started/setup.md)
 - [Authentication Guide](../../getting-started/authentication.md)
 - [CLI Reference](../../cli/README.md)
 
 ### API References
+
 - [Jobs API](../../api/jobs.md)
 - [Clusters API](../../api/clusters.md)
 - [Workspace API](../../api/workspace.md)

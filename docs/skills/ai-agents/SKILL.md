@@ -1,3 +1,26 @@
+---
+title: "AI & Agents Skills"
+description: "Build intelligent applications with AI agents, vector search, and natural language interfaces"
+category: "ai-agents"
+tags:
+  [
+    "ai",
+    "agents",
+    "vector-search",
+    "rag",
+    "model-serving",
+    "genie",
+    "chatbots",
+    "semantic-search",
+    "llm",
+  ]
+priority: "high"
+skills_count: 5
+last_updated: 2026-02-27
+version: "1.0.0"
+status: "partial"
+---
+
 # AI & Agents Skills
 
 This directory contains skills and patterns for building AI applications and agents on Databricks.
@@ -7,11 +30,13 @@ This directory contains skills and patterns for building AI applications and age
 ### High Priority Skills
 
 #### 1. Databricks Agent Bricks
+
 **Status**: ⚠️ Not yet documented
 **Priority**: HIGH
 **Description**: Build production-ready AI agents using Databricks Agent Bricks framework
 
 **Key Topics**:
+
 - Agent creation and deployment
 - Tool integration and function calling
 - Agent monitoring and debugging
@@ -19,17 +44,20 @@ This directory contains skills and patterns for building AI applications and age
 - Multi-agent orchestration
 
 **Use Cases**:
+
 - Customer support chatbots
 - Data analysis assistants
 - Code generation agents
 - Workflow automation agents
 
 **Prerequisites**:
+
 - Unity Catalog access
 - Model Serving endpoint knowledge
 - Vector Search familiarity
 
 **Related Documentation**:
+
 - [Model Serving](../../sdk/mlflow.md)
 - [Unity Catalog API](../../api/unity-catalog.md)
 - [Python SDK](../../sdk/python.md)
@@ -37,11 +65,13 @@ This directory contains skills and patterns for building AI applications and age
 ---
 
 #### 2. Databricks Genie
+
 **Status**: ⚠️ Not yet documented
 **Priority**: HIGH
 **Description**: Natural language interface for querying and analyzing data
 
 **Key Topics**:
+
 - Genie Spaces setup and configuration
 - Natural language to SQL generation
 - Data visualization from queries
@@ -49,17 +79,20 @@ This directory contains skills and patterns for building AI applications and age
 - Access control and security
 
 **Use Cases**:
+
 - Business user data exploration
 - Ad-hoc analytics without SQL knowledge
 - Dashboard creation from natural language
 - Self-service reporting
 
 **Prerequisites**:
+
 - Unity Catalog enabled
 - SQL Warehouses configured
 - Table access permissions
 
 **Related Documentation**:
+
 - [SQL Examples](../../examples/sql.md)
 - [Unity Catalog API](../../api/unity-catalog.md)
 - [Security Best Practices](../../best-practices/security.md)
@@ -67,11 +100,13 @@ This directory contains skills and patterns for building AI applications and age
 ---
 
 #### 3. Databricks Vector Search
+
 **Status**: ⚠️ Not yet documented
 **Priority**: HIGH
 **Description**: Build semantic search and retrieval-augmented generation (RAG) applications
 
 **Key Topics**:
+
 - Vector index creation and management
 - Embedding generation strategies
 - Similarity search patterns
@@ -79,6 +114,7 @@ This directory contains skills and patterns for building AI applications and age
 - Index optimization and scaling
 
 **Use Cases**:
+
 - Semantic document search
 - RAG chatbots
 - Recommendation systems
@@ -86,11 +122,13 @@ This directory contains skills and patterns for building AI applications and age
 - Content similarity matching
 
 **Prerequisites**:
+
 - Delta Lake tables
 - Embedding model access
 - Unity Catalog enabled
 
 **Related Documentation**:
+
 - [Delta Lake Guide](../../sdk/delta-lake.md)
 - [ML Workflows](../../examples/ml-workflows.md)
 - [Performance Optimization](../../best-practices/performance.md)
@@ -100,11 +138,13 @@ This directory contains skills and patterns for building AI applications and age
 ### Medium Priority Skills
 
 #### 4. Databricks Model Serving
+
 **Status**: ⚠️ Partially documented
 **Priority**: MEDIUM
 **Description**: Deploy and serve machine learning models at scale
 
 **Key Topics**:
+
 - Model endpoint deployment
 - Real-time inference
 - Batch inference patterns
@@ -113,22 +153,26 @@ This directory contains skills and patterns for building AI applications and age
 - Monitoring and alerting
 
 **Use Cases**:
+
 - Production ML model serving
 - A/B testing models
 - Online feature computation
 - Model ensemble serving
 
 **Prerequisites**:
+
 - MLflow registered models
 - Model training knowledge
 - API integration experience
 
 **Related Documentation**:
+
 - [MLflow Guide](../../sdk/mlflow.md) ✅
 - [ML Workflows](../../examples/ml-workflows.md) ✅
 - [Python SDK](../../sdk/python.md) ✅
 
 **Enhancement Needed**:
+
 - Add dedicated Model Serving endpoint examples
 - Document autoscaling strategies
 - Include monitoring patterns
@@ -138,11 +182,13 @@ This directory contains skills and patterns for building AI applications and age
 ### Low Priority Skills
 
 #### 5. Databricks Unstructured PDF Generation
+
 **Status**: ❌ Not documented
 **Priority**: LOW
 **Description**: Generate and process unstructured documents and PDFs
 
 **Key Topics**:
+
 - PDF text extraction
 - Document parsing
 - OCR integration
@@ -150,16 +196,19 @@ This directory contains skills and patterns for building AI applications and age
 - Batch document processing
 
 **Use Cases**:
+
 - Invoice processing
 - Contract analysis
 - Document classification
 - Form data extraction
 
 **Prerequisites**:
+
 - File storage access (DBFS/S3)
 - Python environment setup
 
 **Related Documentation**:
+
 - [DBFS API](../../api/dbfs.md)
 - [ETL Patterns](../../examples/etl-patterns.md)
 
@@ -461,6 +510,7 @@ class AgentWithMemory:
 ## 📊 Best Practices
 
 ### Vector Search
+
 1. **Index Design**
    - Choose appropriate embedding dimensions (768, 1024, 1536)
    - Consider index type (delta_sync vs direct_access)
@@ -477,6 +527,7 @@ class AgentWithMemory:
    - Add metadata for filtering
 
 ### Agent Development
+
 1. **Tool Design**
    - Keep functions focused and single-purpose
    - Provide clear descriptions for the LLM
@@ -493,6 +544,7 @@ class AgentWithMemory:
    - Log all agent interactions
 
 ### RAG Applications
+
 1. **Context Selection**
    - Retrieve 3-5 relevant chunks
    - Consider context window limits
@@ -513,6 +565,7 @@ class AgentWithMemory:
 ## 🚀 Getting Started Checklist
 
 ### For Vector Search
+
 - [ ] Enable Unity Catalog
 - [ ] Create source Delta table with documents
 - [ ] Deploy embedding model endpoint
@@ -522,6 +575,7 @@ class AgentWithMemory:
 - [ ] Implement RAG pattern
 
 ### For AI Agents
+
 - [ ] Define agent objectives and scope
 - [ ] Design tool functions
 - [ ] Select and deploy LLM endpoint
@@ -531,6 +585,7 @@ class AgentWithMemory:
 - [ ] Deploy to production
 
 ### For Genie Spaces
+
 - [ ] Set up Unity Catalog tables
 - [ ] Configure SQL Warehouse
 - [ ] Create Genie Space
@@ -544,15 +599,18 @@ class AgentWithMemory:
 ## 📖 Additional Resources
 
 ### Official Documentation
+
 - [Databricks AI Functions](https://docs.databricks.com/en/large-language-models/ai-functions.html)
 - [Vector Search Guide](https://docs.databricks.com/en/generative-ai/vector-search.html)
 - [Model Serving](https://docs.databricks.com/en/machine-learning/model-serving/index.html)
 
 ### Tutorials
+
 - [Build a RAG Application](../../getting-started/ai-playground-tutorial.md)
 - [ML Workflows](../../examples/ml-workflows.md)
 
 ### API References
+
 - [Python SDK](../../sdk/python.md)
 - [MLflow API](../../sdk/mlflow.md)
 - [Unity Catalog API](../../api/unity-catalog.md)

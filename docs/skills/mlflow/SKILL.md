@@ -1,3 +1,26 @@
+---
+title: "MLflow Skills"
+description: "Experiment tracking, model management, and observability for machine learning workflows on Databricks"
+category: "mlflow"
+tags:
+  [
+    "mlflow",
+    "experiment-tracking",
+    "model-registry",
+    "tracing",
+    "ml-ops",
+    "model-management",
+    "hyperparameter-tuning",
+    "llm-tracing",
+    "observability",
+  ]
+priority: "medium"
+skills_count: 8
+last_updated: 2026-02-27
+version: "1.0.0"
+status: "partial"
+---
+
 # MLflow Skills
 
 This directory contains skills and patterns for MLflow experiment tracking, model management, and tracing on Databricks.
@@ -7,11 +30,13 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 ### Well Covered Skills
 
 #### 1. MLflow Onboarding
+
 **Status**: ✅ Covered
 **Priority**: -
 **Description**: Comprehensive guide to getting started with MLflow on Databricks
 
 **Key Topics**:
+
 - MLflow setup and configuration
 - Experiment tracking basics
 - Model logging and registration
@@ -19,6 +44,7 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Authentication and permissions
 
 **Related Documentation**:
+
 - [MLflow Guide](../../sdk/mlflow.md) ✅
 - [ML Workflows](../../examples/ml-workflows.md) ✅
 - [Authentication](../../getting-started/authentication.md) ✅
@@ -26,11 +52,13 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 ---
 
 #### 2. Querying MLflow Metrics
+
 **Status**: ✅ Covered
 **Priority**: -
 **Description**: Search and analyze experiment metrics programmatically
 
 **Key Topics**:
+
 - Metric query APIs
 - Run comparison
 - Hyperparameter analysis
@@ -38,6 +66,7 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Metric visualization
 
 **Related Documentation**:
+
 - [MLflow Guide](../../sdk/mlflow.md) ✅
 - [ML Workflows](../../examples/ml-workflows.md) ✅
 
@@ -46,11 +75,13 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 ### Medium Priority Skills
 
 #### 3. Instrumenting with MLflow Tracing
+
 **Status**: ⚠️ Partially documented
 **Priority**: MEDIUM
 **Description**: Add observability and debugging to LLM applications and agents
 
 **Key Topics**:
+
 - Trace creation and management
 - Span instrumentation
 - LLM call tracking
@@ -59,6 +90,7 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Debugging complex workflows
 
 **Use Cases**:
+
 - LLM application observability
 - Agent debugging
 - Latency optimization
@@ -66,27 +98,32 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Error analysis
 
 **Prerequisites**:
+
 - MLflow 2.9.0+
 - LLM or agent application
 - Understanding of spans and traces
 
 **Enhancement Needed**:
+
 - Add dedicated tracing examples
 - Document span context propagation
 - Include agent tracing patterns
 - Show integration with Model Serving
 
 **Related Documentation**:
+
 - [MLflow Guide](../../sdk/mlflow.md) ⚠️ Basic coverage only
 
 ---
 
 #### 4. Agent Evaluation
+
 **Status**: ❌ Not covered
 **Priority**: MEDIUM
 **Description**: Evaluate and compare AI agent performance systematically
 
 **Key Topics**:
+
 - Agent evaluation metrics
 - Test case creation
 - Automated evaluation pipelines
@@ -95,6 +132,7 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Performance benchmarking
 
 **Use Cases**:
+
 - Agent quality assurance
 - Comparing agent versions
 - Production readiness validation
@@ -102,11 +140,13 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Regression detection
 
 **Prerequisites**:
+
 - Deployed agents
 - Evaluation datasets
 - MLflow experiment tracking
 
 **Related Documentation**:
+
 - [ML Workflows](../../examples/ml-workflows.md)
 - [AI Playground Tutorial](../../getting-started/ai-playground-tutorial.md)
 
@@ -115,11 +155,13 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 ### Low Priority Skills
 
 #### 5. Analyze MLflow Chat Session
+
 **Status**: ❌ Not covered
 **Priority**: LOW
 **Description**: Analyze chat interactions and conversation patterns
 
 **Key Topics**:
+
 - Session replay and analysis
 - Conversation flow visualization
 - User interaction patterns
@@ -127,12 +169,14 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Session duration analysis
 
 **Use Cases**:
+
 - Chatbot improvement
 - User experience optimization
 - Conversation debugging
 - Quality monitoring
 
 **Prerequisites**:
+
 - MLflow tracking enabled
 - Chat application logs
 - Session data stored
@@ -140,11 +184,13 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 ---
 
 #### 6. Analyze MLflow Trace
+
 **Status**: ⚠️ Partially documented
 **Priority**: LOW
 **Description**: Deep dive into trace data for debugging and optimization
 
 **Key Topics**:
+
 - Trace visualization
 - Span analysis
 - Latency breakdown
@@ -152,12 +198,14 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Error investigation
 
 **Use Cases**:
+
 - Performance bottleneck identification
 - Cost optimization
 - Error root cause analysis
 - Workflow optimization
 
 **Prerequisites**:
+
 - MLflow tracing enabled
 - Trace data collected
 - Understanding of distributed tracing
@@ -165,11 +213,13 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 ---
 
 #### 7. Retrieving MLflow Traces
+
 **Status**: ⚠️ Partially documented
 **Priority**: LOW
 **Description**: Query and retrieve trace data programmatically
 
 **Key Topics**:
+
 - Trace search APIs
 - Filtering by tags and attributes
 - Bulk trace retrieval
@@ -177,12 +227,14 @@ This directory contains skills and patterns for MLflow experiment tracking, mode
 - Integration with monitoring tools
 
 **Use Cases**:
+
 - Custom trace analysis
 - Monitoring dashboard creation
 - Trace data export
 - Anomaly detection
 
 **Prerequisites**:
+
 - MLflow Python client
 - Trace data available
 - API authentication
@@ -594,6 +646,7 @@ with mlflow.start_run():
 ## 📊 Best Practices
 
 ### Experiment Organization
+
 1. **Naming Conventions**
    - Use descriptive experiment names: `/team/project/model-type`
    - Include version numbers in run names
@@ -612,6 +665,7 @@ with mlflow.start_run():
    - Log business metrics when applicable
 
 ### Model Management
+
 1. **Model Registry**
    - Use semantic versioning
    - Add comprehensive descriptions
@@ -631,6 +685,7 @@ with mlflow.start_run():
    - Document input/output schemas
 
 ### Tracing Best Practices
+
 1. **Span Organization**
    - Use meaningful span names
    - Set appropriate span types
@@ -654,6 +709,7 @@ with mlflow.start_run():
 ## 🚀 Getting Started Checklist
 
 ### Basic MLflow Setup
+
 - [ ] Install MLflow SDK: `pip install mlflow`
 - [ ] Configure tracking URI (Databricks managed automatically)
 - [ ] Create experiment: `mlflow.create_experiment()`
@@ -662,6 +718,7 @@ with mlflow.start_run():
 - [ ] View results in MLflow UI
 
 ### Model Registry
+
 - [ ] Register trained model: `mlflow.register_model()`
 - [ ] Add model description and tags
 - [ ] Transition through stages (Staging → Production)
@@ -670,6 +727,7 @@ with mlflow.start_run():
 - [ ] Configure model serving endpoint
 
 ### MLflow Tracing
+
 - [ ] Enable tracing: `mlflow.tracing.enable()`
 - [ ] Add `@trace` decorators to functions
 - [ ] Create spans for key operations
@@ -678,6 +736,7 @@ with mlflow.start_run():
 - [ ] Set up trace retention and sampling
 
 ### Production Deployment
+
 - [ ] Set up CI/CD integration with MLflow
 - [ ] Configure automated model validation
 - [ ] Implement model monitoring
@@ -746,17 +805,20 @@ with mlflow.start_run():
 ## 📖 Additional Resources
 
 ### Official Documentation
+
 - [MLflow Documentation](https://mlflow.org/docs/latest/index.html)
 - [Databricks MLflow Guide](https://docs.databricks.com/en/mlflow/index.html)
 - [MLflow Model Registry](https://docs.databricks.com/en/mlflow/model-registry.html)
 - [MLflow Tracing](https://docs.databricks.com/en/mlflow/tracing.html)
 
 ### Tutorials
+
 - [ML Workflows Tutorial](../../examples/ml-workflows.md)
 - [ML Model Tutorial](../../getting-started/ml-model-tutorial.md)
 - [Python SDK Guide](../../sdk/python.md)
 
 ### API References
+
 - [MLflow Python API](../../sdk/mlflow.md)
 - [Jobs API](../../api/jobs.md)
 - [Unity Catalog API](../../api/unity-catalog.md)
