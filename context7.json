@@ -24,6 +24,8 @@
     "docs/skills/SKILL-FORMAT-GUIDE.md",
     "docs/skills/SKILL-QUICK-REF.md",
     "docs/skills/SKILL-TEMPLATE.md",
+    "docs/skills/SKILL.md",
+    "docs/skills/*/SKILL.md",
     "VALIDATION-SYSTEM-DELIVERY.md",
     "AGENT-SYSTEM-DELIVERY.md",
     "AI-DEV-KIT-ANALYSIS.md",
