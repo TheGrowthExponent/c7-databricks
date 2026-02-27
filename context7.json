@@ -2,7 +2,14 @@
   "name": "databricks",
   "description": "Comprehensive Databricks documentation for Context7 - 30 files with 300+ code examples",
   "version": "1.0.0",
-  "include": ["docs/**/*", "README.md", "CONTRIBUTING.md", "PROJECT-STATUS.md", "LICENSE"],
+  "include": [
+    "context7.md",
+    "docs/**/*",
+    "README.md",
+    "CONTRIBUTING.md",
+    "PROJECT-STATUS.md",
+    "LICENSE"
+  ],
   "exclude": [
     "node_modules/**/*",
     ".git/**/*",
@@ -21,7 +28,19 @@
     "docs/progress.md",
     "docs/extraction-strategy.md",
     "docs/session-summary.md",
-    "VALIDATION-SYSTEM-DELIVERY.md"
+    "VALIDATION-SYSTEM-DELIVERY.md",
+    "AGENT-SYSTEM-DELIVERY.md",
+    "AI-DEV-KIT-ANALYSIS.md",
+    "COMPLETION-SUMMARY.md",
+    "CONTEXT7-GUIDELINES-ADDED.md",
+    "GETTING-STARTED-UPDATE.md",
+    "ML-TUTORIALS-ANALYSIS.md",
+    "NEXT-STEPS.md",
+    "PHASE-4-VALIDATION.md",
+    "PHASE-5-RECOMMENDATION.md",
+    "SESSION-2024-01-15.md",
+    "ZED-CONFIGURATION.md",
+    "docssdkmlflow.md"
   ],
   "bestPractices": [
     "Use clear, concise documentation with production-ready examples",
