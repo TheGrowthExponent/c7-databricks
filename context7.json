@@ -1,29 +1,22 @@
 {
-  "name": "databricks",
-  "description": "Comprehensive Databricks documentation for Context7 - 30 files with 300+ code examples",
-  "version": "1.0.0",
-  "include": [
-    "context7.md",
-    "docs/**/*",
-    "README.md",
-    "CONTRIBUTING.md",
-    "PROJECT-STATUS.md",
-    "LICENSE"
-  ],
-  "exclude": [
-    "node_modules/**/*",
-    ".git/**/*",
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Databricks",
+  "description": "Comprehensive Databricks documentation for Context7 - 30 files with 300+ code examples covering REST API, Python SDK, Delta Lake, MLflow, SQL, CLI, ETL patterns, ML workflows, streaming, and best practices",
+  "folders": ["docs", "README.md", "CONTRIBUTING.md", "PROJECT-STATUS.md", "LICENSE"],
+  "excludeFolders": [
+    "node_modules",
+    ".git",
+    "dist",
+    "build",
+    "tests",
+    "coverage",
+    ".github",
+    ".vscode",
+    ".cursor",
+    ".zed",
     "*.log",
-    "dist/**/*",
-    "build/**/*",
-    "tests/**/*",
     "*.tmp",
     "*.bak",
-    "coverage/**/*",
-    ".github/**/*",
-    ".vscode/**/*",
-    ".cursor/**/*",
-    ".zed/**/*",
     "docs/plan.md",
     "docs/progress.md",
     "docs/extraction-strategy.md",
@@ -39,175 +32,28 @@
     "NEXT-STEPS.md",
     "PHASE-4-VALIDATION.md",
     "PHASE-5-RECOMMENDATION.md",
-    "SESSION-2024-01-15.md",
+    "SESSION-2026-01-15.md",
     "ZED-CONFIGURATION.md",
     "docssdkmlflow.md"
   ],
-  "bestPractices": [
+  "rules": [
     "Use clear, concise documentation with production-ready examples",
     "Include comprehensive code examples for all scenarios",
     "Follow Databricks API conventions and best practices",
     "Document common use cases and advanced patterns",
-    "Include error handling and security considerations",
-    "Provide version-specific guidance and troubleshooting",
-    "Show real-world patterns for ETL, ML, and streaming",
-    "Include IDE integration and local development setup"
-  ],
-  "library": {
-    "name": "Databricks",
-    "owner": "databricks",
-    "type": "platform",
-    "description": "Unified analytics platform for data analysts, data engineers, and data scientists",
-    "versions": ["latest", "DBR 13.x", "DBR 12.x"],
-    "features": [
-      "REST API (Clusters, Jobs, Workspace, DBFS, Secrets, Unity Catalog)",
-      "Python SDK (databricks-sdk)",
-      "Delta Lake (ACID transactions, time travel)",
-      "MLflow (experiment tracking, model registry)",
-      "Structured Streaming (real-time processing)",
-      "Databricks Connect (local development)",
-      "CLI (automation and scripting)",
-      "SQL Analytics"
-    ]
-  },
-  "patterns": {
-    "api": "**/api/**/*",
-    "sdk": "**/sdk/**/*",
-    "sql": "**/sql/**/*",
-    "cli": "**/cli/**/*",
-    "ml": "**/ml/**/*",
-    "examples": "**/examples/**/*",
-    "getting-started": "**/getting-started/**/*",
-    "best-practices": "**/best-practices/**/*"
-  },
-  "documentation": {
-    "getting-started": [
-      "docs/getting-started/introduction.md",
-      "docs/getting-started/setup.md",
-      "docs/getting-started/authentication.md",
-      "docs/getting-started/quickstart.md",
-      "docs/getting-started/databricks-connect.md"
-    ],
-    "api-reference": [
-      "docs/api/overview.md",
-      "docs/api/clusters.md",
-      "docs/api/jobs.md",
-      "docs/api/workspace.md",
-      "docs/api/dbfs.md",
-      "docs/api/secrets.md",
-      "docs/api/tokens.md",
-      "docs/api/unity-catalog.md"
-    ],
-    "sdk": ["docs/sdk/python.md", "docs/sdk/delta-lake.md", "docs/sdk/mlflow.md"],
-    "examples": [
-      "docs/examples/sql.md",
-      "docs/examples/etl-patterns.md",
-      "docs/examples/ml-workflows.md",
-      "docs/examples/streaming-workflows.md",
-      "docs/examples/distributed-caching.md"
-    ],
-    "best-practices": ["docs/best-practices/performance.md", "docs/best-practices/security.md"],
-    "cli": ["docs/cli/README.md"]
-  },
-  "examples": [
-    {
-      "name": "Get Started with Databricks",
-      "description": "Basic setup, authentication, and quick start tutorial",
-      "category": "getting-started",
-      "files": ["docs/getting-started/*.md"]
-    },
-    {
-      "name": "Databricks REST API",
-      "description": "Complete REST API reference with 100+ examples",
-      "category": "api",
-      "files": ["docs/api/*.md"]
-    },
-    {
-      "name": "Python SDK Usage",
-      "description": "Python SDK for all Databricks services",
-      "category": "sdk",
-      "files": ["docs/sdk/python.md"]
-    },
-    {
-      "name": "Delta Lake Operations",
-      "description": "ACID transactions, time travel, optimization",
-      "category": "sdk",
-      "files": ["docs/sdk/delta-lake.md"]
-    },
-    {
-      "name": "MLflow Integration",
-      "description": "Experiment tracking, model registry, deployment",
-      "category": "sdk",
-      "files": ["docs/sdk/mlflow.md"]
-    },
-    {
-      "name": "SQL Query Examples",
-      "description": "50+ SQL examples for Databricks",
-      "category": "examples",
-      "files": ["docs/examples/sql.md"]
-    },
-    {
-      "name": "ETL Patterns",
-      "description": "70+ production ETL patterns including SCD and CDC",
-      "category": "examples",
-      "files": ["docs/examples/etl-patterns.md"]
-    },
-    {
-      "name": "ML Workflows",
-      "description": "End-to-end ML pipelines with hyperparameter tuning",
-      "category": "examples",
-      "files": ["docs/examples/ml-workflows.md"]
-    },
-    {
-      "name": "Streaming Workflows",
-      "description": "50+ Structured Streaming patterns for real-time processing",
-      "category": "examples",
-      "files": ["docs/examples/streaming-workflows.md"]
-    },
-    {
-      "name": "Distributed Caching Strategies",
-      "description": "Multi-cluster cache invalidation and consistency patterns",
-      "category": "examples",
-      "files": ["docs/examples/distributed-caching.md"]
-    },
-    {
-      "name": "Databricks Connect",
-      "description": "Local development with IDE integration",
-      "category": "getting-started",
-      "files": ["docs/getting-started/databricks-connect.md"]
-    },
-    {
-      "name": "Performance Optimization",
-      "description": "Best practices for query and job optimization",
-      "category": "best-practices",
-      "files": ["docs/best-practices/performance.md"]
-    },
-    {
-      "name": "Security Best Practices",
-      "description": "Security patterns and access control",
-      "category": "best-practices",
-      "files": ["docs/best-practices/security.md"]
-    },
-    {
-      "name": "Databricks CLI",
-      "description": "Command-line automation with 100+ commands",
-      "category": "cli",
-      "files": ["docs/cli/README.md"]
-    }
-  ],
-  "statistics": {
-    "total_files": 31,
-    "total_lines": 25154,
-    "code_examples": 320,
-    "api_endpoints": 50,
-    "completion": "95%",
-    "quality": "production-ready"
-  },
-  "metadata": {
-    "last_updated": "2026-02-27",
-    "phase": "Phase 4 - Testing & Validation",
-    "status": "production-ready",
-    "context7_compatible": true,
-    "agent_system": "deployed"
-  }
+    "Include error handling and security considerations in all examples",
+    "Provide version-specific guidance (DBR 13.x, DBR 12.x)",
+    "Show real-world patterns for ETL, ML, and streaming workflows",
+    "Include IDE integration and local development setup with Databricks Connect",
+    "Use databricks-sdk Python package for API interactions",
+    "Implement proper authentication using environment variables or Azure Key Vault",
+    "Follow Delta Lake best practices for ACID transactions and optimization",
+    "Use MLflow for experiment tracking and model registry",
+    "Implement structured streaming with proper checkpointing and error handling",
+    "Use Unity Catalog for centralized data governance and access control",
+    "Follow security best practices including credential management and network isolation",
+    "Optimize Spark jobs with caching, partitioning, and broadcast joins",
+    "Use cluster policies to control costs and enforce security standards",
+    "Implement proper logging and monitoring for production workloads"
+  ]
 }
