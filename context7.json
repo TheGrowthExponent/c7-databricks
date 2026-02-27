@@ -102,7 +102,8 @@
       "docs/examples/sql.md",
       "docs/examples/etl-patterns.md",
       "docs/examples/ml-workflows.md",
-      "docs/examples/streaming-workflows.md"
+      "docs/examples/streaming-workflows.md",
+      "docs/examples/distributed-caching.md"
     ],
     "best-practices": ["docs/best-practices/performance.md", "docs/best-practices/security.md"],
     "cli": ["docs/cli/README.md"]
@@ -163,6 +164,12 @@
       "files": ["docs/examples/streaming-workflows.md"]
     },
     {
+      "name": "Distributed Caching Strategies",
+      "description": "Multi-cluster cache invalidation and consistency patterns",
+      "category": "examples",
+      "files": ["docs/examples/distributed-caching.md"]
+    },
+    {
       "name": "Databricks Connect",
       "description": "Local development with IDE integration",
       "category": "getting-started",
@@ -188,15 +195,15 @@
     }
   ],
   "statistics": {
-    "total_files": 30,
-    "total_lines": 23754,
-    "code_examples": 300,
+    "total_files": 31,
+    "total_lines": 25154,
+    "code_examples": 320,
     "api_endpoints": 50,
     "completion": "95%",
     "quality": "production-ready"
   },
   "metadata": {
-    "last_updated": "2024-01-15",
+    "last_updated": "2025-02-27",
     "phase": "Phase 4 - Testing & Validation",
     "status": "production-ready",
     "context7_compatible": true,

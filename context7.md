@@ -4,9 +4,9 @@
 
 This repository provides comprehensive, production-ready documentation for Databricks, optimized for Context7 AI-assisted development. It contains 30+ documentation files with 23,000+ lines of content, 300+ working code examples, and covers all major Databricks services and workflows.
 
-**Version:** 1.0.0
+**Version:** 1.0.1
 **Status:** Production-Ready
-**Completion:** 95%
+**Completion:** 96%
 **Last Updated:** 2025-02-27
 
 ---
@@ -38,11 +38,12 @@ This repository provides comprehensive, production-ready documentation for Datab
    - Delta Lake - ACID transactions, time travel, optimization
    - MLflow - Experiment tracking, model registry, deployment
 
-4. **Examples & Patterns** (4 files, 150+ examples)
+4. **Examples & Patterns** (5 files, 170+ examples)
    - SQL Examples - Complex queries, window functions, CTEs
    - ETL Patterns - Incremental loading, CDC, SCD Type 1 & 2
    - ML Workflows - End-to-end pipelines with hyperparameter tuning
    - Streaming Workflows - Real-time data processing patterns
+   - Distributed Caching - Multi-cluster cache invalidation and consistency
 
 5. **Best Practices** (2 files)
    - Performance Optimization - Caching, partitioning, Z-Order
@@ -100,6 +101,15 @@ This repository provides comprehensive, production-ready documentation for Datab
 - "How do I implement distributed training?"
 - "What's the pattern for feature engineering at scale?"
 - "How do I automate model retraining?"
+
+**Distributed Caching:**
+
+- "How do I implement cache invalidation across multiple clusters?"
+- "Show me a distributed caching strategy with consistency guarantees"
+- "How do I coordinate cache updates across Databricks clusters?"
+- "What are best practices for multi-cluster caching?"
+- "How do I use Delta Lake for cache metadata management?"
+- "Show me event-driven cache invalidation patterns"
 
 ### API & SDK Queries
 
@@ -215,11 +225,12 @@ c7-databricks/
     │   ├── delta-lake.md              # Delta Lake operations (25+ examples)
     │   └── mlflow.md                  # MLflow integration (15+ examples)
     │
-    ├── examples/                      # 4 files - Practical patterns
+    ├── examples/                      # 5 files - Practical patterns
     │   ├── sql.md                     # 50+ SQL examples
     │   ├── etl-patterns.md            # 70+ ETL patterns
     │   ├── ml-workflows.md            # 30+ ML workflow examples
-    │   └── streaming-workflows.md     # 50+ streaming patterns
+    │   ├── streaming-workflows.md     # 50+ streaming patterns
+    │   └── distributed-caching.md     # 20+ caching patterns
     │
     ├── best-practices/                # 2 files - Production guidance
     │   ├── performance.md             # Performance optimization
@@ -434,11 +445,11 @@ Best for debugging and problem-solving.
 
 ### Documentation Files
 
-- **Total Files:** 30+
-- **Total Lines:** 23,750+
-- **Code Examples:** 300+
+- **Total Files:** 31+
+- **Total Lines:** 25,150+
+- **Code Examples:** 320+
 - **API Endpoints:** 50+
-- **Complete Workflows:** 30+
+- **Complete Workflows:** 32+
 
 ### Coverage by Category
 
@@ -447,7 +458,7 @@ Best for debugging and problem-solving.
 | Getting Started     | 12    | 4,500+ | 60+      | ✅ Complete |
 | API Reference       | 8     | 5,500+ | 100+     | ✅ Complete |
 | SDK Documentation   | 3     | 3,000+ | 80+      | ✅ Complete |
-| Examples & Patterns | 4     | 4,800+ | 150+     | ✅ Complete |
+| Examples & Patterns | 5     | 6,200+ | 170+     | ✅ Complete |
 | Best Practices      | 2     | 1,600+ | 30+      | ✅ Complete |
 | CLI Reference       | 1     | 920+   | 50+      | ✅ Complete |
 
@@ -545,6 +556,7 @@ All content in this repository adheres to:
 - ✅ Complete CLI reference
 - ✅ 12 hands-on tutorials
 - ✅ Streaming workflows documentation
+- ✅ Distributed caching strategies with multi-cluster invalidation
 
 ---
 
@@ -604,5 +616,5 @@ This repository enables Context7 to:
 ---
 
 **Last Updated:** 2025-02-27
-**Version:** 1.0.0
+**Version:** 1.0.1
 **Status:** ✅ Production-Ready for Context7 Indexing

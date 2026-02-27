@@ -5,12 +5,14 @@ Welcome to the Context7-compatible Databricks documentation repository. This doc
 ## Table of Contents
 
 ### Getting Started
+
 - [Introduction to Databricks](getting-started/introduction.md)
 - [Setup and Configuration](getting-started/setup.md)
 - [Authentication](getting-started/authentication.md)
 - [Quick Start Guide](getting-started/quickstart.md)
 
 ### API Documentation
+
 - [REST API Overview](api/overview.md)
 - [Workspace API](api/workspace.md)
 - [Clusters API](api/clusters.md)
@@ -21,12 +23,14 @@ Welcome to the Context7-compatible Databricks documentation repository. This doc
 - [Unity Catalog API](api/unity-catalog.md)
 
 ### SDK Documentation
+
 - [Python SDK](sdk/python.md)
 - [Databricks Connect](sdk/databricks-connect.md)
 - [Delta Lake](sdk/delta-lake.md)
 - [MLflow Integration](sdk/mlflow.md)
 
 ### SQL Reference
+
 - [SQL Overview](sql/overview.md)
 - [Common SQL Queries](sql/common-queries.md)
 - [Delta Lake SQL](sql/delta-lake.md)
@@ -34,6 +38,7 @@ Welcome to the Context7-compatible Databricks documentation repository. This doc
 - [SQL Functions Reference](sql/functions.md)
 
 ### Machine Learning
+
 - [MLflow Overview](ml/mlflow.md)
 - [Model Training](ml/training.md)
 - [Model Deployment](ml/deployment.md)
@@ -41,18 +46,22 @@ Welcome to the Context7-compatible Databricks documentation repository. This doc
 - [Feature Store](ml/feature-store.md)
 
 ### CLI Documentation
+
 - [Databricks CLI](cli/overview.md)
 - [CLI Installation](cli/installation.md)
 - [CLI Commands Reference](cli/commands.md)
 
 ### Examples
+
 - [Python Examples](examples/python.md)
 - [SQL Examples](examples/sql.md)
 - [API Usage Examples](examples/api.md)
 - [ETL Pipelines](examples/etl.md)
 - [Machine Learning Workflows](examples/ml-workflows.md)
+- [Distributed Caching Strategies](examples/distributed-caching.md)
 
 ### Best Practices
+
 - [General Best Practices](best-practices/general.md)
 - [Performance Optimization](best-practices/performance.md)
 - [Security Best Practices](best-practices/security.md)
@@ -89,4 +98,4 @@ This documentation is provided under the terms specified in [LICENSE](../LICENSE
 
 Current documentation version: 1.0.0
 
-Last updated: 2024
+Last updated: 2026
